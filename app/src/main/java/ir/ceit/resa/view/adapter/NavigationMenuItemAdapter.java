@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ir.ceit.resa.R;
-import ir.ceit.resa.model.NavigationMenuItem;
+import ir.ceit.resa.model.view.NavigationMenuItem;
 
 public class NavigationMenuItemAdapter extends ArrayAdapter<NavigationMenuItem> {
 

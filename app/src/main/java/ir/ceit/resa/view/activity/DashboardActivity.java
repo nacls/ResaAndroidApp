@@ -22,7 +22,7 @@ import java.util.Objects;
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.DashboardContract;
 import ir.ceit.resa.model.ERole;
-import ir.ceit.resa.model.NavigationMenuItem;
+import ir.ceit.resa.model.view.NavigationMenuItem;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.presenter.DashboardActivityPresenter;
 import ir.ceit.resa.view.adapter.NavigationMenuItemAdapter;

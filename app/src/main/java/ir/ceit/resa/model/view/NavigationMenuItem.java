@@ -1,4 +1,4 @@
-package ir.ceit.resa.model;
+package ir.ceit.resa.model.view;
 
 public class NavigationMenuItem {
     private int icon;
