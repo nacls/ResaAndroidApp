@@ -33,6 +33,8 @@
     <string name="profile">پروفایل</string>
     <string name="settings">تنظیمات</string>
     <string name="logout">خروج</string>
+    <string name="add_board">اضافه کردن برد</string>
+    <string name="admin_control">نظیمات ادمین</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>

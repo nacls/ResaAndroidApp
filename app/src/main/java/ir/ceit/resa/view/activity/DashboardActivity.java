@@ -1,6 +1,7 @@
 package ir.ceit.resa.view.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.DashboardContract;
+import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.NavigationMenuItem;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.presenter.DashboardActivityPresenter;
@@ -22,8 +29,8 @@ import ir.ceit.resa.view.adapter.NavigationMenuItemAdapter;
 
 public class DashboardActivity extends AppCompatActivity implements DashboardContract.View {
 
+    ArrayList<NavigationMenuItem> drawerItems = new ArrayList<>();
     private DashboardActivityPresenter dashboardPresenter;
-
     private Toolbar toolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout drawerLayout;
@@ -32,6 +39,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     private TextView fullNameTv;
     private UserProfile userProfile;
     private ImageView avatarIv;
+    private FloatingActionButton createBoardBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +51,14 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
 
         dashboardPresenter = new DashboardActivityPresenter(this, this, userProfile);
 
-        initializeView();
+        setupActivityView();
     }
 
-    private void initializeView() {
-        drawerLayout = findViewById(R.id.dashboard_layout);
-        drawerList = findViewById(R.id.menu_items_list);
-        usernameTv = findViewById(R.id.userUsernameNav);
-        fullNameTv = findViewById(R.id.userNameNav);
-        avatarIv = findViewById(R.id.header_avatar);
+    private void setupActivityView() {
 
-        setAvatarImage();
+        initializeViews();
+
+        setVideBasedOnRole();
         setupToolbar();
         setUsernameAndFullName();
         setNavigationMenu();
@@ -66,6 +71,44 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         setupDrawerToggle();
     }
 
+    private void initializeViews() {
+        drawerLayout = findViewById(R.id.dashboard_layout);
+        drawerList = findViewById(R.id.menu_items_list);
+        usernameTv = findViewById(R.id.userUsernameNav);
+        fullNameTv = findViewById(R.id.userNameNav);
+        avatarIv = findViewById(R.id.header_avatar);
+        createBoardBtn = findViewById(R.id.add_board_button);
+    }
+
+    private void setVideBasedOnRole() {
+        switch (userProfile.getRole()) {
+            case ROLE_USER:
+                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.user_avatar));
+                createBoardBtn.setVisibility(View.GONE);
+                break;
+            case ROLE_ADMIN:
+                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.admin_avatar));
+                setupCreateBoardButton();
+                break;
+            case ROLE_CREATOR:
+                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.creator_avatar));
+                setupCreateBoardButton();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setupCreateBoardButton() {
+        createBoardBtn.setOnClickListener(view -> dashboardPresenter.onCreateBoardClicked());
+    }
+
+    void setupToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+    }
+
     private void setUsernameAndFullName() {
         String userUsername = "@" + userProfile.getUsername();
         usernameTv.setText(userUsername);
@@ -74,37 +117,32 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     }
 
     private void setNavigationMenu() {
-        NavigationMenuItem[] drawerItem = new NavigationMenuItem[3];
-        drawerItem[0] = new NavigationMenuItem(R.drawable.profile_logo, getResources().getString(R.string.profile));
-        drawerItem[1] = new NavigationMenuItem(R.drawable.settings_logo, getResources().getString(R.string.settings));
-        drawerItem[2] = new NavigationMenuItem(R.drawable.logout_logo, getResources().getString(R.string.logout));
 
-        NavigationMenuItemAdapter adapter = new NavigationMenuItemAdapter(this, R.layout.navigation_list_view_item, drawerItem);
+        drawerItems.add(new NavigationMenuItem(R.drawable.profile_logo, getResources().getString(R.string.profile), 0));
+        drawerItems.add(new NavigationMenuItem(R.drawable.settings_logo, getResources().getString(R.string.settings), 1));
+        if (userProfile.getRole() == ERole.ROLE_ADMIN) {
+            drawerItems.add(new NavigationMenuItem(R.drawable.admin_setting_logo, getResources().getString(R.string.admin_control), 3));
+        }
+        drawerItems.add(new NavigationMenuItem(R.drawable.logout_logo, getResources().getString(R.string.logout), 2));
+
+        NavigationMenuItemAdapter adapter = new NavigationMenuItemAdapter(this, R.layout.navigation_list_view_item, drawerItems);
         drawerList.setAdapter(adapter);
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
-    private void setAvatarImage() {
-        switch (userProfile.getRole()) {
-            case ROLE_USER:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.user_avatar));
-                break;
-            case ROLE_ADMIN:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.admin_avatar));
-                break;
-            case ROLE_CREATOR:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.creator_avatar));
-                break;
-            default:
-                break;
-        }
+    void setupDrawerToggle() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+
+        mDrawerToggle.syncState();
     }
 
     private void selectItem(int position) {
 
         boolean isItemSelectedValid = true;
 
-        switch (position) {
+        NavigationMenuItem selectedItem = drawerItems.get(position);
+
+        switch (selectedItem.getId()) {
             case 0:
                 dashboardPresenter.onProfileClicked();
                 break;
@@ -112,9 +150,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
                 dashboardPresenter.onSettingsCLicked();
                 break;
             case 2:
+                finishAffinity();
                 dashboardPresenter.onLogoutClicked();
                 break;
-
+            case 3:
+                dashboardPresenter.onAdminSettingsClicked();
+                break;
             default:
                 isItemSelectedValid = false;
                 break;
@@ -132,6 +173,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
+        if (item.getItemId() == R.id.search_icon) {
+            dashboardPresenter.onSearchClicked();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -141,15 +188,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         mDrawerToggle.syncState();
     }
 
-    void setupToolbar() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
-
-    void setupDrawerToggle() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        mDrawerToggle.syncState();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

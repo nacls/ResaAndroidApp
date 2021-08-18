@@ -36,6 +36,21 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     }
 
+    @Override
+    public void onSearchClicked() {
+        System.out.println("SEARCH CLICKED");
+    }
+
+    @Override
+    public void onCreateBoardClicked() {
+        System.out.println("CREATE BOARD CLICKED");
+    }
+
+    @Override
+    public void onAdminSettingsClicked() {
+        System.out.println("ADMIN SETTINGS CLICKED");
+    }
+
     public void openLoginActivity() {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

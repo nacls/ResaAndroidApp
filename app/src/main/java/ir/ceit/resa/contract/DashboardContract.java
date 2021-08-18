@@ -6,7 +6,7 @@ public interface DashboardContract {
 
     }
 
-    interface Model{
+    interface Model {
 
     }
 
@@ -17,5 +17,11 @@ public interface DashboardContract {
         void onProfileClicked();
 
         void onSettingsCLicked();
+
+        void onSearchClicked();
+
+        void onCreateBoardClicked();
+
+        void onAdminSettingsClicked();
     }
 }

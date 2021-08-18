@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import ir.ceit.resa.R;
 import ir.ceit.resa.model.NavigationMenuItem;
 
@@ -16,9 +18,9 @@ public class NavigationMenuItemAdapter extends ArrayAdapter<NavigationMenuItem> 
 
         Context mContext;
         int layoutResourceId;
-        NavigationMenuItem data[] = null;
+        ArrayList<NavigationMenuItem> data = null;
 
-        public NavigationMenuItemAdapter(Context mContext, int layoutResourceId, NavigationMenuItem[] data) {
+        public NavigationMenuItemAdapter(Context mContext, int layoutResourceId, ArrayList<NavigationMenuItem> data) {
 
             super(mContext, layoutResourceId, data);
             this.layoutResourceId = layoutResourceId;
@@ -37,11 +39,11 @@ public class NavigationMenuItemAdapter extends ArrayAdapter<NavigationMenuItem> 
             ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageViewIcon);
             TextView textViewName = (TextView) listItem.findViewById(R.id.textViewName);
 
-            NavigationMenuItem folder = data[position];
+            NavigationMenuItem folder = data.get(position);
 
 
-            imageViewIcon.setImageResource(folder.icon);
-            textViewName.setText(folder.title);
+            imageViewIcon.setImageResource(folder.getIcon());
+            textViewName.setText(folder.getTitle());
 
             return listItem;
         }
