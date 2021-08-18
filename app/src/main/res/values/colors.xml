@@ -13,4 +13,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="error_red">#B22222</color>
     <color name="success_green">#59981A</color>
+    <color name="light_grey">#959595</color>
+    <color name="grey">#707070</color>
 </resources>

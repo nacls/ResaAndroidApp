@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cyan_main"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
+        android:background="@color/cyan_main"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -15,40 +16,41 @@
             android:id="@+id/header"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/resa_logo_transparent" />
+            android:src="@drawable/user_placeholder" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/userNameNav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:text="@string/default_text"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/userEmail"
+                android:id="@+id/userUsernameNav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/default_text"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:layout_gravity="right"
+                android:textColor="@color/grey"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -61,14 +63,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header_layout"
         android:background="@color/white"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
-</RelativeLayout>
+        android:dividerHeight="1dp"
+        android:divider="@drawable/list_divider"/>
+</LinearLayout>

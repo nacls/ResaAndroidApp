@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.activity.DashboardActivity"></activity>
+        <activity android:name=".view.activity.DashboardActivity"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:noHistory="true"

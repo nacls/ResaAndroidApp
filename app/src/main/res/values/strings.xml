@@ -30,4 +30,13 @@
     <string name="password_hint">رمز عبور پورتال آموزشی</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="default_text">مقدار پیش فرض</string>
+    <string name="profile">پروفایل</string>
+    <string name="settings">تنظیمات</string>
+    <string name="logout">خروج</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>پروفایل</item>
+        <item>تنظیمات</item>
+        <item>خروج</item>
+    </string-array>
 </resources>
