@@ -12,5 +12,10 @@ public interface DashboardContract {
 
     interface Presenter {
 
+        void onLogoutClicked();
+
+        void onProfileClicked();
+
+        void onSettingsCLicked();
     }
 }

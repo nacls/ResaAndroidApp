@@ -1,6 +1,7 @@
 package ir.ceit.resa.contract;
 
 public interface SplashContract {
+
     interface View {
 
         void startProgressThread();
