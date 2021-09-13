@@ -6,11 +6,15 @@ public interface LoginContract{
 
     interface View {
 
+        void setupActivityView();
+
         void setStatusText(String error, boolean isError);
     }
 
     interface Presenter {
 
-        void onButtonClick(String username, String password);
+        void onCreated();
+
+        void onLoginButtonClick(String username, String password);
     }
 }

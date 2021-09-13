@@ -5,6 +5,8 @@ public interface SplashContract {
     interface View {
 
         void startProgressThread();
+
+        void setupActivityView();
     }
 
     interface Presenter {

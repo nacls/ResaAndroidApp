@@ -23,6 +23,11 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
     }
 
     @Override
+    public void setupActivityView() {
+
+    }
+
+    @Override
     public void startProgressThread() {
         Thread background = new Thread() {
             public void run() {

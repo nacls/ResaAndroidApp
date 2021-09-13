@@ -29,18 +29,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         loginPresenter = new LoginActivityPresenter(this, this);
 
-        initializeView();
-
-        registerSubmitButton();
+        loginPresenter.onCreated();
     }
 
-    private void initializeView() {
+    @Override
+    public void setupActivityView() {
         submitButton = findViewById(R.id.submitBtn);
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
         statusTv = findViewById(R.id.statusTv);
+        registerSubmitButton();
     }
-
 
     private void registerSubmitButton() {
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 clearStatusTv();
                 String username = String.valueOf(usernameEt.getText());
                 String password = String.valueOf(passwordEt.getText());
-                loginPresenter.onButtonClick(username, password);
+                loginPresenter.onLoginButtonClick(username, password);
             }
         });
     }

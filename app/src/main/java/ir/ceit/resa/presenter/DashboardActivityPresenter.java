@@ -21,6 +21,11 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     }
 
     @Override
+    public void onCreated() {
+        view.setupActivityView();
+    }
+
+    @Override
     public void onLogoutClicked() {
         ResaSharedPreferences.clearPreferences(context);
         openLoginActivity();
@@ -28,12 +33,12 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onProfileClicked() {
-
+        System.out.println("ADMIN SETTINGS CLICKED");
     }
 
     @Override
     public void onSettingsCLicked() {
-
+        System.out.println("SETTINGS CLICKED");
     }
 
     @Override
@@ -54,5 +59,13 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     public void openLoginActivity() {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

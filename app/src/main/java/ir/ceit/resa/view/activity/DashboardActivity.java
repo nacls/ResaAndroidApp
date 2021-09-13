@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,42 +24,45 @@ import ir.ceit.resa.R;
 import ir.ceit.resa.contract.DashboardContract;
 import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.view.NavigationMenuItem;
-import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.presenter.DashboardActivityPresenter;
 import ir.ceit.resa.view.adapter.NavigationMenuItemAdapter;
 
 public class DashboardActivity extends AppCompatActivity implements DashboardContract.View {
 
-    ArrayList<NavigationMenuItem> drawerItems = new ArrayList<>();
     private DashboardActivityPresenter dashboardPresenter;
+    // Toolbar components
     private Toolbar toolbar;
-    private ActionBarDrawerToggle mDrawerToggle;
+    private ActionBarDrawerToggle drawerToggle;
+    ArrayList<NavigationMenuItem> drawerItems = new ArrayList<>();
     private DrawerLayout drawerLayout;
     private ListView drawerList;
+    // Profile components
     private TextView usernameTv;
     private TextView fullNameTv;
-    private UserProfile userProfile;
     private ImageView avatarIv;
+    // For admin and creator
     private FloatingActionButton createBoardBtn;
+    // Loading boards components
+    private RecyclerView boardsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        Bundle data = getIntent().getExtras();
-        userProfile = data.getParcelable("user_profile");
+        dashboardPresenter = new DashboardActivityPresenter(this,
+                this,
+                getIntent().getExtras().getParcelable("user_profile"));
 
-        dashboardPresenter = new DashboardActivityPresenter(this, this, userProfile);
-
-        setupActivityView();
+        dashboardPresenter.onCreated();
     }
 
-    private void setupActivityView() {
+    @Override
+    public void setupActivityView() {
 
-        initializeViews();
+        initializeViewComponents();
 
-        setVideBasedOnRole();
+        setViewBasedOnRole();
         setupToolbar();
         setUsernameAndFullName();
         setNavigationMenu();
@@ -67,11 +71,26 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         getSupportActionBar().setHomeButtonEnabled(true);
 
         drawerLayout = findViewById(R.id.dashboard_layout);
-        drawerLayout.setDrawerListener(mDrawerToggle);
+        drawerLayout.setDrawerListener(drawerToggle);
         setupDrawerToggle();
     }
 
-    private void initializeViews() {
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void showNoJoinedBoards() {
+
+    }
+
+    @Override
+    public void showJoinedBoards() {
+
+    }
+
+    private void initializeViewComponents() {
         drawerLayout = findViewById(R.id.dashboard_layout);
         drawerList = findViewById(R.id.menu_items_list);
         usernameTv = findViewById(R.id.userUsernameNav);
@@ -80,8 +99,8 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         createBoardBtn = findViewById(R.id.add_board_button);
     }
 
-    private void setVideBasedOnRole() {
-        switch (userProfile.getRole()) {
+    private void setViewBasedOnRole() {
+        switch (dashboardPresenter.getUserProfile().getRole()) {
             case ROLE_USER:
                 avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.user_avatar));
                 createBoardBtn.setVisibility(View.GONE);
@@ -110,17 +129,17 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     }
 
     private void setUsernameAndFullName() {
-        String userUsername = "@" + userProfile.getUsername();
+        String userUsername = "@" + dashboardPresenter.getUserProfile().getUsername();
         usernameTv.setText(userUsername);
-        String userFullName = userProfile.getFirstName() + " " + userProfile.getLastName();
+        String userFullName = dashboardPresenter.getUserProfile().getFirstName()
+                + " " + dashboardPresenter.getUserProfile().getLastName();
         fullNameTv.setText(userFullName);
     }
 
     private void setNavigationMenu() {
-
         drawerItems.add(new NavigationMenuItem(R.drawable.profile_logo, getResources().getString(R.string.profile), 0));
         drawerItems.add(new NavigationMenuItem(R.drawable.settings_logo, getResources().getString(R.string.settings), 1));
-        if (userProfile.getRole() == ERole.ROLE_ADMIN) {
+        if (dashboardPresenter.getUserProfile().getRole() == ERole.ROLE_ADMIN) {
             drawerItems.add(new NavigationMenuItem(R.drawable.admin_setting_logo, getResources().getString(R.string.admin_control), 3));
         }
         drawerItems.add(new NavigationMenuItem(R.drawable.logout_logo, getResources().getString(R.string.logout), 2));
@@ -131,9 +150,9 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     }
 
     void setupDrawerToggle() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
 
-        mDrawerToggle.syncState();
+        drawerToggle.syncState();
     }
 
     private void selectItem(int position) {
@@ -170,7 +189,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
@@ -185,7 +204,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+        drawerToggle.syncState();
     }
 
     @Override

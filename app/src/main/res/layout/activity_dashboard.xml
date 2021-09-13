@@ -25,30 +25,53 @@
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_board_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            app:backgroundTint="@color/cyan_menu_theme"
-            android:src="@drawable/add_logo"
-            android:contentDescription="@string/add_board"
-            android:clickable="true"
-            android:layout_margin="16dp"
-            android:focusable="true" />
-            </FrameLayout>
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/no_boards"
+                android:textColor="@color/cyan_dark3"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                android:progressDrawable="@drawable/custom_progress_bar" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_board_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/add_board"
+                android:focusable="true"
+                android:src="@drawable/add_logo"
+                app:backgroundTint="@color/cyan_menu_theme" />
+        </FrameLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/drawer_layout"
         android:orientation="vertical">
 
         <include

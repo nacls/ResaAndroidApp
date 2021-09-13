@@ -31,7 +31,12 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
 
 
     @Override
-    public void onButtonClick(String username, String password) {
+    public void onCreated() {
+        view.setupActivityView();
+    }
+
+    @Override
+    public void onLoginButtonClick(String username, String password) {
         if (isLoginInProgress()) {
             return;
         }

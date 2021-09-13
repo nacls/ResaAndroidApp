@@ -4,13 +4,18 @@ public interface DashboardContract {
 
     interface View {
 
-    }
+        void setupActivityView();
 
-    interface Model {
+        void showProgressBar();
 
+        void showNoJoinedBoards();
+
+        void showJoinedBoards();
     }
 
     interface Presenter {
+
+        void onCreated();
 
         void onLogoutClicked();
 
