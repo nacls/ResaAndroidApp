@@ -94,6 +94,7 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
 
     private void saveValuesToSharedPreferences(JwtResponse jwtResponse) {
         String token = jwtResponse.getType() + " " + jwtResponse.getToken();
+        System.out.println("saveValuesToSharedPreferences token "+ token);
         ResaSharedPreferences.setToken(context, token);
         ResaSharedPreferences.setUserName(context, jwtResponse.getUsername());
         ResaSharedPreferences.setFirstName(context, jwtResponse.getFirstName());
@@ -104,7 +105,6 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
 
     private void openDashboardActivity(UserProfile userProfile) {
         Intent intent = new Intent(context, DashboardActivity.class);
-        intent.putExtra("user_profile", userProfile);
         context.startActivity(intent);
     }
 

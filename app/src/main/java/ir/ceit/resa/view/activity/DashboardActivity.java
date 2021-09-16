@@ -51,8 +51,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         setContentView(R.layout.activity_dashboard);
 
         dashboardPresenter = new DashboardActivityPresenter(this,
-                this,
-                getIntent().getExtras().getParcelable("user_profile"));
+                this);
 
         dashboardPresenter.onCreated();
     }

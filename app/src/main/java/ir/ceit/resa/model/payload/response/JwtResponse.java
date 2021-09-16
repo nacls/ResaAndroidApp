@@ -6,10 +6,10 @@ import java.util.List;
 
 public class JwtResponse {
 
-    @SerializedName("token")
+    @SerializedName("accessToken")
     private String token;
 
-    @SerializedName("type")
+    @SerializedName("tokenType")
     private String type;
 
     @SerializedName("id")
