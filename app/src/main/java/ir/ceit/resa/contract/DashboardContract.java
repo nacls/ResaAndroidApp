@@ -1,5 +1,9 @@
 package ir.ceit.resa.contract;
 
+import java.util.List;
+
+import ir.ceit.resa.model.Board;
+
 public interface DashboardContract {
 
     interface View {
@@ -8,9 +12,9 @@ public interface DashboardContract {
 
         void showProgressBar();
 
-        void showNoJoinedBoards();
+        void showNoJoinedBoards(String status);
 
-        void showJoinedBoards();
+        void showJoinedBoards(List<Board> boards);
     }
 
     interface Presenter {

@@ -6,6 +6,7 @@
     <color name="cyan_light2">#A6E7F0</color>
     <color name="cyan_light3">#D9F5F9</color>
     <color name="cyan_lightest">#F2FCFD</color>
+    <color name="announcement">#77FFFF99</color>
     <color name="cyan_dark1">#1FA6B8</color>
     <color name="cyan_dark2">#167481</color>
     <color name="cyan_dark3">#093237</color>
@@ -16,4 +17,7 @@
     <color name="success_green">#59981A</color>
     <color name="light_grey">#c2c2c2</color>
     <color name="grey">#5e5e5e</color>
+    <color name="grey_dark">#444444</color>
+    <color name="grey_light">#c8c8c8</color>
+    <color name="wooden">#4f392e</color>
 </resources>

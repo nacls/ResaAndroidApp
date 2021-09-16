@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import ir.ceit.resa.contract.LoginContract;
+import ir.ceit.resa.controller.Constants;
 import ir.ceit.resa.controller.UserProfileManager;
 import ir.ceit.resa.controller.network.ErrorUtils;
 import ir.ceit.resa.controller.network.NetworkUtils;
@@ -76,7 +77,7 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
             @Override
             public void onFailure(Call call, Throwable t) {
                 setLoginInProgress(false);
-                view.setStatusText("مشکلی در برقراری ارتباط با سرور پیش آمده است، مجدداً تلاش کنید.", true);
+                view.setStatusText(Constants.CONNECTION_PROBLEM + " " + Constants.TRY_AGAIN, true);
             }
         });
     }
@@ -85,7 +86,7 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
         saveValuesToSharedPreferences(jwtResponse);
         UserProfile userProfile = UserProfileManager.createUserProfile(context);
         if (userProfile == null) {
-            view.setStatusText("مشکلی در ورود پیش آمده است.", true);
+            view.setStatusText(Constants.PROBLEM_OCCURRED_DURING_LOGIN, true);
             setLoginInProgress(false);
         } else {
             openDashboardActivity(userProfile);
@@ -94,7 +95,7 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
 
     private void saveValuesToSharedPreferences(JwtResponse jwtResponse) {
         String token = jwtResponse.getType() + " " + jwtResponse.getToken();
-        System.out.println("saveValuesToSharedPreferences token "+ token);
+        System.out.println("saveValuesToSharedPreferences token " + token);
         ResaSharedPreferences.setToken(context, token);
         ResaSharedPreferences.setUserName(context, jwtResponse.getUsername());
         ResaSharedPreferences.setFirstName(context, jwtResponse.getFirstName());
