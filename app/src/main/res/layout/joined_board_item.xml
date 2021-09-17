@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/parent_layout"
     android:background="@drawable/board_border"
     android:padding="2dp"
     android:layout_marginLeft="6dp"
@@ -19,6 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -26,8 +29,8 @@
                 android:id="@+id/membershipIv"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
 
             <TextView
                 android:id="@+id/boardDescription"
@@ -39,7 +42,7 @@
                 android:gravity="center|start"
                 android:text="توضیح برد"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -49,18 +52,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:fontFamily="@font/iransans"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/sahelfd"
             android:gravity="center|right"
             android:text="بانی برد"
             android:textColor="@color/grey"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/announcementLayout"
             android:layout_gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/page_gray_border"
             android:orientation="vertical">
@@ -69,7 +76,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="right"
-                android:background="@drawable/page_curl"></ImageView>
+                android:background="@drawable/page_curl" />
 
             <TextView
                 android:id="@+id/announcementTv"
@@ -78,10 +85,11 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/iransans"
+                android:fontFamily="@font/sahelfd"
                 android:text="آخرین اطلاعیه"
+
                 android:textColor="@color/grey_dark"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

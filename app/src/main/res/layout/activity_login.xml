@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:ems="10"
+            android:ems="12"
             android:fontFamily="@font/iransans"
             android:textColor="@color/error_red"
             android:gravity="start"
@@ -84,11 +84,13 @@
             android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:background="@drawable/curved_button"
             android:text="@string/login"
+            android:fontFamily="@font/iransans"
             android:textColor="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

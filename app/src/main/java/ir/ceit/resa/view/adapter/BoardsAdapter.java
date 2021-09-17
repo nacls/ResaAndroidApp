@@ -1,9 +1,12 @@
 package ir.ceit.resa.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +20,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import ir.ceit.resa.R;
+import ir.ceit.resa.controller.SolarCalendar;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.view.activity.BoardActivity;
 
 public class BoardsAdapter extends
         RecyclerView.Adapter<BoardsAdapter.ViewHolder> {
@@ -50,10 +55,10 @@ public class BoardsAdapter extends
         Context context = status.getContext();
         switch (board.getUserMembership()) {
             case WRITER:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.write_board));
+                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.pen));
                 break;
             case CREATOR:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.own_board));
+                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.key));
                 break;
             case REGULAR_MEMBER:
                 status.setVisibility(View.GONE);
@@ -71,10 +76,22 @@ public class BoardsAdapter extends
         LinearLayout announcementLayout = viewHolder.announcementLayout;
         if (board.getLatestAnnouncement() != null) {
             TextView announcement = viewHolder.latestAnnouncement;
-            announcement.setText(board.getLatestAnnouncement().getMessage());
+            String lastAnnouncement =board.getLatestAnnouncement().getMessage() +
+                    "\n" +
+                    SolarCalendar.getShamsiDate(board.getLatestAnnouncement().getCreationDate());
+            announcement.setText(lastAnnouncement);
         } else {
             announcementLayout.setVisibility(View.GONE);
         }
+
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BoardActivity.class);
+                intent.putExtra("board", boards.get(i));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -83,6 +100,7 @@ public class BoardsAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public LinearLayout parentLayout;
         public LinearLayout announcementLayout;
         public ImageView membershipStatus;
         public TextView boardDescription;
@@ -97,6 +115,7 @@ public class BoardsAdapter extends
             boardCreator = itemView.findViewById(R.id.boardCreator);
             latestAnnouncement = itemView.findViewById(R.id.announcementTv);
             announcementLayout = itemView.findViewById(R.id.announcementLayout);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }

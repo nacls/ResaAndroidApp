@@ -3,9 +3,10 @@ package ir.ceit.resa.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Announcement implements Comparable<Announcement> {
+public class Announcement implements Comparable<Announcement>, Serializable {
 
     private Integer id;
 

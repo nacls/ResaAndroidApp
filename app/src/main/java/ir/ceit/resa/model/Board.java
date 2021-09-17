@@ -1,10 +1,11 @@
 package ir.ceit.resa.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 
-public class Board implements Comparable<Board>{
+public class Board implements Comparable<Board>, Serializable {
 
     private String boardId;
 

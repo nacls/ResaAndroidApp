@@ -11,5 +11,7 @@ public interface BoardContract {
 
         void onCreated();
 
+        void onInfoEditClicked();
+
     }
 }
