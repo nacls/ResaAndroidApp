@@ -4,24 +4,43 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
 import java.util.Objects;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.BoardContract;
+import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.presenter.BoardActivityPresenter;
 
 public class BoardActivity extends AppCompatActivity implements BoardContract.View {
 
     private BoardActivityPresenter boardPresenter;
+    // Toolbar components
     private Toolbar toolbar;
     private Menu toolbarMenu;
-
+    // Layouts (controlling big picture view)
+    private ConstraintLayout showAnnouncementsLayout;
+    private LinearLayout showProblemLayout;
+    private LinearLayout addAnnouncementLayout;
+    private ProgressBar progressBar;
+    // View items
+    private RecyclerView announcementsRv;
+    private EditText announcementEt;
+    private ImageView announcementProblemIv;
+    private TextView announcementProblemTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +58,21 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     public void setupActivityView() {
         initializeViewComponents();
         setUpToolbar();
+
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void showNoAnnouncements(String status) {
+
+    }
+
+    @Override
+    public void showAnnouncements(List<Announcement> announcements) {
 
     }
 

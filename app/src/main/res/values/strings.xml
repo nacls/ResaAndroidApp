@@ -36,6 +36,7 @@
     <string name="add_board">اضافه کردن برد</string>
     <string name="admin_control">نظیمات ادمین</string>
     <string name="no_boards">بردی برای نمایش وجود ندارد</string>
+    <string name="type_announcement_hint">متن پیام</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>
