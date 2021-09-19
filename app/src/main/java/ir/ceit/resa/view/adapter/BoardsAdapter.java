@@ -2,11 +2,9 @@ package ir.ceit.resa.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import ir.ceit.resa.R;
-import ir.ceit.resa.controller.SolarCalendar;
+import ir.ceit.resa.service.SolarCalendar;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.view.activity.BoardActivity;
 
@@ -97,6 +95,17 @@ public class BoardsAdapter extends
     @Override
     public int getItemCount() {
         return boards.size();
+    }
+
+
+    public void clear() {
+        boards.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Board> list) {
+        boards.addAll(list);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -12,6 +12,8 @@ public interface DashboardContract {
 
         void showProgressBar();
 
+        void showProgressRefresh();
+
         void showNoJoinedBoards(String status);
 
         void showJoinedBoards(List<Board> boards);
@@ -32,5 +34,7 @@ public interface DashboardContract {
         void onCreateBoardClicked();
 
         void onAdminSettingsClicked();
+
+        void onRefresh();
     }
 }

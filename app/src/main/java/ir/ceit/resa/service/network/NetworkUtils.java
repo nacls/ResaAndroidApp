@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller.network;
+package ir.ceit.resa.service.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller;
+package ir.ceit.resa.service;
 
 public class Constants {
     public static final String CONNECTION_PROBLEM = "مشکلی در برقراری ارتباط با سرور پیش آمده است.";

@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 import ir.ceit.resa.contract.DashboardContract;
-import ir.ceit.resa.controller.Constants;
-import ir.ceit.resa.controller.UserProfileManager;
-import ir.ceit.resa.controller.network.ErrorUtils;
-import ir.ceit.resa.controller.network.WebService;
-import ir.ceit.resa.controller.storage.ResaSharedPreferences;
+import ir.ceit.resa.service.Constants;
+import ir.ceit.resa.service.UserProfileManager;
+import ir.ceit.resa.service.network.ErrorUtils;
+import ir.ceit.resa.service.network.WebService;
+import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
@@ -37,6 +37,12 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     @Override
     public void onCreated() {
         view.setupActivityView();
+        view.showProgressBar();
+        getUserJoinedBoardsFromServer();
+    }
+
+    @Override
+    public void onRefresh() {
         view.showProgressBar();
         getUserJoinedBoardsFromServer();
     }

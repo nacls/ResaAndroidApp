@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller.network;
+package ir.ceit.resa.service.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

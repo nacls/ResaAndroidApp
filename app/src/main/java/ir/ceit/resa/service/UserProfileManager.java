@@ -1,10 +1,10 @@
-package ir.ceit.resa.controller;
+package ir.ceit.resa.service;
 
 import android.content.Context;
 
 import java.util.List;
 
-import ir.ceit.resa.controller.storage.ResaSharedPreferences;
+import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.UserProfile;
 

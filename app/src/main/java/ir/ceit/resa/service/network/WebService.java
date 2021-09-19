@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller.network;
+package ir.ceit.resa.service.network;
 
 import java.util.List;
 

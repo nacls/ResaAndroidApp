@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 
 import ir.ceit.resa.contract.LoginContract;
-import ir.ceit.resa.controller.Constants;
-import ir.ceit.resa.controller.UserProfileManager;
-import ir.ceit.resa.controller.network.ErrorUtils;
-import ir.ceit.resa.controller.network.NetworkUtils;
-import ir.ceit.resa.controller.network.WebService;
-import ir.ceit.resa.controller.storage.ResaSharedPreferences;
+import ir.ceit.resa.service.Constants;
+import ir.ceit.resa.service.UserProfileManager;
+import ir.ceit.resa.service.network.ErrorUtils;
+import ir.ceit.resa.service.network.NetworkUtils;
+import ir.ceit.resa.service.network.WebService;
+import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.JwtResponse;

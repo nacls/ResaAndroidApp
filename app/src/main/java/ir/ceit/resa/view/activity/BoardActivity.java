@@ -1,6 +1,5 @@
 package ir.ceit.resa.view.activity;
 
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +43,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     private void setViewBasedOnRole() {
-        switch (boardPresenter.board.getUserMembership()) {
+        switch (boardPresenter.getBoard().getUserMembership()) {
             case CREATOR:
                 toolbarMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.edit_board));
                 break;
@@ -67,6 +66,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(boardPresenter.getBoard().getDescription());
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

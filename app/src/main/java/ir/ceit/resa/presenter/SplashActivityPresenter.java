@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import ir.ceit.resa.contract.SplashContract;
-import ir.ceit.resa.controller.UserProfileManager;
-import ir.ceit.resa.controller.storage.ResaSharedPreferences;
+import ir.ceit.resa.service.UserProfileManager;
+import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.view.activity.DashboardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;

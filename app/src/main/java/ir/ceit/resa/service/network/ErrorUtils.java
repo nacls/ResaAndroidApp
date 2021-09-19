@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller.network;
+package ir.ceit.resa.service.network;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

@@ -23,58 +23,89 @@
         </LinearLayout>
 
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="3dp"
-                android:id="@+id/boardsRv"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/show_announcement_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/boardsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/add_announcement_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <EditText
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/pen"
+                        >
+
+                    </ImageView>
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/container_boards_problem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/boardsProblemIv"
+                    android:id="@+id/announcementProblemIv"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/boards_problem"/>
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/boards_problem" />
 
                 <TextView
                     android:id="@+id/boardsStatusTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
                     android:text="@string/no_boards"
                     android:textColor="@color/cyan_dark3"
-                    android:fontFamily="@font/iransans"
-                    android:layout_marginRight="10dp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/boardsProgressBar"
+                android:id="@+id/announcementProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:visibility="gone"
-                android:progressDrawable="@drawable/custom_progress_bar" />
-        </FrameLayout>
-
+                android:progressDrawable="@drawable/custom_progress_bar"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

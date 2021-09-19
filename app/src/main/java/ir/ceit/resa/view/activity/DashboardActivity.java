@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,6 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     // For admin and creator
     private FloatingActionButton createBoardBtn;
     // Loading boards components
+    private SwipeRefreshLayout swipeContainer;
     private FrameLayout contentLayout;
     private RecyclerView boardsRv;
     private LinearLayout boardsProblem;
@@ -83,6 +85,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         drawerLayout = findViewById(R.id.dashboard_layout);
         drawerLayout.setDrawerListener(drawerToggle);
         setupDrawerToggle();
+        setOnSwipe();
     }
 
     @Override
@@ -93,12 +96,18 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     }
 
     @Override
+    public void showProgressRefresh() {
+        //boardsProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showNoJoinedBoards(String status) {
         boardsProgressBar.setVisibility(View.GONE);
         boardsRv.setVisibility(View.GONE);
         boardsProblem.setVisibility(View.VISIBLE);
         boardsStatusTv.setText(status);
         boardsStatusTv.setVisibility(View.VISIBLE);
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
@@ -115,7 +124,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         float offsetPx = getResources().getDimension(R.dimen.bottom_offset_dp);
         BottomOffsetDecoration bottomOffsetDecoration = new BottomOffsetDecoration((int) offsetPx);
         boardsRv.addItemDecoration(bottomOffsetDecoration);
-
+        swipeContainer.setRefreshing(false);
     }
 
     private void initializeViewComponents() {
@@ -130,6 +139,16 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         boardsStatusTv = findViewById(R.id.boardsStatusTv);
         boardsProgressBar = findViewById(R.id.boardsProgressBar);
         contentLayout = findViewById(R.id.content_frame);
+        swipeContainer = findViewById(R.id.swipe_container);
+    }
+
+    private void setOnSwipe(){
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                dashboardPresenter.getUserJoinedBoardsFromServer();
+            }
+        });
     }
 
 

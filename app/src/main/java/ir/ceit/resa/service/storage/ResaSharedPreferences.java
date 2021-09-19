@@ -1,4 +1,4 @@
-package ir.ceit.resa.controller.storage;
+package ir.ceit.resa.service.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
