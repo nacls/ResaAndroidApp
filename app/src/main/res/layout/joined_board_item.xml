@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
-                android:fontFamily="@font/iransans"
+                android:fontFamily="@font/sahelfd"
                 android:gravity="center|start"
                 android:text="توضیح برد"
                 android:textColor="@color/black"

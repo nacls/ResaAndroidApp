@@ -17,7 +17,7 @@
 
         <gradient
             android:endColor="@color/white"
-            android:startColor="@color/cyan_lightest"
+            android:startColor="@color/lightest_shade"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

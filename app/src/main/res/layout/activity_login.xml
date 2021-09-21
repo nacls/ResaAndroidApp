@@ -32,7 +32,7 @@
             android:textSize="18sp"
             android:fontFamily="@font/iransans"
             android:gravity="right"
-            android:textColor="@color/cyan_dark2"
+            android:textColor="@color/dark_shade3"
             android:text="@string/username" />
 
         <EditText
@@ -54,7 +54,7 @@
             android:ems="10"
             android:textSize="18sp"
             android:fontFamily="@font/iransans"
-            android:textColor="@color/cyan_dark2"
+            android:textColor="@color/dark_shade3"
             android:gravity="right"
             android:text="@string/password" />
 
@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textAlignment="center"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:textSize="18sp"

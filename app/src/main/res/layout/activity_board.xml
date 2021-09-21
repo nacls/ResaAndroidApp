@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:background="@drawable/cloud"
+            android:background="@drawable/lime_green_grid"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,22 +56,18 @@
                         android:layout_weight="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="5dp"
                         android:background="@null"
                         android:fontFamily="@font/sahelfd"
                         android:inputType="textLongMessage"
                         android:hint="@string/type_announcement_hint"
                         android:padding="10dp"
-                        android:textColorHighlight="@color/cyan_lightest"
+                        android:textColorHighlight="@color/lightest_shade"
                         android:textSize="18sp" />
 
                     <ImageView
                         android:layout_gravity="center"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
                         android:src="@drawable/add_announcement"
                         android:layout_marginEnd="5dp">
@@ -109,7 +105,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="center"
                     android:text="@string/no_boards"
-                    android:textColor="@color/cyan_dark3"
+                    android:textColor="@color/dark_shade3"
                     android:textSize="14sp" />
             </LinearLayout>
 

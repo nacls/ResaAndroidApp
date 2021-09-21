@@ -66,7 +66,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="center"
                     android:text="@string/no_boards"
-                    android:textColor="@color/cyan_dark3"
+                    android:textColor="@color/dark_shade3"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                 android:contentDescription="@string/add_board"
                 android:focusable="true"
                 android:src="@drawable/add_logo"
-                app:backgroundTint="@color/cyan_menu_theme" />
+                app:backgroundTint="@color/menu_theme" />
         </FrameLayout>
 
     </LinearLayout>

@@ -28,9 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/iransans"
+            android:fontFamily="@font/sahelfd"
             android:text="@string/resaName"
-            android:textColor="@color/cyan_darkest"
+            android:textColor="@color/darkest_shade"
             android:textSize="60sp" />
 
         <TextView
@@ -38,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/cyan_dark3"
-            android:fontFamily="@font/iransans"
+            android:textColor="@color/dark_shade3"
+            android:fontFamily="@font/sahelfd"
             android:text="@string/autName" />
 
         <ProgressBar
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/VERSION_CODE"
-            android:fontFamily="@font/iransans"
+            android:fontFamily="@font/sahelfd"
             android:layout_marginTop="150dp"/>
     </LinearLayout>
 

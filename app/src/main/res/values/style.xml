@@ -2,14 +2,14 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/cyan_main</item>
-        <item name="colorPrimaryDark">@color/cyan_dark2</item>
-        <item name="colorAccent">@color/cyan_light3</item>
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimaryDark">@color/dark_shade2</item>
+        <item name="colorAccent">@color/light_shade3</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/cyan_light3</item>
-        <item name="android:textColorSecondary">@color/cyan_dark2</item>
+        <item name="android:textColorPrimary">@color/light_shade3</item>
+        <item name="android:textColorSecondary">@color/dark_shade2</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

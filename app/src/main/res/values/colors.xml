@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="cyan_main">#4DD0E1</color>#23bace
-    <color name="cyan_menu_theme">#23bace</color>
-    <color name="cyan_light1">#73DAE7</color>
-    <color name="cyan_light2">#A6E7F0</color>
-    <color name="cyan_light3">#D9F5F9</color>
-    <color name="cyan_lightest">#F2FCFD</color>
-    <color name="announcement">#1173DAE7</color>
-    <color name="cyan_dark1">#1FA6B8</color>
-    <color name="cyan_dark2">#167481</color>
-    <color name="cyan_dark3">#093237</color>
-    <color name="cyan_darkest">#031112</color>
+    <color name="main">#81A89C</color>
+    <color name="menu_theme">#7EA69A</color>
+    <color name="light_shade1">#93B4AA</color>
+    <color name="light_shade2">#A5C0B8</color>
+    <color name="light_shade3">#C0D3CD</color>
+    <color name="lightest_shade">#E4ECEA</color>
+    <color name="announcement">#229CBAB1</color>
+    <color name="dark_shade1">#689688</color>
+    <color name="dark_shade2">#577D71</color>
+    <color name="dark_shade3">#3D574F</color>
+    <color name="darkest_shade">#23322D</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="error_red">#B22222</color>
     <color name="success_green">#59981A</color>
-    <color name="light_grey">#c2c2c2</color>
     <color name="grey">#5e5e5e</color>
-    <color name="grey_dark">#444444</color>
-    <color name="grey_light">#c8c8c8</color>
+    <color name="grey_dark">#404040</color>
+    <color name="grey_light1">#c8c8c8</color>
+    <color name="grey_light2">#c2c2c2</color>
     <color name="wooden">#4f392e</color>
 </resources>
