@@ -42,12 +42,6 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     }
 
     @Override
-    public void onRefresh() {
-        view.showProgressBar();
-        getUserJoinedBoardsFromServer();
-    }
-
-    @Override
     public void onLogoutClicked() {
         ResaSharedPreferences.clearPreferences(context);
         openLoginActivity();

@@ -35,6 +35,7 @@ import ir.ceit.resa.model.view.NavigationMenuItem;
 import ir.ceit.resa.presenter.DashboardActivityPresenter;
 import ir.ceit.resa.view.adapter.BoardsAdapter;
 import ir.ceit.resa.view.adapter.NavigationMenuItemAdapter;
+import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class DashboardActivity extends AppCompatActivity implements DashboardContract.View {
 
@@ -96,11 +97,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     }
 
     @Override
-    public void showProgressRefresh() {
-        //boardsProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public void showNoJoinedBoards(String status) {
         boardsProgressBar.setVisibility(View.GONE);
         boardsRv.setVisibility(View.GONE);
@@ -121,11 +117,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         // Set layout manager to position the items
         boardsRv.setLayoutManager(new LinearLayoutManager(this));
         boardsRv.setVisibility(View.VISIBLE);
-        float offsetPx = getResources().getDimension(R.dimen.bottom_offset_dp);
-        BottomOffsetDecoration bottomOffsetDecoration = new BottomOffsetDecoration((int) offsetPx);
+        float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false);
         boardsRv.addItemDecoration(bottomOffsetDecoration);
         swipeContainer.setRefreshing(false);
     }
+
 
     private void initializeViewComponents() {
         drawerLayout = findViewById(R.id.dashboard_layout);
@@ -142,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         swipeContainer = findViewById(R.id.swipe_container);
     }
 
-    private void setOnSwipe(){
+    private void setOnSwipe() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -267,31 +264,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         return true;
     }
 
+
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
-        }
-    }
-
-    static class BottomOffsetDecoration extends RecyclerView.ItemDecoration {
-        private int mBottomOffset;
-
-        public BottomOffsetDecoration(int bottomOffset) {
-            mBottomOffset = bottomOffset;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int dataSize = state.getItemCount();
-            int position = parent.getChildAdapterPosition(view);
-            if (dataSize > 0 && position == dataSize - 1) {
-                outRect.set(0, 0, 0, mBottomOffset);
-            } else {
-                outRect.set(0, 0, 0, 0);
-            }
-
         }
     }
 }

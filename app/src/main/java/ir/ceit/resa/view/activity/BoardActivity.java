@@ -1,6 +1,7 @@
 package ir.ceit.resa.view.activity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,12 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,6 +27,8 @@ import ir.ceit.resa.contract.BoardContract;
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.presenter.BoardActivityPresenter;
+import ir.ceit.resa.view.adapter.AnnouncementAdapter;
+import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class BoardActivity extends AppCompatActivity implements BoardContract.View {
 
@@ -32,13 +37,14 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     private Toolbar toolbar;
     private Menu toolbarMenu;
     // Layouts (controlling big picture view)
-    private ConstraintLayout showAnnouncementsLayout;
+    private RelativeLayout showAnnouncementsLayout;
     private LinearLayout showProblemLayout;
     private LinearLayout addAnnouncementLayout;
     private ProgressBar progressBar;
     // View items
     private RecyclerView announcementsRv;
-    private EditText announcementEt;
+    private EditText addAnnouncementEt;
+    private ImageView addAnnouncementIv;
     private ImageView announcementProblemIv;
     private TextView announcementProblemTv;
 
@@ -49,7 +55,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
         Board board = (Board) getIntent().getSerializableExtra("board");
 
-        boardPresenter = new BoardActivityPresenter(this, board);
+        boardPresenter = new BoardActivityPresenter(this, this, board);
 
         boardPresenter.onCreated();
     }
@@ -63,17 +69,59 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     @Override
     public void showProgressBar() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        showAnnouncementsLayout.setVisibility(View.GONE);
+        showProblemLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void showNoAnnouncements(String status) {
-
+        progressBar.setVisibility(View.GONE);
+        showAnnouncementsLayout.setVisibility(View.GONE);
+        showProblemLayout.setVisibility(View.VISIBLE);
+        announcementProblemTv.setText(status);
     }
 
     @Override
     public void showAnnouncements(List<Announcement> announcements) {
+        progressBar.setVisibility(View.GONE);
+        showProblemLayout.setVisibility(View.GONE);
+        showAnnouncementsLayout.setVisibility(View.VISIBLE);
+        AnnouncementAdapter adapter = new AnnouncementAdapter(announcements);
+        // Attach the adapter to the recyclerview to populate items
+        announcementsRv.setAdapter(adapter);
+        // Set layout manager to position the items
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
+        announcementsRv.setLayoutManager(layoutManager);
+        // bottom offset
+        float offsetPx = getResources().getDimension(R.dimen.announcement_bottom_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true);
+        announcementsRv.addItemDecoration(bottomOffsetDecoration);
+        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true);
+        announcementsRv.addItemDecoration(topOffsetDecoration);
+        // divide items
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                announcementsRv.getContext(),
+                layoutManager.getOrientation()
+        );
+        dividerItemDecoration.setDrawable(
+                Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.announcement_divider))
+        );
+        announcementsRv.addItemDecoration(dividerItemDecoration);
+        announcementsRv.scrollToPosition(0);
+        setAddAnnouncementViewBasedOnRole();
+    }
 
+    private void setAddAnnouncementViewBasedOnRole() {
+        switch (boardPresenter.getBoard().getUserMembership()) {
+            case CREATOR:
+            case WRITER:
+                addAnnouncementLayout.setVisibility(View.VISIBLE);
+                break;
+            default:
+                addAnnouncementLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 
     private void setViewBasedOnRole() {
@@ -94,6 +142,20 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     private void initializeViewComponents() {
         toolbar = findViewById(R.id.board_toolbar);
+        // progress
+        progressBar = findViewById(R.id.announcement_progress_bar);
+        // announcements
+        // show
+        showAnnouncementsLayout = findViewById(R.id.show_announcement_layout);
+        announcementsRv = findViewById(R.id.announcementsRv);
+        // add
+        addAnnouncementEt = findViewById(R.id.add_announcement_et);
+        addAnnouncementIv = findViewById(R.id.add_announcement_iv);
+        addAnnouncementLayout = findViewById(R.id.add_announcement_layout);
+        // problem
+        showProblemLayout = findViewById(R.id.container_announcements_problem);
+        announcementProblemIv = findViewById(R.id.announcement_problem_iv);
+        announcementProblemTv = findViewById(R.id.announcement_status_tv);
     }
 
     private void setUpToolbar() {

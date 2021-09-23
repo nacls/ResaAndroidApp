@@ -2,6 +2,7 @@ package ir.ceit.resa.service.network;
 
 import java.util.List;
 
+import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
@@ -22,4 +23,9 @@ public interface ApiClient {
     @GET(UrlProvider.JOINED_BOARDS)
     Call<List<BoardInfoResponse>> getUserBoards(@Path("username") String username,
                                                 @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @GET(UrlProvider.GET_BOARD_ANNOUNCEMENTS)
+    Call<List<Announcement>> getBoardAnnouncements(@Path("boardId") String boardId,
+                                                   @Header("Authorization") String token);
 }

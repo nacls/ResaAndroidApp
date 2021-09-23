@@ -2,6 +2,7 @@ package ir.ceit.resa.service.network;
 
 import java.util.List;
 
+import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
@@ -18,8 +19,13 @@ public class WebService {
 
     public static void getJoinedBoards(String token, String username, Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
-
         Call<List<BoardInfoResponse>> call = service.getUserBoards(username, token);
+        call.enqueue(callback);
+    }
+
+    public static void getBoardAnnouncements(String token, String boardId, Callback callback){
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<List<Announcement>> call = service.getBoardAnnouncements(boardId, token);
         call.enqueue(callback);
     }
 }

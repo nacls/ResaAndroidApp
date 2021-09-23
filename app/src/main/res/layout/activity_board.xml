@@ -26,11 +26,10 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="@drawable/lime_green_grid"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/show_announcement_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -38,48 +37,55 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/announcementsRv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="3dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:stackFromEnd="false"
+                    app:reverseLayout="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_above="@id/add_announcement_layout"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
 
                 <LinearLayout
                     android:id="@+id/add_announcement_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
 
                     <EditText
-                        android:layout_width="match_parent"
+                        android:id="@+id/add_announcement_et"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:background="@null"
                         android:fontFamily="@font/sahelfd"
-                        android:inputType="textLongMessage"
                         android:hint="@string/type_announcement_hint"
+                        android:inputType="textLongMessage"
                         android:padding="10dp"
                         android:textColorHighlight="@color/lightest_shade"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:layout_gravity="center"
+                        android:id="@+id/add_announcement_iv"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/add_announcement"
-                        android:layout_marginEnd="5dp">
+                        android:src="@drawable/add_announcement">
 
                     </ImageView>
                 </LinearLayout>
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/container_boards_problem"
+                android:id="@+id/container_announcements_problem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -88,7 +94,7 @@
                 android:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/announcementProblemIv"
+                    android:id="@+id/announcement_problem_iv"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
@@ -96,7 +102,7 @@
                     android:src="@drawable/boards_problem" />
 
                 <TextView
-                    android:id="@+id/announcementStatusTv"
+                    android:id="@+id/announcement_status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -110,12 +116,12 @@
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/announcementProgressBar"
+                android:id="@+id/announcement_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:progressDrawable="@drawable/custom_progress_bar"
+                android:layout_marginTop="250dp"
+                android:foregroundGravity="center"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

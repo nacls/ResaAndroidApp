@@ -41,8 +41,7 @@ public class BoardsAdapter extends
 
         View boardView = inflater.inflate(R.layout.joined_board_item, viewGroup, false);
 
-        ViewHolder viewHolder = new ViewHolder(boardView);
-        return viewHolder;
+        return new ViewHolder(boardView);
     }
 
     @Override
