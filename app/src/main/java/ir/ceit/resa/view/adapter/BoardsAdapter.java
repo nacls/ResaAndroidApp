@@ -18,13 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import ir.ceit.resa.R;
-import ir.ceit.resa.service.SolarCalendar;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.service.SolarCalendar;
 import ir.ceit.resa.view.activity.BoardActivity;
 
 public class BoardsAdapter extends
         RecyclerView.Adapter<BoardsAdapter.ViewHolder> {
-
 
     private List<Board> boards;
 
@@ -73,10 +72,15 @@ public class BoardsAdapter extends
         LinearLayout announcementLayout = viewHolder.announcementLayout;
         if (board.getLatestAnnouncement() != null) {
             TextView announcement = viewHolder.latestAnnouncement;
-            String lastAnnouncement =board.getLatestAnnouncement().getMessage() +
+            String announcementMessage = board.getLatestAnnouncement().getMessage();
+            if (announcementMessage.length() > 45)
+                announcementMessage = board.getLatestAnnouncement().getMessage().substring(0, 45) + "...";
+
+            String lastAnnouncement = announcementMessage +
                     "\n" +
-                    SolarCalendar.getShamsiDate(board.getLatestAnnouncement().getCreationDate());
+                    SolarCalendar.getShamsiDateRtl(board.getLatestAnnouncement().getCreationDate());
             announcement.setText(lastAnnouncement);
+
         } else {
             announcementLayout.setVisibility(View.GONE);
         }

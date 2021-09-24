@@ -87,7 +87,6 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/sahelfd"
                 android:text="آخرین اطلاعیه"
-
                 android:textColor="@color/grey_dark"
                 android:textSize="16sp" />
         </LinearLayout>

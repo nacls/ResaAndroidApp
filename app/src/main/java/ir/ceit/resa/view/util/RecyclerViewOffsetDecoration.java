@@ -6,14 +6,17 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewOffsetDecoration extends RecyclerView.ItemDecoration {
+
     private int offset;
     private boolean top;
     private boolean isReverse;
+    private int borders;
 
-    public RecyclerViewOffsetDecoration(int bottomOffset, boolean top, boolean isReverse) {
+    public RecyclerViewOffsetDecoration(int bottomOffset, boolean top, boolean isReverse, int borders) {
         this.offset = bottomOffset;
         this.top = top;
         this.isReverse = isReverse;
+        this.borders = borders;
     }
 
     @Override
@@ -22,39 +25,34 @@ public class RecyclerViewOffsetDecoration extends RecyclerView.ItemDecoration {
         int dataSize = state.getItemCount();
         int position = parent.getChildAdapterPosition(view);
         if (dataSize <= 0) {
-            outRect.set(0, 0, 0, 0);
+            outRect.set(borders, 0, borders, 0);
         } else {
             if (position == dataSize - 1) {
                 if (top) {
-                    if (isReverse) {
-                        outRect.set(0, offset, 0, 0);
-                    } else {
-                        outRect.set(0, 0, 0, 0);
+                    if (isReverse){
+                        outRect.set(borders, offset, borders, 0);
+                        return;
                     }
                 } else {
-                    if (isReverse) {
-                        outRect.set(0, 0, 0, 0);
-                    } else {
-                        outRect.set(0, 0, 0, offset);
+                    if (!isReverse) {
+                        outRect.set(borders, 0, borders, offset);
+                        return;
                     }
                 }
             } else if (position == 0) {
                 if (top) {
-                    if (isReverse) {
-                        outRect.set(0, 0, 0, 0);
-                    } else {
-                        outRect.set(0, offset, 0, 0);
+                    if (!isReverse){
+                        outRect.set(borders, offset, borders, 0);
+                        return;
                     }
                 } else {
-                    if (isReverse) {
-                        outRect.set(0, 0, 0, offset);
-                    } else {
-                        outRect.set(0, 0, 0, 0);
+                    if (isReverse){
+                        outRect.set(borders, 0, borders, offset);
+                        return;
                     }
                 }
-            } else {
-                outRect.set(0, 0, 0, 0);
             }
         }
+        outRect.set(borders, 0, borders, 0);
     }
 }

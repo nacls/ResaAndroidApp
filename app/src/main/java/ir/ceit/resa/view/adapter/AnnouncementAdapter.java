@@ -51,15 +51,18 @@ public class AnnouncementAdapter extends
         announcementText.setText(announcement.getMessage());
 
         TextView writerAndDate = viewHolder.announcementWriterDate;
-        String writerDate = SolarCalendar.getShamsiDate(announcement.getCreationDate()) + " ،" + announcement.getWriter();
+        String date = SolarCalendar.getShamsiDateLtr(announcement.getCreationDate());
+        String writerDate = announcement.getWriter() + "، " + date;
         writerAndDate.setText(writerDate);
 
         LinearLayout.LayoutParams announcementParams = new LinearLayout.
                 LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-        announcementParams.gravity = Gravity.CENTER;
+        announcementParams.gravity = Gravity.RIGHT;
 
         viewHolder.parentLayout.setLayoutParams(announcementParams);
+
+        viewHolder.parentLayout.setGravity(Gravity.CENTER);
 
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

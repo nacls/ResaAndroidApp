@@ -23,9 +23,14 @@ public class SolarCalendar {
         calcSolarCalendar(MiladiDate);
     }
 
-    public static String getShamsiDate(Date miladiDate) {
+    public static String getShamsiDateRtl(Date miladiDate) {
         SolarCalendar solarCalendar = new SolarCalendar(miladiDate);
         return solarCalendar.year + "/" + solarCalendar.month + "/" + solarCalendar.date + " " + getTime(miladiDate);
+    }
+
+    public static String getShamsiDateLtr(Date miladiDate) {
+        SolarCalendar solarCalendar = new SolarCalendar(miladiDate);
+        return getTime(miladiDate) + " " + solarCalendar.year + "/" + solarCalendar.month + "/" + solarCalendar.date;
     }
 
     public static String getTime(Date date) {

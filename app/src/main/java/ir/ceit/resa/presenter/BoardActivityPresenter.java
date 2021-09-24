@@ -37,6 +37,11 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
         getBoardAnnouncementsFromServer();
     }
 
+    @Override
+    public void onInfoEditClicked() {
+        System.out.println("INFO CLICKED");
+    }
+
     public void getBoardAnnouncementsFromServer() {
         String token = ResaSharedPreferences.getToken(context);
         WebService.getBoardAnnouncements(token, board.getBoardId(), new Callback<List<Announcement>>(){
@@ -63,11 +68,6 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
                 view.showNoAnnouncements(Constants.CONNECTION_PROBLEM);
             }
         });
-    }
-
-    @Override
-    public void onInfoEditClicked() {
-        System.out.println("INFO CLICKED");
     }
 
     public Board getBoard() {

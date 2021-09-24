@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +27,9 @@ import ir.ceit.resa.R;
 import ir.ceit.resa.contract.BoardContract;
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.BoardActivityPresenter;
+import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.view.adapter.AnnouncementAdapter;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
@@ -77,9 +80,25 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     @Override
     public void showNoAnnouncements(String status) {
         progressBar.setVisibility(View.GONE);
-        showAnnouncementsLayout.setVisibility(View.GONE);
+        announcementsRv.setVisibility(View.GONE);
+        showAnnouncementsLayout.setVisibility(View.VISIBLE);
         showProblemLayout.setVisibility(View.VISIBLE);
         announcementProblemTv.setText(status);
+        if (status.equals(Constants.NO_ANNOUNCEMENTS_TO_SHOW)) {
+            announcementProblemIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.empty_board));
+            setAddAnnouncementViewBasedOnRole();
+        }
+
+        if (status.equals(Constants.CONNECTION_PROBLEM)) {
+            addAnnouncementEt.setVisibility(View.GONE);
+            final float scale = this.getResources().getDisplayMetrics().density;
+            int pixels = (int) (30 * scale + 0.5f);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, pixels);
+            params.weight = 1.0f;
+            params.gravity = Gravity.TOP;
+            addAnnouncementIv.setLayoutParams(params);
+            addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.error_red));
+        }
     }
 
     @Override
@@ -93,11 +112,11 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
         announcementsRv.setLayoutManager(layoutManager);
-        // bottom offset
-        float offsetPx = getResources().getDimension(R.dimen.announcement_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true);
+        // recycler view items offset
+        float offsetPx = getResources().getDimension(R.dimen.announcement_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true, (int) offsetPx);
         announcementsRv.addItemDecoration(bottomOffsetDecoration);
-        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true);
+        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true, (int) offsetPx);
         announcementsRv.addItemDecoration(topOffsetDecoration);
         // divide items
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
@@ -113,14 +132,32 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     private void setAddAnnouncementViewBasedOnRole() {
-        switch (boardPresenter.getBoard().getUserMembership()) {
+        EMembership userMembership = boardPresenter.getBoard().getUserMembership();
+        switch (userMembership) {
             case CREATOR:
             case WRITER:
+                showAnnouncementsLayout.setVisibility(View.VISIBLE);
                 addAnnouncementLayout.setVisibility(View.VISIBLE);
-                break;
+                return;
+            case REGULAR_MEMBER:
+            case NOT_JOINED:
             default:
-                addAnnouncementLayout.setVisibility(View.GONE);
+                addAnnouncementEt.setVisibility(View.GONE);
+                final float scale = this.getResources().getDisplayMetrics().density;
+                int pixels = (int) (30 * scale + 0.5f);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, pixels);
+                params.weight = 1.0f;
+                params.gravity = Gravity.TOP;
+                addAnnouncementIv.setLayoutParams(params);
                 break;
+        }
+
+        if (userMembership == EMembership.REGULAR_MEMBER) {
+            addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.joined_tick));
+        } else if (userMembership == EMembership.NOT_JOINED) {
+            addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.add_logo));
+        } else {
+            addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.error_red));
         }
     }
 
@@ -130,11 +167,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
                 toolbarMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.edit_board));
                 break;
             case WRITER:
-
-                break;
             case REGULAR_MEMBER:
-
-                break;
             default:
                 break;
         }

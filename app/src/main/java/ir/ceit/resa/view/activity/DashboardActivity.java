@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -118,7 +119,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         boardsRv.setLayoutManager(new LinearLayoutManager(this));
         boardsRv.setVisibility(View.VISIBLE);
         float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false,0);
         boardsRv.addItemDecoration(bottomOffsetDecoration);
         swipeContainer.setRefreshing(false);
     }
@@ -148,19 +149,18 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         });
     }
 
-
     private void setViewBasedOnRole() {
         switch (dashboardPresenter.getUserProfile().getRole()) {
             case ROLE_USER:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.user_avatar));
+                avatarIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.user_avatar));
                 createBoardBtn.setVisibility(View.GONE);
                 break;
             case ROLE_ADMIN:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.admin_avatar));
+                avatarIv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.admin_avatar));
                 setupCreateBoardButton();
                 break;
             case ROLE_CREATOR:
-                avatarIv.setImageDrawable(getResources().getDrawable(R.drawable.creator_avatar));
+                avatarIv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.creator_avatar));
                 setupCreateBoardButton();
                 break;
             default:
@@ -263,8 +263,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
-
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override

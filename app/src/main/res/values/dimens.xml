@@ -6,5 +6,6 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="board_bottom_offset_dp">50dp</dimen>
-    <dimen name="announcement_bottom_offset_dp">3dp</dimen>
+    <dimen name="announcement_offset_dp">5dp</dimen>
+    <dimen name="announcement_bottom_offset_dp">10dp</dimen>
 </resources>
