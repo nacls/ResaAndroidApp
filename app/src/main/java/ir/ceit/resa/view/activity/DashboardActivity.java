@@ -1,6 +1,5 @@
 package ir.ceit.resa.view.activity;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +33,7 @@ import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.view.NavigationMenuItem;
 import ir.ceit.resa.presenter.DashboardActivityPresenter;
+import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.view.adapter.BoardsAdapter;
 import ir.ceit.resa.view.adapter.NavigationMenuItemAdapter;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
@@ -60,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     private LinearLayout boardsProblem;
     private TextView boardsStatusTv;
     private ProgressBar boardsProgressBar;
+    private ImageView problemIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,12 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         dashboardPresenter = new DashboardActivityPresenter(this, this);
 
         dashboardPresenter.onCreated();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dashboardPresenter.getUserJoinedBoardsFromServer();
     }
 
     @Override
@@ -106,6 +113,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         boardsStatusTv.setText(status);
         boardsStatusTv.setVisibility(View.VISIBLE);
         swipeContainer.setRefreshing(false);
+        if (status.equals(Constants.NO_BOARDS_TO_SHOW)) {
+            problemIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.no_boards));
+        } else {
+            problemIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.boards_problem));
+        }
     }
 
     @Override
@@ -133,13 +145,14 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         boardsProgressBar = findViewById(R.id.boardsProgressBar);
         contentLayout = findViewById(R.id.content_frame);
         swipeContainer = findViewById(R.id.swipe_container);
+        problemIv = findViewById(R.id.boardsProblemIv);
     }
 
-    private void setupRecyclerView(){
+    private void setupRecyclerView() {
         // Set layout manager to position the items
         boardsRv.setLayoutManager(new LinearLayoutManager(this));
         float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false,0);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0);
         boardsRv.addItemDecoration(bottomOffsetDecoration);
     }
 
@@ -159,11 +172,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
                 createBoardBtn.setVisibility(View.GONE);
                 break;
             case ROLE_ADMIN:
-                avatarIv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.admin_avatar));
+                avatarIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.admin_avatar));
                 setupCreateBoardButton();
                 break;
             case ROLE_CREATOR:
-                avatarIv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.creator_avatar));
+                avatarIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.creator_avatar));
                 setupCreateBoardButton();
                 break;
             default:

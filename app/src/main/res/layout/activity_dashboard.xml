@@ -53,7 +53,7 @@
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/boards_problem" />
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:gravity="center"
                     android:text="@string/no_boards"
                     android:textColor="@color/dark_shade3"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <ProgressBar

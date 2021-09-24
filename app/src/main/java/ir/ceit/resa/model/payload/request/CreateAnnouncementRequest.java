@@ -3,21 +3,19 @@ package ir.ceit.resa.model.payload.request;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class CreateAnnouncementRequest {
 
     @SerializedName("timestamp")
-    private Date creationDate;
+    private String creationDate;
 
     @SerializedName("message")
     private String message;
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 

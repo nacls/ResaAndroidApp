@@ -3,9 +3,11 @@ package ir.ceit.resa.service.network;
 import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
+import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
+import ir.ceit.resa.model.payload.response.MessageResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -28,4 +30,10 @@ public interface ApiClient {
     @GET(UrlProvider.GET_BOARD_ANNOUNCEMENTS)
     Call<List<Announcement>> getBoardAnnouncements(@Path("boardId") String boardId,
                                                    @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @POST(UrlProvider.ADD_ANNOUNCEMENT_TO_BOARD)
+    Call<MessageResponse> addAnnouncementToBoard(@Path("boardId") String boardId,
+                                                 @Header("Authorization") String token,
+                                                 @Body CreateAnnouncementRequest announcementRequest);
 }

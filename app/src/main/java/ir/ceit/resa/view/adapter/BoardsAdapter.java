@@ -73,6 +73,7 @@ public class BoardsAdapter extends
         if (board.getLatestAnnouncement() != null) {
             TextView announcement = viewHolder.latestAnnouncement;
             String announcementMessage = board.getLatestAnnouncement().getMessage();
+            announcementMessage = announcementMessage.replace("\n", " ");
             if (announcementMessage.length() > 45)
                 announcementMessage = board.getLatestAnnouncement().getMessage().substring(0, 45) + "...";
 
@@ -85,13 +86,10 @@ public class BoardsAdapter extends
             announcementLayout.setVisibility(View.GONE);
         }
 
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, BoardActivity.class);
-                intent.putExtra("board", boards.get(i));
-                context.startActivity(intent);
-            }
+        viewHolder.parentLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, BoardActivity.class);
+            intent.putExtra("board", boards.get(i));
+            context.startActivity(intent);
         });
     }
 

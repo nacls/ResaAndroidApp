@@ -3,6 +3,7 @@ package ir.ceit.resa.service.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import ir.ceit.resa.service.Constants;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -14,11 +15,12 @@ public class RetrofitClient {
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.level(HttpLoggingInterceptor.Level.BODY);;
+            interceptor.level(HttpLoggingInterceptor.Level.BODY);
+
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
             Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .setDateFormat(Constants.DATE_FORMAT)
                     .create();
 
             retrofit = new retrofit2.Retrofit.Builder()

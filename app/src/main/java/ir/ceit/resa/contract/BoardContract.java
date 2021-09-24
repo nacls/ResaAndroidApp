@@ -16,6 +16,8 @@ public interface BoardContract {
         void showNoAnnouncements(String status);
 
         void showAnnouncements(List<Announcement> announcements);
+
+        void showToastAnnouncementStatus(String status, boolean isLong);
     }
 
     interface Presenter {
@@ -24,5 +26,8 @@ public interface BoardContract {
 
         void onInfoEditClicked();
 
+        void setWritingMode(boolean inWritingMode);
+
+        void addAnnouncementIvClicked(String message);
     }
 }

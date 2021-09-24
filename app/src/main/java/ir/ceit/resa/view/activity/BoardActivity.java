@@ -1,7 +1,6 @@
 package ir.ceit.resa.view.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
@@ -70,6 +69,12 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        boardPresenter.getBoardAnnouncementsFromServer();
+    }
+
+    @Override
     public void setupActivityView() {
         initializeViewComponents();
         setUpToolbar();
@@ -92,6 +97,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         showAnnouncementsLayout.setVisibility(View.VISIBLE);
         showProblemLayout.setVisibility(View.VISIBLE);
         announcementProblemTv.setText(status);
+
         if (status.equals(Constants.NO_ANNOUNCEMENTS_TO_SHOW)) {
             announcementProblemIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.empty_board));
             setAddAnnouncementViewBasedOnRole();
@@ -123,11 +129,20 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         setAddAnnouncementViewBasedOnRole();
     }
 
+    @Override
+    public void showToastAnnouncementStatus(String status, boolean isLong) {
+        if (isLong)
+            Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
+    }
+
     private void setAddAnnouncementViewBasedOnRole() {
         EMembership userMembership = boardPresenter.getBoard().getUserMembership();
         switch (userMembership) {
             case CREATOR:
             case WRITER:
+                setupAddAnnouncementButton();
                 showAnnouncementsLayout.setVisibility(View.VISIBLE);
                 addAnnouncementLayout.setVisibility(View.VISIBLE);
                 addAnnouncementEt.setVisibility(View.VISIBLE);
@@ -136,10 +151,10 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
                 int pixels1 = (int) (30 * scale1 + 0.5f);
                 int rightMargin = (int) (5 * scale1 + 0.5f);
                 LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(pixels1, pixels1);
-                //params1.weight = 1.0f;
                 params1.gravity = Gravity.CENTER;
                 params1.rightMargin = rightMargin;
                 addAnnouncementIv.setLayoutParams(params1);
+                boardPresenter.setWritingMode(true);
                 return;
             case REGULAR_MEMBER:
             case NOT_JOINED:
@@ -163,7 +178,21 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         }
     }
 
-    private void setupRecyclerView(){
+    private void setupAddAnnouncementButton() {
+        addAnnouncementIv.setOnClickListener(v -> {
+            if (addAnnouncementEt.getVisibility() == View.VISIBLE) {
+                String editTextMessage = addAnnouncementEt.getText().toString();
+                if (editTextMessage.isEmpty()) {
+                    showToastAnnouncementStatus(Constants.ANNOUNCEMENTS_CANT_BE_EMPTY, false);
+                } else {
+                    boardPresenter.addAnnouncementIvClicked(editTextMessage);
+                    addAnnouncementEt.getText().clear();
+                }
+            }
+        });
+    }
+
+    private void setupRecyclerView() {
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
         announcementsRv.setLayoutManager(layoutManager);

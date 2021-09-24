@@ -11,4 +11,5 @@ public class UrlProvider {
 
     // Announcement endpoints
     public static final String GET_BOARD_ANNOUNCEMENTS = "/api/announcement/get/{boardId}";
+    public static final String ADD_ANNOUNCEMENT_TO_BOARD = "/api/announcement/add/{boardId}";
 }
