@@ -18,6 +18,7 @@ import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import ir.ceit.resa.view.activity.LoginActivity;
+import ir.ceit.resa.view.activity.SearchBoardActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +61,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     @Override
     public void onSearchClicked() {
         System.out.println("SEARCH CLICKED");
+        openSearchBoardActivity();
     }
 
     @Override
@@ -70,6 +72,11 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     @Override
     public void onAdminSettingsClicked() {
         System.out.println("ADMIN SETTINGS CLICKED");
+    }
+
+    public void openSearchBoardActivity(){
+        Intent intent = new Intent(context, SearchBoardActivity.class);
+        context.startActivity(intent);
     }
 
     public void openLoginActivity() {
