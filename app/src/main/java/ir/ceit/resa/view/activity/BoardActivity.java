@@ -1,6 +1,7 @@
 package ir.ceit.resa.view.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,6 +51,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     private ProgressBar progressBar;
     // View items
     private RecyclerView announcementsRv;
+    private SwipyRefreshLayout swipeContainer;
     private EditText addAnnouncementEt;
     private ImageView addAnnouncementIv;
     private ImageView announcementProblemIv;
@@ -67,7 +73,8 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     public void setupActivityView() {
         initializeViewComponents();
         setUpToolbar();
-
+        setOnSwipe();
+        setupRecyclerView();
     }
 
     @Override
@@ -79,6 +86,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     @Override
     public void showNoAnnouncements(String status) {
+        swipeContainer.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
         announcementsRv.setVisibility(View.GONE);
         showAnnouncementsLayout.setVisibility(View.VISIBLE);
@@ -103,30 +111,14 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     @Override
     public void showAnnouncements(List<Announcement> announcements) {
+        swipeContainer.setRefreshing(false);
         progressBar.setVisibility(View.GONE);
         showProblemLayout.setVisibility(View.GONE);
         showAnnouncementsLayout.setVisibility(View.VISIBLE);
         AnnouncementAdapter adapter = new AnnouncementAdapter(announcements);
         // Attach the adapter to the recyclerview to populate items
+        announcementsRv.setVisibility(View.VISIBLE);
         announcementsRv.setAdapter(adapter);
-        // Set layout manager to position the items
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
-        announcementsRv.setLayoutManager(layoutManager);
-        // recycler view items offset
-        float offsetPx = getResources().getDimension(R.dimen.announcement_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true, (int) offsetPx);
-        announcementsRv.addItemDecoration(bottomOffsetDecoration);
-        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true, (int) offsetPx);
-        announcementsRv.addItemDecoration(topOffsetDecoration);
-        // divide items
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                announcementsRv.getContext(),
-                layoutManager.getOrientation()
-        );
-        dividerItemDecoration.setDrawable(
-                Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.announcement_divider))
-        );
-        announcementsRv.addItemDecoration(dividerItemDecoration);
         announcementsRv.scrollToPosition(0);
         setAddAnnouncementViewBasedOnRole();
     }
@@ -138,6 +130,16 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
             case WRITER:
                 showAnnouncementsLayout.setVisibility(View.VISIBLE);
                 addAnnouncementLayout.setVisibility(View.VISIBLE);
+                addAnnouncementEt.setVisibility(View.VISIBLE);
+                addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.add_announcement));
+                final float scale1 = this.getResources().getDisplayMetrics().density;
+                int pixels1 = (int) (30 * scale1 + 0.5f);
+                int rightMargin = (int) (5 * scale1 + 0.5f);
+                LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(pixels1, pixels1);
+                //params1.weight = 1.0f;
+                params1.gravity = Gravity.CENTER;
+                params1.rightMargin = rightMargin;
+                addAnnouncementIv.setLayoutParams(params1);
                 return;
             case REGULAR_MEMBER:
             case NOT_JOINED:
@@ -161,6 +163,27 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         }
     }
 
+    private void setupRecyclerView(){
+        // Set layout manager to position the items
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, true);
+        announcementsRv.setLayoutManager(layoutManager);
+        // recycler view items offset
+        float offsetPx = getResources().getDimension(R.dimen.announcement_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true, (int) offsetPx);
+        announcementsRv.addItemDecoration(bottomOffsetDecoration);
+        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true, (int) offsetPx);
+        announcementsRv.addItemDecoration(topOffsetDecoration);
+        // divide items
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                announcementsRv.getContext(),
+                layoutManager.getOrientation()
+        );
+        dividerItemDecoration.setDrawable(
+                Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.announcement_divider))
+        );
+        announcementsRv.addItemDecoration(dividerItemDecoration);
+    }
+
     private void setViewBasedOnRole() {
         switch (boardPresenter.getBoard().getUserMembership()) {
             case CREATOR:
@@ -181,6 +204,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         // show
         showAnnouncementsLayout = findViewById(R.id.show_announcement_layout);
         announcementsRv = findViewById(R.id.announcementsRv);
+        swipeContainer = findViewById(R.id.swipe_container_announcement);
         // add
         addAnnouncementEt = findViewById(R.id.add_announcement_et);
         addAnnouncementIv = findViewById(R.id.add_announcement_iv);
@@ -189,6 +213,15 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         showProblemLayout = findViewById(R.id.container_announcements_problem);
         announcementProblemIv = findViewById(R.id.announcement_problem_iv);
         announcementProblemTv = findViewById(R.id.announcement_status_tv);
+    }
+
+    private void setOnSwipe() {
+        swipeContainer.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                boardPresenter.getBoardAnnouncementsFromServer();
+            }
+        });
     }
 
     private void setUpToolbar() {

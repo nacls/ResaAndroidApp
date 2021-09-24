@@ -78,6 +78,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
 
         setViewBasedOnRole();
         setupToolbar();
+        setupRecyclerView();
         setUsernameAndFullName();
         setNavigationMenu();
 
@@ -111,16 +112,10 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     public void showJoinedBoards(List<Board> boards) {
         boardsProgressBar.setVisibility(View.GONE);
         boardsProblem.setVisibility(View.GONE);
-
+        boardsRv.setVisibility(View.VISIBLE);
         BoardsAdapter adapter = new BoardsAdapter(boards);
         // Attach the adapter to the recyclerview to populate items
         boardsRv.setAdapter(adapter);
-        // Set layout manager to position the items
-        boardsRv.setLayoutManager(new LinearLayoutManager(this));
-        boardsRv.setVisibility(View.VISIBLE);
-        float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false,0);
-        boardsRv.addItemDecoration(bottomOffsetDecoration);
         swipeContainer.setRefreshing(false);
     }
 
@@ -138,6 +133,14 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         boardsProgressBar = findViewById(R.id.boardsProgressBar);
         contentLayout = findViewById(R.id.content_frame);
         swipeContainer = findViewById(R.id.swipe_container);
+    }
+
+    private void setupRecyclerView(){
+        // Set layout manager to position the items
+        boardsRv.setLayoutManager(new LinearLayoutManager(this));
+        float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false,0);
+        boardsRv.addItemDecoration(bottomOffsetDecoration);
     }
 
     private void setOnSwipe() {
