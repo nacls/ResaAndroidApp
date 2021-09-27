@@ -17,6 +17,7 @@ import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
+import ir.ceit.resa.view.activity.CreateBoardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;
 import ir.ceit.resa.view.activity.SearchBoardActivity;
 import retrofit2.Call;
@@ -65,12 +66,17 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onCreateBoardClicked() {
-        System.out.println("CREATE BOARD CLICKED");
+        openCreateBoardActivity();
     }
 
     @Override
     public void onAdminSettingsClicked() {
         System.out.println("ADMIN SETTINGS CLICKED");
+    }
+
+    public void openCreateBoardActivity(){
+        Intent intent = new Intent(context, CreateBoardActivity.class);
+        context.startActivity(intent);
     }
 
     public void openSearchBoardActivity(){
@@ -81,14 +87,6 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     public void openLoginActivity() {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
-    }
-
-    public UserProfile getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
     }
 
     public void getUserJoinedBoardsFromServer() {
@@ -132,5 +130,13 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
         }
         Collections.sort(boards);
         return boards;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

@@ -18,6 +18,8 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
         setContentView(R.layout.activity_create_board);
 
         createBoardPresenter = new CreateBoardActivityPresenter(this, this);
+
+        createBoardPresenter.onCreated();
     }
 
     @Override
