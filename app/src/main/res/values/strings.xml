@@ -45,7 +45,16 @@
     <string name="board_faculty">دانشکده</string>
     <string name="board_info">اطلاعات برد</string>
 
+    <string name="board_id_hint">برای مثال: board_id123</string>
+    <string name="latin_only">شامل اعداد و حروف لاتین</string>
+    <string name="faculty_hint">برای مثال: علوم کامپیوتر</string>
+    <string name="category_hint">برای مثال: درسی</string>
+    <string name="description_hint">برای مثال: روش پژوهش ترم 1 00-99</string>
+
+    <string name="default_error">خطا</string>
+
     <string name="create_new_board">ایجاد برد جدید</string>
+    <string name="create_board">ایجاد برد</string>
     <string name="exit_board_question">ااگر خارج شوید، برد ایجاد نخواهد شد.</string>
 
     <string name="yes">بله</string>

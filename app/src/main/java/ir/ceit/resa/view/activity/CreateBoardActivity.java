@@ -3,7 +3,6 @@ package ir.ceit.resa.view.activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -47,12 +46,7 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.create_new_board));
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openExitDialog();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> openExitDialog());
     }
 
     private void openExitDialog() {
