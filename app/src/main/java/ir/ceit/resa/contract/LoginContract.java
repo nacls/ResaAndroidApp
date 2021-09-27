@@ -1,8 +1,6 @@
 package ir.ceit.resa.contract;
 
-import org.jetbrains.annotations.Contract;
-
-public interface LoginContract{
+public interface LoginContract {
 
     interface View {
 

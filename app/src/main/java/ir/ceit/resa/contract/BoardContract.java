@@ -19,7 +19,11 @@ public interface BoardContract {
 
         void showToastAnnouncementStatus(String status, boolean isLong);
 
+        void updateToolbarTitle();
+
         void openBoardInfoDialog(Board board);
+
+        void openConfigureBoardActivity(Board board);
     }
 
     interface Presenter {
@@ -31,5 +35,7 @@ public interface BoardContract {
         void setWritingMode(boolean inWritingMode);
 
         void addAnnouncementIvClicked(String message);
+
+        void returnFromConfigureBoardActivity(Board board);
     }
 }

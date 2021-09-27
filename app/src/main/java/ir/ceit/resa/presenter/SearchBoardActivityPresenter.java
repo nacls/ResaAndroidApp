@@ -1,4 +1,21 @@
 package ir.ceit.resa.presenter;
 
-public class SearchBoardActivityPresenter {
+import android.content.Context;
+
+import ir.ceit.resa.contract.SearchContract;
+
+public class SearchBoardActivityPresenter implements SearchContract.Presenter {
+
+    private SearchContract.View view;
+    private Context context;
+
+    public SearchBoardActivityPresenter(SearchContract.View view, Context context) {
+        this.view = view;
+        this.context = context;
+    }
+
+    @Override
+    public void onCreated() {
+        view.setupActivityView();
+    }
 }

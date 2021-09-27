@@ -1,5 +1,6 @@
 package ir.ceit.resa.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
-import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.List;
 import java.util.Objects;
@@ -74,6 +74,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     @Override
     protected void onResume() {
         super.onResume();
+
         boardPresenter.getBoardAnnouncementsFromServer();
     }
 
@@ -141,10 +142,20 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     @Override
+    public void updateToolbarTitle() {
+        getSupportActionBar().setTitle(boardPresenter.getBoard().getDescription());
+    }
+
+    @Override
     public void openBoardInfoDialog(Board board) {
         BoardInfoDialog boardInfoDialog = new BoardInfoDialog(this, board);
         boardInfoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         boardInfoDialog.show();
+    }
+
+    @Override
+    public void openConfigureBoardActivity(Board board) {
+
     }
 
     private void setAddAnnouncementViewBasedOnRole() {
@@ -288,5 +299,4 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         setViewBasedOnRole();
         return true;
     }
-
 }

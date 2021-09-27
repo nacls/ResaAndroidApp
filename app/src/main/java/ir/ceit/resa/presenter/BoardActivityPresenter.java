@@ -44,7 +44,7 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
     @Override
     public void onInfoEditClicked() {
         if (board.getUserMembership() == EMembership.CREATOR) {
-            System.out.println("EDIT CLICKED");
+            view.openConfigureBoardActivity(board);
         } else {
             view.openBoardInfoDialog(board);
         }
@@ -60,6 +60,12 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
         if (writingMode) {
             sendAnnouncementToServer(message);
         }
+    }
+
+    @Override
+    public void returnFromConfigureBoardActivity(Board board) {
+        setBoard(board);
+        view.updateToolbarTitle();
     }
 
     public void sendAnnouncementToServer(String message) {
@@ -127,5 +133,9 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.activity.CreateBoardActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.ConfigureBoardActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".view.activity.SearchBoardActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

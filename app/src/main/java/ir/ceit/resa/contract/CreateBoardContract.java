@@ -1,6 +1,6 @@
 package ir.ceit.resa.contract;
 
-public interface SearchContract {
+public interface CreateBoardContract {
 
     interface View {
 
