@@ -46,6 +46,11 @@
     <string name="board_info">اطلاعات برد</string>
 
     <string name="create_new_board">ایجاد برد جدید</string>
+    <string name="exit_board_question">ااگر خارج شوید، برد ایجاد نخواهد شد.</string>
+
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="sure_to_exit">آیا از خروج اطمینان دارید؟</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>
