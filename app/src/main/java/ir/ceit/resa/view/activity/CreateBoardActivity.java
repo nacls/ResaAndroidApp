@@ -20,6 +20,8 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
     // view
     private Toolbar toolbar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,11 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
         createBoardPresenter = new CreateBoardActivityPresenter(this, this);
 
         createBoardPresenter.onCreated();
+    }
+
+    @Override
+    public void onBackPressed() {
+        openExitDialog();
     }
 
     @Override
