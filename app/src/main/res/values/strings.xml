@@ -38,11 +38,11 @@
     <string name="no_boards">بردی برای نمایش وجود ندارد</string>
     <string name="type_announcement_hint">متن پیام</string>
 
-    <string name="board_id">شناسه برد:</string>
-    <string name="board_title">عنوان برد:</string>
-    <string name="board_creator">بانی برد:</string>
-    <string name="board_category">دسته بندی برد:</string>
-    <string name="board_faculty">دانشکده:</string>
+    <string name="board_id">شناسه برد</string>
+    <string name="board_title">عنوان برد</string>
+    <string name="board_creator">بانی برد</string>
+    <string name="board_category">دسته بندی برد</string>
+    <string name="board_faculty">دانشکده</string>
     <string name="board_info">اطلاعات برد</string>
 
     <string-array name="navigation_drawer_items_array">
