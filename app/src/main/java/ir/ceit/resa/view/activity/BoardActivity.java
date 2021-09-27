@@ -1,5 +1,7 @@
 package ir.ceit.resa.view.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -35,6 +37,7 @@ import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.BoardActivityPresenter;
 import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.view.adapter.AnnouncementAdapter;
+import ir.ceit.resa.view.dialog.BoardInfoDialog;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class BoardActivity extends AppCompatActivity implements BoardContract.View {
@@ -135,6 +138,13 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
             Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
         else
             Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void openBoardInfoDialog(Board board) {
+        BoardInfoDialog boardInfoDialog = new BoardInfoDialog(this, board);
+        boardInfoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        boardInfoDialog.show();
     }
 
     private void setAddAnnouncementViewBasedOnRole() {
@@ -245,12 +255,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     private void setOnSwipe() {
-        swipeContainer.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh(SwipyRefreshLayoutDirection direction) {
-                boardPresenter.getBoardAnnouncementsFromServer();
-            }
-        });
+        swipeContainer.setOnRefreshListener(direction -> boardPresenter.getBoardAnnouncementsFromServer());
     }
 
     private void setUpToolbar() {

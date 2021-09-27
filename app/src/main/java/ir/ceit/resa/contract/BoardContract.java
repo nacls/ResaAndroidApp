@@ -18,6 +18,8 @@ public interface BoardContract {
         void showAnnouncements(List<Announcement> announcements);
 
         void showToastAnnouncementStatus(String status, boolean isLong);
+
+        void openBoardInfoDialog(Board board);
     }
 
     interface Presenter {

@@ -46,7 +46,7 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
         if (board.getUserMembership() == EMembership.CREATOR) {
             System.out.println("EDIT CLICKED");
         } else {
-            System.out.println("INFO CLICKED");
+            view.openBoardInfoDialog(board);
         }
     }
 
