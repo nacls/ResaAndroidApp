@@ -1,5 +1,6 @@
 package ir.ceit.resa.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -43,6 +48,23 @@ import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 public class BoardActivity extends AppCompatActivity implements BoardContract.View {
 
     private BoardActivityPresenter boardPresenter;
+
+    private ActivityResultLauncher<Intent> configureBoardActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Board board = null;
+                        if (data != null){
+                            board = (Board) data.getSerializableExtra("board");
+                        }
+                        boardPresenter.returnFromConfigureBoardActivity(board);
+                    }
+                }
+            });
+    ;
     // Toolbar components
     private Toolbar toolbar;
     private Menu toolbarMenu;
@@ -155,7 +177,14 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     @Override
     public void openConfigureBoardActivity(Board board) {
+        Intent intent = new Intent(this, ConfigureBoardActivity.class);
+        intent.putExtra("board", board);
+        configureBoardActivityLauncher.launch(intent);
+    }
 
+    @Override
+    public void finishActivity() {
+        finish();
     }
 
     private void setAddAnnouncementViewBasedOnRole() {

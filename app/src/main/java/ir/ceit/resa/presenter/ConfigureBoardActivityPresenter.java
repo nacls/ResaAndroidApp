@@ -21,4 +21,12 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
     public void onCreated() {
         view.setupActivityView();
     }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }

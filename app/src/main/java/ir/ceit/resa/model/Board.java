@@ -59,6 +59,34 @@ public class Board implements Comparable<Board>, Serializable {
         return userMembership;
     }
 
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setCreatorUsername(String creatorUsername) {
+        this.creatorUsername = creatorUsername;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public void setLatestAnnouncement(Announcement latestAnnouncement) {
+        this.latestAnnouncement = latestAnnouncement;
+    }
+
+    public void setUserMembership(EMembership userMembership) {
+        this.userMembership = userMembership;
+    }
+
     public int compareTo(Board o) {
         if (getLatestAnnouncement() == null) {
             return (o.getLatestAnnouncement() == null) ? 0 : 1;

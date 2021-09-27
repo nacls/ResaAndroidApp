@@ -64,6 +64,10 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
 
     @Override
     public void returnFromConfigureBoardActivity(Board board) {
+        if (board == null){
+            view.finishActivity();
+            return;
+        }
         setBoard(board);
         view.updateToolbarTitle();
     }

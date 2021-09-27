@@ -24,6 +24,8 @@ public interface BoardContract {
         void openBoardInfoDialog(Board board);
 
         void openConfigureBoardActivity(Board board);
+
+        void finishActivity();
     }
 
     interface Presenter {

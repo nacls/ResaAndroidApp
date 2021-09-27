@@ -60,7 +60,6 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onSearchClicked() {
-        System.out.println("SEARCH CLICKED");
         openSearchBoardActivity();
     }
 
