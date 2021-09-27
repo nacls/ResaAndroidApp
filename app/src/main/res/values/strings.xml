@@ -45,6 +45,8 @@
     <string name="board_faculty">دانشکده</string>
     <string name="board_info">اطلاعات برد</string>
 
+    <string name="create_new_board">ایجاد برد جدید</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>
         <item>تنظیمات</item>
