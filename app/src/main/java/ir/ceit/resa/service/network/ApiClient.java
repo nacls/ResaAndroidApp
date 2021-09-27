@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
+import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
@@ -36,4 +37,9 @@ public interface ApiClient {
     Call<MessageResponse> addAnnouncementToBoard(@Path("boardId") String boardId,
                                                  @Header("Authorization") String token,
                                                  @Body CreateAnnouncementRequest announcementRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST(UrlProvider.CREATE_BOARD)
+    Call<MessageResponse> createBoard(@Header("Authorization") String token,
+                                      @Body CreateBoardRequest createBoardRequest);
 }

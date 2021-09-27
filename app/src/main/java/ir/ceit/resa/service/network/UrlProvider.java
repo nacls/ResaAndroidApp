@@ -9,6 +9,8 @@ public class UrlProvider {
     // Board endpoints
     public static final String JOINED_BOARDS = "/api/board/joined/{username}";
 
+    public static final String CREATE_BOARD = "/api/board/create";
+
     // Announcement endpoints
     public static final String GET_BOARD_ANNOUNCEMENTS = "/api/announcement/get/{boardId}";
     public static final String ADD_ANNOUNCEMENT_TO_BOARD = "/api/announcement/add/{boardId}";

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
+import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
@@ -37,6 +38,14 @@ public class WebService {
                                               Callback callback){
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.addAnnouncementToBoard(boardId, token, announcementRequest);
+        call.enqueue(callback);
+    }
+
+    public static void createBoard(String token,
+                                   CreateBoardRequest createBoardRequest,
+                                   Callback callback){
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.createBoard(token, createBoardRequest);
         call.enqueue(callback);
     }
 }
