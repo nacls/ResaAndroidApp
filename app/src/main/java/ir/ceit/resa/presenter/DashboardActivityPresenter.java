@@ -8,15 +8,16 @@ import java.util.Collections;
 import java.util.List;
 
 import ir.ceit.resa.contract.DashboardContract;
-import ir.ceit.resa.service.Constants;
-import ir.ceit.resa.service.UserProfileManager;
-import ir.ceit.resa.service.network.ErrorUtils;
-import ir.ceit.resa.service.network.WebService;
-import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
+import ir.ceit.resa.service.BoardUtil;
+import ir.ceit.resa.service.Constants;
+import ir.ceit.resa.service.UserProfileUtil;
+import ir.ceit.resa.service.network.ErrorUtils;
+import ir.ceit.resa.service.network.WebService;
+import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.view.activity.CreateBoardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;
 import ir.ceit.resa.view.activity.SearchBoardActivity;
@@ -33,7 +34,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     public DashboardActivityPresenter(DashboardContract.View view, Context context) {
         this.view = view;
         this.context = context;
-        this.userProfile = UserProfileManager.createUserProfile(context);
+        this.userProfile = UserProfileUtil.createUserProfile(context);
     }
 
     @Override
@@ -74,12 +75,12 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
         System.out.println("ADMIN SETTINGS CLICKED");
     }
 
-    public void openCreateBoardActivity(){
+    public void openCreateBoardActivity() {
         Intent intent = new Intent(context, CreateBoardActivity.class);
         context.startActivity(intent);
     }
 
-    public void openSearchBoardActivity(){
+    public void openSearchBoardActivity() {
         Intent intent = new Intent(context, SearchBoardActivity.class);
         context.startActivity(intent);
     }
@@ -118,14 +119,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
     public List<Board> makeBoardModelFromPayload(List<BoardInfoResponse> payload) {
         List<Board> boards = new ArrayList<>();
         for (int i = 0; i < payload.size(); i++) {
-            Board board = new Board(payload.get(i).getBoardId(),
-                    payload.get(i).getDescription(),
-                    payload.get(i).getCategory(),
-                    payload.get(i).getCreatorUsername(),
-                    payload.get(i).getFaculty(),
-                    payload.get(i).getLatestAnnouncement(),
-                    payload.get(i).getUserMembership()
-            );
+            Board board = BoardUtil.makeBoardFromBoardInfoResponse(payload.get(i));
             boards.add(board);
         }
         Collections.sort(boards);

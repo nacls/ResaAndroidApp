@@ -40,6 +40,6 @@ public interface ApiClient {
 
     @Headers("Content-Type: application/json")
     @POST(UrlProvider.CREATE_BOARD)
-    Call<MessageResponse> createBoard(@Header("Authorization") String token,
+    Call<BoardInfoResponse> createBoard(@Header("Authorization") String token,
                                       @Body CreateBoardRequest createBoardRequest);
 }

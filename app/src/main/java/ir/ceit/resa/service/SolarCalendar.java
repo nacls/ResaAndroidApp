@@ -33,6 +33,10 @@ public class SolarCalendar {
         return getTime(miladiDate) + " " + solarCalendar.year + "/" + solarCalendar.month + "/" + solarCalendar.date;
     }
 
+    public static String getCurrentTimestamp(){
+        return new SimpleDateFormat(Constants.DATE_FORMAT).format(Calendar.getInstance().getTime());
+    }
+
     public static String getTime(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

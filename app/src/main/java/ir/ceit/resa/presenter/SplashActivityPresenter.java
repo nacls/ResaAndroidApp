@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import ir.ceit.resa.contract.SplashContract;
-import ir.ceit.resa.service.UserProfileManager;
+import ir.ceit.resa.service.UserProfileUtil;
 import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.view.activity.DashboardActivity;
@@ -37,7 +37,7 @@ public class SplashActivityPresenter implements SplashContract.Presenter {
     }
 
     public void loadDashboardActivity() {
-        UserProfile userProfile = UserProfileManager.createUserProfile(context);
+        UserProfile userProfile = UserProfileUtil.createUserProfile(context);
         if (userProfile == null) {
             openLoginActivity();
         } else {

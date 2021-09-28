@@ -17,6 +17,7 @@
         tools:targetApi="m">
         <activity
             android:name=".view.activity.CreateBoardActivity"
+            android:noHistory="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.activity.ConfigureBoardActivity"

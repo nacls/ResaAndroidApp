@@ -45,7 +45,7 @@ public class WebService {
                                    CreateBoardRequest createBoardRequest,
                                    Callback callback){
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
-        Call<MessageResponse> call = service.createBoard(token, createBoardRequest);
+        Call<BoardInfoResponse> call = service.createBoard(token, createBoardRequest);
         call.enqueue(callback);
     }
 }

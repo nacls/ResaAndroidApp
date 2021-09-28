@@ -29,6 +29,7 @@
                 android:id="@+id/membershipIv"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
 
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/sahelfd"
                 android:gravity="center|start"
                 android:text="توضیح برد"

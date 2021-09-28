@@ -20,8 +20,15 @@ public class CreateBoardRequest {
     private String faculty;
 
     @SerializedName("timestamp")
-    private Date creationDate;
+    private String creationDate;
 
+    public CreateBoardRequest(String boardId, String description, String category, String faculty, String creationDate) {
+        this.boardId = boardId;
+        this.description = description;
+        this.category = category;
+        this.faculty = faculty;
+        this.creationDate = creationDate;
+    }
 
     public String getBoardId() {
         return boardId;
@@ -55,11 +62,11 @@ public class CreateBoardRequest {
         this.faculty = faculty;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 }

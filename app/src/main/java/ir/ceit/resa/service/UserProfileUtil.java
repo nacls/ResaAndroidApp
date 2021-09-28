@@ -8,7 +8,7 @@ import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.UserProfile;
 
-public class UserProfileManager {
+public class UserProfileUtil {
 
     public static ERole getHighLevelRole(List<String> roles) {
         boolean creatorFound = false;

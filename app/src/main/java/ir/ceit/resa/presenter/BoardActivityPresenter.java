@@ -14,6 +14,7 @@ import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import ir.ceit.resa.service.Constants;
+import ir.ceit.resa.service.SolarCalendar;
 import ir.ceit.resa.service.network.ErrorUtils;
 import ir.ceit.resa.service.network.WebService;
 import ir.ceit.resa.service.storage.ResaSharedPreferences;
@@ -82,7 +83,6 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
                     MessageResponse serverMessage = response.body();
                     assert serverMessage != null;
                     if (serverMessage.getMessage().equals(Constants.SERVER_RESPONSE_ADD_ANNOUNCEMENT_OK)) {
-                        view.showToastAnnouncementStatus(Constants.ADD_ANNOUNCEMENTS_SUCCESSFUL, true);
                         getBoardAnnouncementsFromServer();
                     } else {
                         view.showToastAnnouncementStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
@@ -102,8 +102,7 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
     public CreateAnnouncementRequest createAnnouncementRequest(String message) {
         CreateAnnouncementRequest announcementRequest = new CreateAnnouncementRequest();
         announcementRequest.setMessage(message);
-        String timestamp = new SimpleDateFormat(Constants.DATE_FORMAT).format(Calendar.getInstance().getTime());
-        announcementRequest.setCreationDate(timestamp);
+        announcementRequest.setCreationDate(SolarCalendar.getCurrentTimestamp());
         return announcementRequest;
     }
 
