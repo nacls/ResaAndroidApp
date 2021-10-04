@@ -8,6 +8,10 @@ public class SearchBoardRequest {
     @SerializedName("boardId")
     private String boardId;
 
+    public SearchBoardRequest(String boardId) {
+        this.boardId = boardId;
+    }
+
     public String getBoardId() {
         return boardId;
     }

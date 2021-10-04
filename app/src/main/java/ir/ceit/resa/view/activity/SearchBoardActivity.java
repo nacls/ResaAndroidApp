@@ -19,6 +19,7 @@ import ir.ceit.resa.contract.SearchContract;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.SearchBoardActivityPresenter;
+import ir.ceit.resa.view.adapter.SearchResultAdapter;
 
 public class SearchBoardActivity extends AppCompatActivity implements SearchContract.View {
 
@@ -33,6 +34,8 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     private ProgressBar searchProgressBar;
     // board result components
     private RecyclerView resultRv;
+
+    private SearchResultAdapter resultAdapter;
 
 
     @Override
@@ -69,6 +72,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     public void showSearchResultProblem(String status, int statusImage) {
         resultRv.setVisibility(View.GONE);
         searchProgressBar.setVisibility(View.GONE);
+        searchStatusLayout.setVisibility(View.VISIBLE);
         searchStatusTv.setText(status);
         switch (statusImage) {
             case 1: // no boards to show
@@ -99,6 +103,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                System.out.println("onQueryTextSubmit " + query);
                 searchPresenter.searchButtonClicked(query);
                 return false;
             }

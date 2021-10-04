@@ -6,12 +6,14 @@ import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
+import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -41,5 +43,10 @@ public interface ApiClient {
     @Headers("Content-Type: application/json")
     @POST(UrlProvider.CREATE_BOARD)
     Call<BoardInfoResponse> createBoard(@Header("Authorization") String token,
-                                      @Body CreateBoardRequest createBoardRequest);
+                                        @Body CreateBoardRequest createBoardRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST(UrlProvider.SEARCH_BOARDS)
+    Call<List<BoardInfoResponse>> searchBoard(@Header("Authorization") String token,
+                                              @Body SearchBoardRequest searchBoardRequest);
 }

@@ -6,6 +6,7 @@ import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
+import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
@@ -46,6 +47,14 @@ public class WebService {
                                    Callback callback){
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<BoardInfoResponse> call = service.createBoard(token, createBoardRequest);
+        call.enqueue(callback);
+    }
+
+    public static void searchBoard(String token,
+                                   SearchBoardRequest searchBoardRequest,
+                                   Callback callback){
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<List<BoardInfoResponse>> call = service.searchBoard(token, searchBoardRequest);
         call.enqueue(callback);
     }
 }
