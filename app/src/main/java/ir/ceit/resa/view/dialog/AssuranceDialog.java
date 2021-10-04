@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ir.ceit.resa.R;
+import ir.ceit.resa.view.util.AssuranceDialogListener;
 
-public class ExitDialog extends Dialog implements
+public class AssuranceDialog extends Dialog implements
         android.view.View.OnClickListener {
 
     private final String question;
@@ -18,11 +19,19 @@ public class ExitDialog extends Dialog implements
     private TextView exitQuestionTv;
     private Button yesButton;
     private Button noButton;
+    private AssuranceDialogListener listener;
 
-    public ExitDialog(Activity activity, String question) {
+    public AssuranceDialog(Activity activity, String question) {
         super(activity);
         this.activity = activity;
         this.question = question;
+    }
+
+    public AssuranceDialog(Activity activity, String question, AssuranceDialogListener listener) {
+        super(activity);
+        this.activity = activity;
+        this.question = question;
+        this.listener = listener;
     }
 
     @Override
@@ -49,16 +58,31 @@ public class ExitDialog extends Dialog implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_yes:
-                activity.finish();
-                break;
-            case R.id.btn_no:
-                dismiss();
-                break;
-            default:
-                break;
+        if (listener == null) {
+            switch (v.getId()) {
+                case R.id.btn_yes:
+                    activity.finish();
+                    break;
+                case R.id.btn_no:
+                    dismiss();
+                    break;
+                default:
+                    break;
+            }
+            dismiss();
+        } else {
+            switch (v.getId()) {
+                case R.id.btn_yes:
+                    listener.onAcceptClicked();
+                    break;
+                case R.id.btn_no:
+                    listener.onRejectClicked();
+                    dismiss();
+                    break;
+                default:
+                    break;
+            }
+            dismiss();
         }
-        dismiss();
     }
 }

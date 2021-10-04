@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.model.EMembership;
 
 public interface BoardContract {
 
@@ -25,6 +26,8 @@ public interface BoardContract {
 
         void openConfigureBoardActivity(Board board);
 
+        void updateMembershipIv(EMembership newMembership);
+
         void finishActivity();
     }
 
@@ -39,5 +42,9 @@ public interface BoardContract {
         void addAnnouncementIvClicked(String message);
 
         void returnFromConfigureBoardActivity(Board board);
+
+        void joinBoardClicked();
+
+        void leaveBoardClicked();
     }
 }

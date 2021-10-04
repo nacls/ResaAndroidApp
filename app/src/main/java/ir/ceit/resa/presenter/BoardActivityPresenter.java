@@ -73,6 +73,16 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
         view.updateToolbarTitle();
     }
 
+    @Override
+    public void joinBoardClicked() {
+
+    }
+
+    @Override
+    public void leaveBoardClicked() {
+
+    }
+
     public void sendAnnouncementToServer(String message) {
         String token = ResaSharedPreferences.getToken(context);
         CreateAnnouncementRequest announcementRequest = createAnnouncementRequest(message);

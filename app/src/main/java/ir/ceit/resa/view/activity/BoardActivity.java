@@ -183,6 +183,11 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     @Override
+    public void updateMembershipIv(EMembership newMembership) {
+
+    }
+
+    @Override
     public void finishActivity() {
         finish();
     }

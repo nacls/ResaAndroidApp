@@ -20,7 +20,7 @@ import java.util.Objects;
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.CreateBoardContract;
 import ir.ceit.resa.presenter.CreateBoardActivityPresenter;
-import ir.ceit.resa.view.dialog.ExitDialog;
+import ir.ceit.resa.view.dialog.AssuranceDialog;
 
 public class CreateBoardActivity extends AppCompatActivity implements CreateBoardContract.View {
 
@@ -173,7 +173,7 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
         String exitQuestion = getResources().getString(R.string.exit_board_question) + "\n" +
                 getResources().getString(R.string.sure_to_exit);
 
-        ExitDialog exitDialog = new ExitDialog(this, exitQuestion);
+        AssuranceDialog exitDialog = new AssuranceDialog(this, exitQuestion);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exitDialog.show();
     }
