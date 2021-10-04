@@ -17,6 +17,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiClient {
@@ -49,4 +50,14 @@ public interface ApiClient {
     @POST(UrlProvider.SEARCH_BOARDS)
     Call<List<BoardInfoResponse>> searchBoard(@Header("Authorization") String token,
                                               @Body SearchBoardRequest searchBoardRequest);
+
+    @Headers("Content-Type: application/json")
+    @GET(UrlProvider.JOIN_BOARD)
+    Call<MessageResponse> joinBoard(@Path("boardId") String boardId,
+                                                   @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @PUT(UrlProvider.LEAVE_BOARD)
+    Call<MessageResponse> leaveBoard(@Path("boardId") String boardId,
+                                    @Header("Authorization") String token);
 }

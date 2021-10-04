@@ -15,9 +15,9 @@ import retrofit2.Callback;
 
 public class WebService {
 
-    public static void login(LoginRequest body, Callback callback) {
+    public static void login(LoginRequest loginRequest, Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
-        Call<JwtResponse> call = service.getUserLoginInfo(body);
+        Call<JwtResponse> call = service.getUserLoginInfo(loginRequest);
         call.enqueue(callback);
     }
 
@@ -27,7 +27,7 @@ public class WebService {
         call.enqueue(callback);
     }
 
-    public static void getBoardAnnouncements(String token, String boardId, Callback callback){
+    public static void getBoardAnnouncements(String token, String boardId, Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<List<Announcement>> call = service.getBoardAnnouncements(boardId, token);
         call.enqueue(callback);
@@ -36,7 +36,7 @@ public class WebService {
     public static void addAnnouncementToBoard(String token,
                                               String boardId,
                                               CreateAnnouncementRequest announcementRequest,
-                                              Callback callback){
+                                              Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.addAnnouncementToBoard(boardId, token, announcementRequest);
         call.enqueue(callback);
@@ -44,7 +44,7 @@ public class WebService {
 
     public static void createBoard(String token,
                                    CreateBoardRequest createBoardRequest,
-                                   Callback callback){
+                                   Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<BoardInfoResponse> call = service.createBoard(token, createBoardRequest);
         call.enqueue(callback);
@@ -52,9 +52,25 @@ public class WebService {
 
     public static void searchBoard(String token,
                                    SearchBoardRequest searchBoardRequest,
-                                   Callback callback){
+                                   Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<List<BoardInfoResponse>> call = service.searchBoard(token, searchBoardRequest);
+        call.enqueue(callback);
+    }
+
+    public static void joinBoard(String token,
+                                 String boardId,
+                                 Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.joinBoard(boardId, token);
+        call.enqueue(callback);
+    }
+
+    public static void leaveBoard(String token,
+                                  String boardId,
+                                  Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.leaveBoard(boardId, token);
         call.enqueue(callback);
     }
 }
