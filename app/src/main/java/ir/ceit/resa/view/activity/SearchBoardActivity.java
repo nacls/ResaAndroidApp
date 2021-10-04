@@ -18,7 +18,6 @@ import java.util.List;
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.SearchContract;
 import ir.ceit.resa.model.Board;
-import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.SearchBoardActivityPresenter;
 import ir.ceit.resa.view.adapter.SearchResultAdapter;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
@@ -120,7 +119,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     private void setupRecyclerView() {
         resultRv.setLayoutManager(new LinearLayoutManager(this));
         float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0, true);
         resultRv.addItemDecoration(bottomOffsetDecoration);
     }
 

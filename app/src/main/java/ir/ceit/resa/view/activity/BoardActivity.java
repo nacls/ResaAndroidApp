@@ -248,9 +248,9 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         announcementsRv.setLayoutManager(layoutManager);
         // recycler view items offset
         float offsetPx = getResources().getDimension(R.dimen.announcement_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true, (int) offsetPx);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, true, (int) offsetPx, false);
         announcementsRv.addItemDecoration(bottomOffsetDecoration);
-        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true, (int) offsetPx);
+        RecyclerViewOffsetDecoration topOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, true, true, 0, false);
         announcementsRv.addItemDecoration(topOffsetDecoration);
         // divide items
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(

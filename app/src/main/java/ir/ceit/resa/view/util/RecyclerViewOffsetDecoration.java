@@ -11,12 +11,14 @@ public class RecyclerViewOffsetDecoration extends RecyclerView.ItemDecoration {
     private boolean top;
     private boolean isReverse;
     private int borders;
+    private boolean needsBottomOffset;
 
-    public RecyclerViewOffsetDecoration(int bottomOffset, boolean top, boolean isReverse, int borders) {
+    public RecyclerViewOffsetDecoration(int bottomOffset, boolean top, boolean isReverse, int borders, boolean needsBottomOffset) {
         this.offset = bottomOffset;
         this.top = top;
         this.isReverse = isReverse;
         this.borders = borders;
+        this.needsBottomOffset = needsBottomOffset;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class RecyclerViewOffsetDecoration extends RecyclerView.ItemDecoration {
                         return;
                     }
                 } else {
-                    if (!isReverse) {
+                    if (!isReverse && needsBottomOffset) {
                         outRect.set(borders, 0, borders, offset);
                         return;
                     }
@@ -46,7 +48,7 @@ public class RecyclerViewOffsetDecoration extends RecyclerView.ItemDecoration {
                         return;
                     }
                 } else {
-                    if (isReverse){
+                    if (isReverse && needsBottomOffset){
                         outRect.set(borders, 0, borders, offset);
                         return;
                     }

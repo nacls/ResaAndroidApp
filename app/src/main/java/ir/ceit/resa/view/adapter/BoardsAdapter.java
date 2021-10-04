@@ -66,7 +66,7 @@ public class BoardsAdapter extends
         description.setText(board.getDescription());
 
         TextView creator = viewHolder.boardCreator;
-        String boardCreator = "بانی برد: " + board.getCreatorUsername();
+        String boardCreator = board.getCreatorUsername();
         creator.setText(boardCreator);
 
         LinearLayout announcementLayout = viewHolder.announcementLayout;

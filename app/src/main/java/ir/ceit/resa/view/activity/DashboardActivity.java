@@ -151,7 +151,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         // Set layout manager to position the items
         boardsRv.setLayoutManager(new LinearLayoutManager(this));
         float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
-        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0, true);
         boardsRv.addItemDecoration(bottomOffsetDecoration);
     }
 

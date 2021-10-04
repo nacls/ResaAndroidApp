@@ -78,7 +78,7 @@ public class SearchResultAdapter extends
         boardId.setText(Html.fromHtml(newString));
 
         TextView creator = viewHolder.boardCreator;
-        String boardCreator = "بانی برد: " + board.getCreatorUsername();
+        String boardCreator = board.getCreatorUsername();
         creator.setText(boardCreator);
 
         viewHolder.parentLayout.setOnClickListener(view -> {
