@@ -22,6 +22,9 @@ public class Constants {
     // Board
     public static final String NO_BOARDS_TO_SHOW = "بردی برای نمایش وجود ندارد!";
     public static final String NO_SEARCH_RESULT = "بردی با شناسه وارد شده، پیدا نشد!";
+    public static final String BE_SURE_TO_LEAVE_BOARD = " آیا از خروج از برد اطمینان دارید؟";
+    public static final String YOU_JOINED_BOARD = "با موفقیت در برد عضو شدید!";
+    public static final String YOU_LEFT_BOARD = "از برد خارج شدید!";
     // Announcements
     public static final String NO_ANNOUNCEMENTS_TO_SHOW = "هنوز اطلاعیه ای برای نمایش در این برد وجود ندارد!";
     public static final String ADD_ANNOUNCEMENTS_SUCCESSFUL = "اطلاعیه با موفقیت اضافه شد!";
@@ -30,6 +33,8 @@ public class Constants {
     // Server Messages
     public static final String SERVER_RESPONSE_ADD_ANNOUNCEMENT_OK = "Announcement added successfully!";
     public static final String BOARD_ID_TAKEN_ERROR = "Error: board id is already taken!";
+    public static final String USER_JOINED_BOARD = "Membership added";
+    public static final String USER_LEFT_BOARD = "user left board!";
     // Submission Errors
     public static final String CANT_BE_EMPTY = "نمی تواند خالی باشد.";
     public static final String NOTICE_ERRORS_RETRY = "خطاهای گفته شده را حل کنید و مجدداً تلاش کنید.";

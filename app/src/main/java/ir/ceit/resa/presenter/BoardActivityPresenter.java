@@ -2,8 +2,6 @@ package ir.ceit.resa.presenter;
 
 import android.content.Context;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
 
     @Override
     public void returnFromConfigureBoardActivity(Board board) {
-        if (board == null){
+        if (board == null) {
             view.finishActivity();
             return;
         }
@@ -75,12 +73,58 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
 
     @Override
     public void joinBoardClicked() {
-
+        sendJoinBoardRequestToServer();
     }
 
     @Override
     public void leaveBoardClicked() {
+        sendLeaveBoardRequestToServer();
+    }
 
+    public void sendJoinBoardRequestToServer() {
+        String token = ResaSharedPreferences.getToken(context);
+        WebService.joinBoard(token, board.getBoardId(), new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful()) {
+                    MessageResponse serverMessage = response.body();
+                    assert serverMessage != null;
+                    if (serverMessage.getMessage().equals(Constants.USER_JOINED_BOARD)) {
+                        view.showToastStatus(Constants.YOU_JOINED_BOARD, true);
+                        board.setUserMembership(EMembership.REGULAR_MEMBER);
+                        view.updateMembershipIv(EMembership.REGULAR_MEMBER);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void sendLeaveBoardRequestToServer() {
+        String token = ResaSharedPreferences.getToken(context);
+        WebService.leaveBoard(token, board.getBoardId(), new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful()) {
+                    MessageResponse serverMessage = response.body();
+                    assert serverMessage != null;
+                    if (serverMessage.getMessage().equals(Constants.USER_LEFT_BOARD)) {
+                        view.showToastStatus(Constants.YOU_LEFT_BOARD, true);
+                        board.setUserMembership(EMembership.NOT_JOINED);
+                        view.updateMembershipIv(EMembership.NOT_JOINED);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+            }
+        });
     }
 
     public void sendAnnouncementToServer(String message) {
@@ -95,16 +139,16 @@ public class BoardActivityPresenter implements BoardContract.Presenter {
                     if (serverMessage.getMessage().equals(Constants.SERVER_RESPONSE_ADD_ANNOUNCEMENT_OK)) {
                         getBoardAnnouncementsFromServer();
                     } else {
-                        view.showToastAnnouncementStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
+                        view.showToastStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
                     }
                 } else {
-                    view.showToastAnnouncementStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
+                    view.showToastStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
                 }
             }
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                view.showToastAnnouncementStatus(Constants.CONNECTION_PROBLEM, true);
+                view.showToastStatus(Constants.CONNECTION_PROBLEM, true);
             }
         });
     }

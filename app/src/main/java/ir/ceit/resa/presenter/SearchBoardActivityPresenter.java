@@ -38,6 +38,9 @@ public class SearchBoardActivityPresenter implements SearchContract.Presenter {
 
     @Override
     public void searchButtonClicked(String boardQuery) {
+        if (boardQuery.isEmpty()){
+            return;
+        }
         view.showProgress();
         searchInServerBoards(new SearchBoardRequest(boardQuery));
     }

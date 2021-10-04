@@ -116,6 +116,12 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        searchPresenter.searchButtonClicked(latestQuery);
+    }
+
     private void setupRecyclerView() {
         resultRv.setLayoutManager(new LinearLayoutManager(this));
         float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);

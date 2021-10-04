@@ -18,7 +18,7 @@ public interface BoardContract {
 
         void showAnnouncements(List<Announcement> announcements);
 
-        void showToastAnnouncementStatus(String status, boolean isLong);
+        void showToastStatus(String status, boolean isLong);
 
         void updateToolbarTitle();
 

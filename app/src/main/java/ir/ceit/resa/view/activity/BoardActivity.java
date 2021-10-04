@@ -42,7 +42,9 @@ import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.BoardActivityPresenter;
 import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.view.adapter.AnnouncementAdapter;
+import ir.ceit.resa.view.dialog.AssuranceDialog;
 import ir.ceit.resa.view.dialog.BoardInfoDialog;
+import ir.ceit.resa.view.util.AssuranceDialogListener;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class BoardActivity extends AppCompatActivity implements BoardContract.View {
@@ -57,7 +59,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         Board board = null;
-                        if (data != null){
+                        if (data != null) {
                             board = (Board) data.getSerializableExtra("board");
                         }
                         boardPresenter.returnFromConfigureBoardActivity(board);
@@ -156,7 +158,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     }
 
     @Override
-    public void showToastAnnouncementStatus(String status, boolean isLong) {
+    public void showToastStatus(String status, boolean isLong) {
         if (isLong)
             Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
         else
@@ -184,7 +186,16 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     @Override
     public void updateMembershipIv(EMembership newMembership) {
-
+        switch (newMembership) {
+            case NOT_JOINED:
+                addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.add_logo));
+                break;
+            case REGULAR_MEMBER:
+                addAnnouncementIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.joined_tick));
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -214,12 +225,14 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
             case REGULAR_MEMBER:
             case NOT_JOINED:
             default:
+                setupAddAnnouncementButton();
                 addAnnouncementEt.setVisibility(View.GONE);
                 final float scale = this.getResources().getDisplayMetrics().density;
                 int pixels = (int) (30 * scale + 0.5f);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, pixels);
                 params.weight = 1.0f;
                 params.gravity = Gravity.TOP;
+                addAnnouncementIv.setVisibility(View.VISIBLE);
                 addAnnouncementIv.setLayoutParams(params);
                 break;
         }
@@ -235,17 +248,49 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
 
     private void setupAddAnnouncementButton() {
         addAnnouncementIv.setOnClickListener(v -> {
-            if (addAnnouncementEt.getVisibility() == View.VISIBLE) {
-                String editTextMessage = addAnnouncementEt.getText().toString();
-                if (editTextMessage.isEmpty()) {
-                    showToastAnnouncementStatus(Constants.ANNOUNCEMENTS_CANT_BE_EMPTY, false);
-                } else {
-                    boardPresenter.addAnnouncementIvClicked(editTextMessage);
-                    addAnnouncementEt.getText().clear();
+            if (addAnnouncementIv.getVisibility() == View.VISIBLE) {
+                if (addAnnouncementIv.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(this, R.drawable.add_announcement).getConstantState()) {
+                    sendAnnouncementToPresenter();
+                } else if (addAnnouncementIv.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(this, R.drawable.joined_tick).getConstantState()) {
+                    openLeaveBoardDialog();
+                } else if (addAnnouncementIv.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(this, R.drawable.add_logo).getConstantState()) {
+                    boardPresenter.joinBoardClicked();
                 }
             }
         });
     }
+
+    private void openLeaveBoardDialog() {
+        String exitQuestion = Constants.BE_SURE_TO_LEAVE_BOARD;
+
+        AssuranceDialog exitDialog = new AssuranceDialog(this, exitQuestion, new AssuranceDialogListener() {
+            @Override
+            public void onRejectClicked() {
+
+            }
+
+            @Override
+            public void onAcceptClicked() {
+                boardPresenter.leaveBoardClicked();
+            }
+        });
+        exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        exitDialog.show();
+    }
+
+    private void sendAnnouncementToPresenter() {
+        String editTextMessage = addAnnouncementEt.getText().toString();
+        if (editTextMessage.isEmpty()) {
+            showToastStatus(Constants.ANNOUNCEMENTS_CANT_BE_EMPTY, false);
+        } else {
+            boardPresenter.addAnnouncementIvClicked(editTextMessage);
+            addAnnouncementEt.getText().clear();
+        }
+    }
+
 
     private void setupRecyclerView() {
         // Set layout manager to position the items
