@@ -55,7 +55,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-                        android:fontFamily="@font/sahelfd"
                         android:hint="@string/board_id_hint"
                         android:inputType="text"
                         android:maxLength="40"
