@@ -61,6 +61,8 @@
     <string name="no">خیر</string>
     <string name="sure_to_exit">آیا از خروج اطمینان دارید؟</string>
 
+    <string name="search_board_hint">شناسه برد را وارد کنید</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>
         <item>تنظیمات</item>

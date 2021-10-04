@@ -3,6 +3,7 @@ package ir.ceit.resa.presenter;
 import android.content.Context;
 
 import ir.ceit.resa.contract.SearchContract;
+import ir.ceit.resa.model.EMembership;
 
 public class SearchBoardActivityPresenter implements SearchContract.Presenter {
 
@@ -17,5 +18,15 @@ public class SearchBoardActivityPresenter implements SearchContract.Presenter {
     @Override
     public void onCreated() {
         view.setupActivityView();
+    }
+
+    @Override
+    public void searchButtonClicked(String boardQuery) {
+        view.showProgress();
+    }
+
+    @Override
+    public void boardMembershipStatusClicked(EMembership membership, String boardId) {
+
     }
 }
