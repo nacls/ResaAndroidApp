@@ -21,7 +21,7 @@ public class Constants {
 
     // Board
     public static final String NO_BOARDS_TO_SHOW = "بردی برای نمایش وجود ندارد!";
-    public static final String NO_SEARCH_RESULT = "بردی برای نمایش وجود ندارد!";
+    public static final String NO_SEARCH_RESULT = "بردی با شناسه وارد شده، پیدا نشد!";
     // Announcements
     public static final String NO_ANNOUNCEMENTS_TO_SHOW = "هنوز اطلاعیه ای برای نمایش در این برد وجود ندارد!";
     public static final String ADD_ANNOUNCEMENTS_SUCCESSFUL = "اطلاعیه با موفقیت اضافه شد!";

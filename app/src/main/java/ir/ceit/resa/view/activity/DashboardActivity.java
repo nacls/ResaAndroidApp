@@ -92,7 +92,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        drawerLayout = findViewById(R.id.dashboard_layout);
         drawerLayout.setDrawerListener(drawerToggle);
         setupDrawerToggle();
         setOnSwipe();

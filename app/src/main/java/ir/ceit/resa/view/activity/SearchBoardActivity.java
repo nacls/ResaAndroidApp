@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.presenter.SearchBoardActivityPresenter;
 import ir.ceit.resa.view.adapter.SearchResultAdapter;
+import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class SearchBoardActivity extends AppCompatActivity implements SearchContract.View {
 
@@ -37,6 +39,8 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
 
     private SearchResultAdapter resultAdapter;
 
+    private String latestQuery = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     public void setupActivityView() {
         initializeViewComponents();
         setupSearchView();
+        setupRecyclerView();
     }
 
     @Override
@@ -66,6 +71,8 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
         searchProgressBar.setVisibility(View.GONE);
         searchStatusLayout.setVisibility(View.GONE);
         resultRv.setVisibility(View.VISIBLE);
+        resultAdapter = new SearchResultAdapter(boards, latestQuery);
+        resultRv.setAdapter(resultAdapter);
     }
 
     @Override
@@ -85,11 +92,6 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
         }
     }
 
-    @Override
-    public void updateBoardMembershipStatusIv(EMembership membership, int boardIndex) {
-
-    }
-
     private void initializeViewComponents() {
         searchView = findViewById(R.id.searchView);
         searchStatusLayout = findViewById(R.id.search_status_layout);
@@ -103,7 +105,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("onQueryTextSubmit " + query);
+                latestQuery = query;
                 searchPresenter.searchButtonClicked(query);
                 return false;
             }
@@ -113,6 +115,13 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
                 return false;
             }
         });
+    }
+
+    private void setupRecyclerView() {
+        resultRv.setLayoutManager(new LinearLayoutManager(this));
+        float offsetPx = getResources().getDimension(R.dimen.board_bottom_offset_dp);
+        RecyclerViewOffsetDecoration bottomOffsetDecoration = new RecyclerViewOffsetDecoration((int) offsetPx, false, false, 0);
+        resultRv.addItemDecoration(bottomOffsetDecoration);
     }
 
 }

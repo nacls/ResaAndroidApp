@@ -45,6 +45,7 @@
     <string name="board_faculty">دانشکده</string>
     <string name="board_info">اطلاعات برد</string>
 
+
     <string name="board_id_hint">برای مثال: board_id123</string>
     <string name="latin_only">شامل اعداد و حروف لاتین</string>
     <string name="faculty_hint">برای مثال: علوم کامپیوتر</string>

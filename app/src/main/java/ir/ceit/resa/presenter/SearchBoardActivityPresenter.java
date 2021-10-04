@@ -42,11 +42,6 @@ public class SearchBoardActivityPresenter implements SearchContract.Presenter {
         searchInServerBoards(new SearchBoardRequest(boardQuery));
     }
 
-    @Override
-    public void boardMembershipStatusClicked(EMembership membership, String boardId) {
-
-    }
-
     public void searchInServerBoards(SearchBoardRequest searchBoardRequest) {
         String token = ResaSharedPreferences.getToken(context);
         WebService.searchBoard(token, searchBoardRequest, new Callback<List<BoardInfoResponse>>() {
