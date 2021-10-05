@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -72,15 +73,15 @@ public class BoardsAdapter extends
         LinearLayout announcementLayout = viewHolder.announcementLayout;
         if (board.getLatestAnnouncement() != null) {
             TextView announcement = viewHolder.latestAnnouncement;
+            TextView announcementDate = viewHolder.latestAnnouncementDate;
             String announcementMessage = board.getLatestAnnouncement().getMessage();
             announcementMessage = announcementMessage.replace("\n", " ");
             if (announcementMessage.length() > 45)
                 announcementMessage = board.getLatestAnnouncement().getMessage().substring(0, 45) + "...";
 
-            String lastAnnouncement = announcementMessage +
-                    "\n" +
-                    SolarCalendar.getShamsiDateRtl(board.getLatestAnnouncement().getCreationDate());
-            announcement.setText(lastAnnouncement);
+            String lastAnnouncementDate = SolarCalendar.getShamsiDateRtl(board.getLatestAnnouncement().getCreationDate());
+            announcement.setText(announcementMessage);
+            announcementDate.setText(lastAnnouncementDate);
 
         } else {
             announcementLayout.setVisibility(View.GONE);
@@ -116,6 +117,7 @@ public class BoardsAdapter extends
         public TextView boardDescription;
         public TextView boardCreator;
         public TextView latestAnnouncement;
+        public TextView latestAnnouncementDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -124,6 +126,7 @@ public class BoardsAdapter extends
             boardDescription = itemView.findViewById(R.id.boardDescription);
             boardCreator = itemView.findViewById(R.id.boardCreator);
             latestAnnouncement = itemView.findViewById(R.id.announcementTv);
+            latestAnnouncementDate = itemView.findViewById(R.id.announcementDateTv);
             announcementLayout = itemView.findViewById(R.id.announcementLayout);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
