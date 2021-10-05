@@ -1,6 +1,7 @@
 package ir.ceit.resa.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import ir.ceit.resa.contract.ConfigureBoardContract;
 import ir.ceit.resa.model.Board;
@@ -12,6 +13,8 @@ import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.service.network.ErrorUtils;
 import ir.ceit.resa.service.network.WebService;
 import ir.ceit.resa.service.storage.ResaSharedPreferences;
+import ir.ceit.resa.view.activity.BoardMembersActivity;
+import ir.ceit.resa.view.activity.DashboardActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +59,13 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
 
     @Override
     public void onOpenBoardMembersClicked() {
+        openBoardMemberActivity();
+    }
 
+    private void openBoardMemberActivity(){
+        Intent intent = new Intent(context, BoardMembersActivity.class);
+        intent.putExtra("board", board);
+        context.startActivity(intent);
     }
 
     private void sendDeleteBoardRequestToServer() {
