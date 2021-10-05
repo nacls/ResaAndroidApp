@@ -15,7 +15,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="error_red">#B22222</color>
-    <color name="delete_red">#D8000C</color>
+    <color name="delete_red">#AAD8000C</color>
     <color name="success_green">#59981A</color>
     <color name="grey">#5e5e5e</color>
     <color name="grey_dark">#404040</color>

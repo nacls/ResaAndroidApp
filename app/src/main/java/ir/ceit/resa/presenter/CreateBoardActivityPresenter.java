@@ -43,6 +43,7 @@ public class CreateBoardActivityPresenter implements CreateBoardContract.Present
 
         if (validateOrShowError(boardId, boardTitle, boardCategory)) {
             view.disableSubmitButton();
+            submitInProgress = true;
             sendCreateBoardRequestToServer(makeCreateBoardRequest(boardId, boardTitle, boardCategory, boardFaculty));
             view.showBoardStatus(Constants.REQUEST_SENT_SUCCESSFULLY, false);
         }
@@ -57,7 +58,6 @@ public class CreateBoardActivityPresenter implements CreateBoardContract.Present
     }
 
     private void sendCreateBoardRequestToServer(CreateBoardRequest createBoardRequest) {
-        submitInProgress = true;
         String token = ResaSharedPreferences.getToken(context);
         WebService.createBoard(token, createBoardRequest, new Callback<BoardInfoResponse>() {
             @Override

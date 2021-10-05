@@ -13,6 +13,12 @@ public class EditBoardRequest {
     @SerializedName("faculty")
     private String faculty;
 
+    public EditBoardRequest(String description, String category, String faculty) {
+        this.description = description;
+        this.category = category;
+        this.faculty = faculty;
+    }
+
     public String getDescription() {
         return description;
     }

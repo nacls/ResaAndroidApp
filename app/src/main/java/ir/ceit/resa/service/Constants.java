@@ -25,6 +25,7 @@ public class Constants {
     public static final String BE_SURE_TO_LEAVE_BOARD = " آیا از خروج از برد اطمینان دارید؟";
     public static final String YOU_JOINED_BOARD = "با موفقیت در برد عضو شدید!";
     public static final String YOU_LEFT_BOARD = "از برد خارج شدید!";
+    public static final String BOARD_CHANGES_SUBMITTED = "تغییرات برد با موفقیت ثبت شد!";
     // Announcements
     public static final String NO_ANNOUNCEMENTS_TO_SHOW = "هنوز اطلاعیه ای برای نمایش در این برد وجود ندارد!";
     public static final String ADD_ANNOUNCEMENTS_SUCCESSFUL = "اطلاعیه با موفقیت اضافه شد!";
