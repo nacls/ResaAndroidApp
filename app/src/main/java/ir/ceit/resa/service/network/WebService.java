@@ -5,6 +5,7 @@ import java.util.List;
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
+import ir.ceit.resa.model.payload.request.EditBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
@@ -71,6 +72,23 @@ public class WebService {
                                   Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.leaveBoard(boardId, token);
+        call.enqueue(callback);
+    }
+
+    public static void editBoard(String token,
+                                 String boardId,
+                                 EditBoardRequest editBoardRequest,
+                                 Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<BoardInfoResponse> call = service.editBoard(boardId, token, editBoardRequest);
+        call.enqueue(callback);
+    }
+
+    public static void deleteBoard(String token,
+                                  String boardId,
+                                  Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.deleteBoard(boardId, token);
         call.enqueue(callback);
     }
 }

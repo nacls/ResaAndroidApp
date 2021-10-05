@@ -22,6 +22,21 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
         view.setupActivityView();
     }
 
+    @Override
+    public void onChangeBoardClicked() {
+
+    }
+
+    @Override
+    public void onDeletedBoardClicked() {
+
+    }
+
+    @Override
+    public void onOpenBoardMembersClicked() {
+
+    }
+
     public Board getBoard() {
         return board;
     }

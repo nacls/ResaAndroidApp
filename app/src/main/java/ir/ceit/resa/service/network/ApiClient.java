@@ -5,6 +5,7 @@ import java.util.List;
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
+import ir.ceit.resa.model.payload.request.EditBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
@@ -12,8 +13,8 @@ import ir.ceit.resa.model.payload.response.JwtResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -54,10 +55,21 @@ public interface ApiClient {
     @Headers("Content-Type: application/json")
     @GET(UrlProvider.JOIN_BOARD)
     Call<MessageResponse> joinBoard(@Path("boardId") String boardId,
-                                                   @Header("Authorization") String token);
+                                    @Header("Authorization") String token);
 
     @Headers("Content-Type: application/json")
     @PUT(UrlProvider.LEAVE_BOARD)
     Call<MessageResponse> leaveBoard(@Path("boardId") String boardId,
-                                    @Header("Authorization") String token);
+                                     @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @PUT(UrlProvider.EDIT_BOARD)
+    Call<BoardInfoResponse> editBoard(@Path("boardId") String boardId,
+                                    @Header("Authorization") String token,
+                                    @Body EditBoardRequest editBoardRequest);
+
+    @Headers("Content-Type: application/json")
+    @DELETE(UrlProvider.DELETE_BOARD)
+    Call<MessageResponse> deleteBoard(@Path("boardId") String boardId,
+                                      @Header("Authorization") String token);
 }

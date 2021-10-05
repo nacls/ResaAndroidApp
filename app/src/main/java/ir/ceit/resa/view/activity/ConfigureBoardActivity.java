@@ -3,10 +3,11 @@ package ir.ceit.resa.view.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import java.util.Objects;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.ConfigureBoardContract;
@@ -16,7 +17,8 @@ import ir.ceit.resa.presenter.ConfigureBoardActivityPresenter;
 public class ConfigureBoardActivity extends AppCompatActivity implements ConfigureBoardContract.View {
 
     private ConfigureBoardActivityPresenter configurePresenter;
-    Button button;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
 
         Board board = (Board) getIntent().getSerializableExtra("board");
 
+        System.out.println("IS BOARD GIVEN TO COFIGURE NULL? "+ board);
+
         configurePresenter = new ConfigureBoardActivityPresenter(this, this, board);
 
         configurePresenter.onCreated();
@@ -32,22 +36,51 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
 
     @Override
     public void setupActivityView() {
+        initializeViewComponents();
+        setupToolbar();
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                returnResult();
-            }
-        });
+
+    }
+
+    @Override
+    public void disableEditBoardButton() {
+
+    }
+
+    @Override
+    public void updateBoardConfiguration() {
+
+    }
+
+    @Override
+    public void onBoardDeleted() {
+
+    }
+
+    public void initializeViewComponents() {
+        toolbar = findViewById(R.id.configure_board_toolbar);
+
+
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.edit_board));
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
+
+    @Override
+    public void onBackPressed() {
+        returnResult();
     }
 
     public void returnResult() {
-
-        configurePresenter.getBoard().setDescription("عنوان جدید!");
         Intent returnIntent = new Intent();
+        System.out.println("IS BOARD PUT IN INTENT NULL? "+ configurePresenter.getBoard());
         returnIntent.putExtra("board", configurePresenter.getBoard());
-        setResult(Activity.RESULT_OK);
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 }
