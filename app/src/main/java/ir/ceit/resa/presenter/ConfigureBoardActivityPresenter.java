@@ -51,12 +51,35 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
 
     @Override
     public void onDeletedBoardClicked() {
-
+        sendDeleteBoardRequestToServer();
     }
 
     @Override
     public void onOpenBoardMembersClicked() {
 
+    }
+
+    private void sendDeleteBoardRequestToServer() {
+        String token = ResaSharedPreferences.getToken(context);
+        WebService.deleteBoard(token, board.getBoardId(), new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful()) {
+                    MessageResponse messageResponse = response.body();
+                    if (messageResponse.getMessage().equals(Constants.BOARD_WAS_DELETED)) {
+                        setBoard(null);
+                        view.onBoardDeleted();
+                    }
+                } else {
+                    view.showToastStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                view.showToastStatus(Constants.CONNECTION_PROBLEM, true);
+            }
+        });
     }
 
     private void sendEditBoardRequestToServer(EditBoardRequest editBoardRequest) {

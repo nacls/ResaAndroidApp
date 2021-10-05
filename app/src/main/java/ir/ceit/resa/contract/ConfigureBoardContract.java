@@ -23,6 +23,8 @@ public interface ConfigureBoardContract {
         void clearProblemLayouts();
 
         void hideGeneralStatusLayout();
+
+        void showToastStatus(String status, boolean isLong);
     }
 
     interface Presenter {

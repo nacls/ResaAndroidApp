@@ -2,6 +2,8 @@ package ir.ceit.resa.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +24,9 @@ import ir.ceit.resa.R;
 import ir.ceit.resa.contract.ConfigureBoardContract;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.presenter.ConfigureBoardActivityPresenter;
+import ir.ceit.resa.service.Constants;
+import ir.ceit.resa.view.dialog.AssuranceDialog;
+import ir.ceit.resa.view.util.AssuranceDialogListener;
 
 public class ConfigureBoardActivity extends AppCompatActivity implements ConfigureBoardContract.View {
 
@@ -91,7 +97,7 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
 
     @Override
     public void onBoardDeleted() {
-
+        returnResult();
     }
 
     @Override
@@ -131,6 +137,14 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
     @Override
     public void hideGeneralStatusLayout() {
         editBoardStatusLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showToastStatus(String status, boolean isLong) {
+        if (isLong)
+            Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
     }
 
     public void initializeViewComponents() {
@@ -177,24 +191,31 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
     }
 
     private void registerDeleteButton() {
-        deleteBoardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("DELETE BOARD CLICKED");
-            }
-        });
+        deleteBoardButton.setOnClickListener(v -> openAssuranceDialog());
     }
 
     private void registerAccessControlLayout() {
-        accessControlLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("ACCESS CONTROL CLICKED");
-            }
-        });
+        accessControlLayout.setOnClickListener(v -> configurePresenter.onOpenBoardMembersClicked());
     }
 
-    private void notifyPresenterOfSubmitChanges(){
+    private void openAssuranceDialog() {
+        String exitQuestion = Constants.BE_SURE_TO_DELETE_BOARD;
+        AssuranceDialog exitDialog = new AssuranceDialog(this, exitQuestion, new AssuranceDialogListener() {
+            @Override
+            public void onRejectClicked() {
+                // do nothing
+            }
+
+            @Override
+            public void onAcceptClicked() {
+                configurePresenter.onDeletedBoardClicked();
+            }
+        });
+        exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        exitDialog.show();
+    }
+
+    private void notifyPresenterOfSubmitChanges() {
         String title = String.valueOf(boardTitleEt.getText());
         String category = String.valueOf(boardCategoryEt.getText());
         String faculty = String.valueOf(boardFacultyEt.getText());
