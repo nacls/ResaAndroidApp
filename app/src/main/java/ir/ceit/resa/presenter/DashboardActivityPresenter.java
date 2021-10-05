@@ -21,6 +21,7 @@ import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.view.activity.CreateBoardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;
 import ir.ceit.resa.view.activity.SearchBoardActivity;
+import ir.ceit.resa.view.activity.UserProfileActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +53,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onProfileClicked() {
-        System.out.println("ADMIN SETTINGS CLICKED");
+        openProfileActivity();
     }
 
     @Override
@@ -87,6 +88,11 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     public void openLoginActivity() {
         Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void openProfileActivity() {
+        Intent intent = new Intent(context, UserProfileActivity.class);
         context.startActivity(intent);
     }
 

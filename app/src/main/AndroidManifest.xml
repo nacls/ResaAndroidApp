@@ -15,10 +15,18 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.activity.AdminSettingActivity"></activity>
-        <activity android:name=".view.activity.UserSettingActivity" />
-        <activity android:name=".view.activity.UserProfileActivity" />
-        <activity android:name=".view.activity.BoardMembersActivity" />
+        <activity
+            android:name=".view.activity.AdminSettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.UserSettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.UserProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.BoardMembersActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.activity.CreateBoardActivity"
             android:noHistory="true"
