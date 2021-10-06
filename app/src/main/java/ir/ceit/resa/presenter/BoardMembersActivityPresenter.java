@@ -21,6 +21,7 @@ public class BoardMembersActivityPresenter implements BoardMembersContract.Prese
     @Override
     public void onCreated() {
         view.setupActivityView();
+        getBoardMembersFromServer();
     }
 
     @Override
@@ -30,6 +31,10 @@ public class BoardMembersActivityPresenter implements BoardMembersContract.Prese
 
     @Override
     public void changeMembershipClicked(String username, EMembership membership) {
+
+    }
+
+    private void getBoardMembersFromServer(){
 
     }
 }

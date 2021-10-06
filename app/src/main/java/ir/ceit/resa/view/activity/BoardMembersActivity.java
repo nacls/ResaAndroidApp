@@ -21,6 +21,11 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
 
     // Toolbar
     private Toolbar toolbar;
+    // Problem layout
+
+    // Progress bar
+
+    // Members components
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

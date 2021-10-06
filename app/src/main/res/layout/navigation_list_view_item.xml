@@ -25,6 +25,7 @@
         android:layout_toLeftOf="@+id/imageViewIcon"
         android:paddingLeft="10dp"
         android:text="Item Name"
+        android:fontFamily="@font/sahelfd"
         android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:layout_toStartOf="@+id/imageViewIcon" />

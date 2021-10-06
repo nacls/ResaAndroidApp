@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,6 +22,87 @@
                 android:id="@+id/members_toolbar"
                 layout="@layout/board_toolbar" />
         </LinearLayout>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/white"
+            android:gravity="start"
+            android:iconifiedByDefault="false"
+            android:padding="5dp"
+            android:queryHint="@string/search_member_hint" />
+
+        <FrameLayout
+            android:id="@+id/member_content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/sahelfd"
+                    android:textColor="@color/grey"
+                    android:text="@string/add_new_member"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/memebrResultRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/search_memeber_status_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/searchMemberStatusIv"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/boards_problem" />
+
+                <TextView
+                    android:id="@+id/searchMemberStatusTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
+                    android:text="@string/no_boards"
+                    android:textColor="@color/dark_shade3"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/searchProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                android:visibility="gone" />
+        </FrameLayout>
 
     </LinearLayout>
 

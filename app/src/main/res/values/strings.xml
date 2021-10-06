@@ -77,6 +77,9 @@
     <string name="search_board_hint">شناسه برد را وارد کنید</string>
     <string name="search_board">جست و جوی برد</string>
 
+    <string name="search_member_hint">نام کاربری را وارد کنید</string>
+    <string name="add_new_member">+ اضافه کردن کاربر جدید</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>
         <item>تنظیمات</item>
