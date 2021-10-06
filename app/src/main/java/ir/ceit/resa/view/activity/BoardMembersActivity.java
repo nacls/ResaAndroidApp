@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ import ir.ceit.resa.model.payload.response.BoardMemberResponse;
 import ir.ceit.resa.presenter.BoardMembersActivityPresenter;
 import ir.ceit.resa.view.adapter.AnnouncementAdapter;
 import ir.ceit.resa.view.adapter.BoardMemberAdapter;
+import ir.ceit.resa.view.util.ChangeMemberAccessListener;
 import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class BoardMembersActivity extends AppCompatActivity implements BoardMembersContract.View {
@@ -70,10 +72,8 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
         progressBar.setVisibility(View.GONE);
         membersLayout.setVisibility(View.VISIBLE);
 
-        adapter = new BoardMemberAdapter(members);
-        // Attach the adapter to the recyclerview to populate items
+        adapter.addAll(members);
         membersRv.setVisibility(View.VISIBLE);
-        membersRv.setAdapter(adapter);
         membersRv.scrollToPosition(0);
     }
 
@@ -137,6 +137,24 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
     }
 
     private void setupRecyclerView() {
+        adapter = new BoardMemberAdapter(new ArrayList<>(), new ChangeMemberAccessListener() {
+            @Override
+            public void removeMemberFromBoardClicked(String username) {
+                System.out.println("REMOVE: " + username + " FROM BOARD");
+            }
+
+            @Override
+            public void giveMemberWriterAccessClicked(String username) {
+                System.out.println("GIVE WRITER ACCESS TO: " + username);
+            }
+
+            @Override
+            public void takeWriterAccessFromMemberClicked(String username) {
+                System.out.println("TAKE WRITER ACCESS FROM: " + username);
+
+            }
+        });
+        membersRv.setAdapter(adapter);
         membersRv.setLayoutManager(new LinearLayoutManager(this));
     }
 }

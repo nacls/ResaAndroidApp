@@ -1,12 +1,14 @@
 package ir.ceit.resa.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,15 +21,19 @@ import java.util.List;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.model.payload.response.BoardMemberResponse;
-import ir.ceit.resa.view.activity.BoardActivity;
+import ir.ceit.resa.view.util.ChangeMemberAccessListener;
 
 public class BoardMemberAdapter extends
         RecyclerView.Adapter<BoardMemberAdapter.ViewHolder> {
 
     private List<BoardMemberResponse> members;
 
-    public BoardMemberAdapter(List<BoardMemberResponse> members) {
+    private ChangeMemberAccessListener listener;
+
+
+    public BoardMemberAdapter(List<BoardMemberResponse> members, ChangeMemberAccessListener listener) {
         this.members = members;
+        this.listener = listener;
     }
 
     @NonNull
@@ -67,8 +73,46 @@ public class BoardMemberAdapter extends
         TextView username = viewHolder.username;
         username.setText(member.getUsername());
 
-        viewHolder.parentLayout.setOnClickListener(view -> {
-            System.out.println("USER CLICKED "+ viewHolder.username);
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(context, v, member);
+            }
+        });
+
+    }
+
+    private void showPopupMenu(Context context, View v, BoardMemberResponse member) {
+        PopupMenu popup = new PopupMenu(context, v);
+
+        switch (member.getMembership()) {
+            case REGULAR_MEMBER:
+                popup.inflate(R.menu.memebr_popup_menu);
+                break;
+            case WRITER:
+                popup.inflate(R.menu.writer_popup_menu);
+                break;
+            case CREATOR:
+            default:
+                return;
+        }
+
+        popup.show();
+
+        popup.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.take_writer_access:
+                    listener.takeWriterAccessFromMemberClicked(member.getUsername());
+                    return true;
+                case R.id.give_writer_access:
+                    listener.giveMemberWriterAccessClicked(member.getUsername());
+                    return true;
+                case R.id.remove_user_from_board:
+                    listener.removeMemberFromBoardClicked(member.getUsername());
+                    return true;
+                default:
+                    return false;
+            }
         });
     }
 
@@ -103,6 +147,8 @@ public class BoardMemberAdapter extends
             fullName = itemView.findViewById(R.id.memberFullName);
             username = itemView.findViewById(R.id.memberUsername);
             parentLayout = itemView.findViewById(R.id.member_layout);
+
+
         }
     }
 }

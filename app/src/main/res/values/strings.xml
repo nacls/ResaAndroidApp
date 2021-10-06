@@ -80,6 +80,9 @@
 
     <string name="search_member_hint">جست و جوی کاربران برد</string>
     <string name="add_new_member">+ اضافه کردن کاربر جدید</string>
+    <string name="remove_user_from_board">حذف کاربر از برد</string>
+    <string name="give_writer_access">ارتقا به نویسنده</string>
+    <string name="take_writer_access">گرفتن دسترسی نویسنده برد</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>

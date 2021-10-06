@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/give_writer_access"
+        android:title="@string/give_writer_access" />
+    <item android:id="@+id/remove_user_from_board"
+        android:title="@string/remove_user_from_board" />
+</menu>

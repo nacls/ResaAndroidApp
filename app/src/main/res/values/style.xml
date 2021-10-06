@@ -18,4 +18,8 @@
         <item name="android:fontFamily">@font/sahelfd</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="AppTheme.TextAppearance.Popup" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/sahelfd</item>
+    </style>
 </resources>
