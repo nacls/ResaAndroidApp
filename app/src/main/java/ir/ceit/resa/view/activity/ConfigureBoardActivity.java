@@ -70,6 +70,12 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        clearProblemLayouts();
+    }
+
+    @Override
     public void setupActivityView() {
         initializeViewComponents();
         clearProblemLayouts();

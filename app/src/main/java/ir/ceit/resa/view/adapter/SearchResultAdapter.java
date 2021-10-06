@@ -69,14 +69,19 @@ public class SearchResultAdapter extends
                 break;
         }
 
+        // Description
         TextView description = viewHolder.boardDescription;
-        description.setText(board.getDescription());
-
+        String boardDescription = board.getDescription();
+        String highlightedBoardDescription = boardDescription.replaceAll(query,
+                "<font color='#81A89C'>" + query + "</font>");
+        description.setText(Html.fromHtml(highlightedBoardDescription));
+        // Id
         TextView boardId = viewHolder.boardId;
         String boardIdWithTag = "@" + board.getBoardId();
-        String newString = boardIdWithTag.replaceAll(query, "<font color='#81A89C'>" + query + "</font>");
-        boardId.setText(Html.fromHtml(newString));
-
+        String highlightedBoardIdWithTag = boardIdWithTag.replaceAll(query,
+                "<font color='#81A89C'>" + query + "</font>");
+        boardId.setText(Html.fromHtml(highlightedBoardIdWithTag));
+        // Creator
         TextView creator = viewHolder.boardCreator;
         String boardCreator = board.getCreatorUsername();
         creator.setText(boardCreator);

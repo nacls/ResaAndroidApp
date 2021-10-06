@@ -1,14 +1,16 @@
 package ir.ceit.resa.view.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,12 +23,13 @@ import java.util.Objects;
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.BoardMembersContract;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.model.EMembership;
 import ir.ceit.resa.model.payload.response.BoardMemberResponse;
 import ir.ceit.resa.presenter.BoardMembersActivityPresenter;
-import ir.ceit.resa.view.adapter.AnnouncementAdapter;
 import ir.ceit.resa.view.adapter.BoardMemberAdapter;
+import ir.ceit.resa.view.dialog.AddMemberDialog;
+import ir.ceit.resa.view.util.AddMemberDialogListener;
 import ir.ceit.resa.view.util.ChangeMemberAccessListener;
-import ir.ceit.resa.view.util.RecyclerViewOffsetDecoration;
 
 public class BoardMembersActivity extends AppCompatActivity implements BoardMembersContract.View {
 
@@ -64,6 +67,7 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
         initializeViewComponents();
         setupToolbar();
         setupRecyclerView();
+        setupAddUserLayout();
     }
 
     @Override
@@ -72,6 +76,7 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
         progressBar.setVisibility(View.GONE);
         membersLayout.setVisibility(View.VISIBLE);
 
+        adapter.clear();
         adapter.addAll(members);
         membersRv.setVisibility(View.VISIBLE);
         membersRv.scrollToPosition(0);
@@ -105,7 +110,10 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
 
     @Override
     public void showToastStatus(String status, boolean isLong) {
-
+        if (isLong)
+            Toast.makeText(this, status, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
     }
 
     private void initializeViewComponents() {
@@ -128,33 +136,48 @@ public class BoardMembersActivity extends AppCompatActivity implements BoardMemb
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.manage_members));
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupRecyclerView() {
         adapter = new BoardMemberAdapter(new ArrayList<>(), new ChangeMemberAccessListener() {
             @Override
             public void removeMemberFromBoardClicked(String username) {
-                System.out.println("REMOVE: " + username + " FROM BOARD");
+                boardMembersPresenter.changeMembershipClicked(username, EMembership.NOT_JOINED);
             }
 
             @Override
             public void giveMemberWriterAccessClicked(String username) {
-                System.out.println("GIVE WRITER ACCESS TO: " + username);
+                boardMembersPresenter.changeMembershipClicked(username, EMembership.WRITER);
             }
 
             @Override
             public void takeWriterAccessFromMemberClicked(String username) {
-                System.out.println("TAKE WRITER ACCESS FROM: " + username);
-
+                boardMembersPresenter.changeMembershipClicked(username, EMembership.REGULAR_MEMBER);
             }
         });
         membersRv.setAdapter(adapter);
         membersRv.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setupAddUserLayout() {
+        addMemberTv.setOnClickListener(v -> {
+            openAddMemberDialog();
+        });
+    }
+
+    private void openAddMemberDialog() {
+        AddMemberDialog addMemberDialog = new AddMemberDialog(this, new AddMemberDialogListener() {
+            @Override
+            public void addUserClicked(String username, boolean isWriter) {
+                if (isWriter)
+                    boardMembersPresenter.changeMembershipClicked(username, EMembership.WRITER);
+                else
+                    boardMembersPresenter.changeMembershipClicked(username, EMembership.REGULAR_MEMBER);
+
+            }
+        });
+        addMemberDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        addMemberDialog.show();
     }
 }

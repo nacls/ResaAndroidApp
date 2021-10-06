@@ -16,6 +16,12 @@ public class ChangeMembershipRequest {
     @SerializedName("membership")
     private EMembership membership;
 
+    public ChangeMembershipRequest(String boardId, String username, EMembership membership) {
+        this.boardId = boardId;
+        this.username = username;
+        this.membership = membership;
+    }
+
     public String getBoardId() {
         return boardId;
     }

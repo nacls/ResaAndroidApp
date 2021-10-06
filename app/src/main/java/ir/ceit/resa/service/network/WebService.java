@@ -3,6 +3,7 @@ package ir.ceit.resa.service.network;
 import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
+import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.EditBoardRequest;
@@ -86,18 +87,26 @@ public class WebService {
     }
 
     public static void deleteBoard(String token,
-                                  String boardId,
-                                  Callback callback) {
+                                   String boardId,
+                                   Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.deleteBoard(boardId, token);
         call.enqueue(callback);
     }
 
     public static void getBoardMembers(String token,
-                                   String boardId,
-                                   Callback callback) {
+                                       String boardId,
+                                       Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<List<BoardMemberResponse>> call = service.getBoardMembers(boardId, token);
+        call.enqueue(callback);
+    }
+
+    public static void changeBoardMembership(String token,
+                                             ChangeMembershipRequest changeMembershipRequest,
+                                             Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.changeUserMembership(token, changeMembershipRequest);
         call.enqueue(callback);
     }
 }

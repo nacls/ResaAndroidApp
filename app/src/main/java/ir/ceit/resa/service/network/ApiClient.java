@@ -3,6 +3,7 @@ package ir.ceit.resa.service.network;
 import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
+import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.EditBoardRequest;
@@ -78,4 +79,9 @@ public interface ApiClient {
     @GET(UrlProvider.GET_BOARD_MEMBERS)
     Call<List<BoardMemberResponse>> getBoardMembers(@Path("boardId") String boardId,
                                                     @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @PUT(UrlProvider.BOARD_ACCESS_CONTROL)
+    Call<MessageResponse> changeUserMembership(@Header("Authorization") String token,
+                                               @Body ChangeMembershipRequest changeMembershipRequest);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import ir.ceit.resa.contract.BoardMembersContract;
 import ir.ceit.resa.model.Board;
 import ir.ceit.resa.model.EMembership;
-import ir.ceit.resa.model.payload.response.BoardInfoResponse;
+import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
 import ir.ceit.resa.model.payload.response.BoardMemberResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import ir.ceit.resa.service.Constants;
@@ -38,16 +38,37 @@ public class BoardMembersActivityPresenter implements BoardMembersContract.Prese
     }
 
     @Override
-    public void addMemberClicked(String username, EMembership membership) {
-
-    }
-
-    @Override
     public void changeMembershipClicked(String username, EMembership membership) {
-
+        sendChangeMemberAccessRequestToServer(new ChangeMembershipRequest(board.getBoardId(),
+                username,
+                membership));
     }
 
-    private void getBoardMembersFromServer(){
+    private void sendChangeMemberAccessRequestToServer(ChangeMembershipRequest changeMembershipRequest) {
+        String token = ResaSharedPreferences.getToken(context);
+        WebService.changeBoardMembership(token, changeMembershipRequest, new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful()) {
+                    MessageResponse messageResponse = response.body();
+                    if (messageResponse.getMessage().equals(Constants.MEMBERSHIP_CHANGED)) {
+                        getBoardMembersFromServer();
+                    } else {
+                        view.showToastStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
+                    }
+                } else {
+                    view.showToastStatus(Constants.USER_WITH_ENTERED_USERNAME_DOES_NOT_EXIST, true);
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                view.showToastStatus(Constants.CONNECTION_PROBLEM, true);
+            }
+        });
+    }
+
+    private void getBoardMembersFromServer() {
         String token = ResaSharedPreferences.getToken(context);
         WebService.getBoardMembers(token, board.getBoardId(), new Callback<List<BoardMemberResponse>>() {
             @Override

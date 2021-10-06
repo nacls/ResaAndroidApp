@@ -27,6 +27,8 @@ public class Constants {
     public static final String YOU_LEFT_BOARD = "از برد خارج شدید!";
     public static final String BOARD_CHANGES_SUBMITTED = "تغییرات برد با موفقیت ثبت شد!";
     public static final String BE_SURE_TO_DELETE_BOARD = " آیا از حذف برد اطمینان دارید؟";
+    public static final String MEMBERSHIP_DID_NOT_CHANGE = "درخواست شما انجام نشد، مجدداً تلاش کنید.";
+    public static final String USER_WITH_ENTERED_USERNAME_DOES_NOT_EXIST = "کاربری با شناسه وارد شده وجود ندارد!";
 
     // Announcements
     public static final String NO_ANNOUNCEMENTS_TO_SHOW = "هنوز اطلاعیه ای برای نمایش در این برد وجود ندارد!";
@@ -52,4 +54,6 @@ public class Constants {
     public static final String USER_JOINED_BOARD = "Membership added";
     public static final String USER_LEFT_BOARD = "user left board!";
     public static final String BOARD_WAS_DELETED = "Board deleted successfully!";
+    public static final String MEMBERSHIP_CHANGED = "Membership changed";
+    public static final String SOMETHING_WENT_WRONG = "Something went wrong";
 }

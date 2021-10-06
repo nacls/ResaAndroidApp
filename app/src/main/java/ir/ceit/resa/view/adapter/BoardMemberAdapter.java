@@ -1,8 +1,6 @@
 package ir.ceit.resa.view.adapter;
 
 import android.content.Context;
-import android.os.Build;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +54,11 @@ public class BoardMemberAdapter extends
         Context context = status.getContext();
         switch (member.getMembership()) {
             case WRITER:
+                status.setVisibility(View.VISIBLE);
                 status.setBackground(ContextCompat.getDrawable(context, R.drawable.pen));
                 break;
             case CREATOR:
+                status.setVisibility(View.VISIBLE);
                 status.setBackground(ContextCompat.getDrawable(context, R.drawable.creator_icon));
                 break;
             case REGULAR_MEMBER:
@@ -71,14 +71,10 @@ public class BoardMemberAdapter extends
         description.setText(member.getFullName());
 
         TextView username = viewHolder.username;
-        username.setText(member.getUsername());
+        String usernameWithAtSign = "@"+member.getUsername();
+        username.setText(usernameWithAtSign);
 
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupMenu(context, v, member);
-            }
-        });
+        viewHolder.parentLayout.setOnClickListener(v -> showPopupMenu(context, v, member));
 
     }
 

@@ -24,8 +24,6 @@ public interface BoardMembersContract {
 
         void onCreated();
 
-        void addMemberClicked(String username, EMembership membership);
-
         void changeMembershipClicked(String username, EMembership membership);
     }
 }
