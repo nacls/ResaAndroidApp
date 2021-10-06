@@ -34,6 +34,11 @@ public class Constants {
     public static final String ADD_ANNOUNCEMENTS_FAILED = "اطلاعیه ارسال نشد.";
     public static final String ANNOUNCEMENTS_CANT_BE_EMPTY = "اطلاعیه نمی تواند خالی باشد.";
 
+    // Profile
+    public static final String ADMIN_DESCRIPTION = "شما می توانید کاربران جدید به سیستم اضافه کنید و مشکلات سیستم را پیگیری کنید.";
+    public static final String CREATOR_DESCRIPTION = "شما می توانید بردهای جدید ایجاد کنید، در آن ها اطلاعیه قرار دهید و آن ها را مدیریت کنید.";
+
+
     // Submission Errors
     public static final String CANT_BE_EMPTY = "نمی تواند خالی باشد.";
     public static final String NOTICE_ERRORS_RETRY = "خطاهای گفته شده را حل کنید و مجدداً تلاش کنید.";

@@ -1,6 +1,7 @@
 package ir.ceit.resa.view.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.model.UserProfile;
+import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.service.UserProfileUtil;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -37,7 +39,7 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         userProfile = UserProfileUtil.createUserProfile(this);
-        // TODO: handle user profile null
+        validateUserProfile();
 
         setupActivityView();
     }
@@ -78,7 +80,18 @@ public class UserProfileActivity extends AppCompatActivity {
         email.setText(userProfile.getEmail());
     }
 
+    private void validateUserProfile() {
+        if (userProfile == null) {
+            finish();
+        }
+    }
+
     private void setAvatarViewBaseOnRole() {
+        setupAvatarImage();
+        showRoleInfo();
+    }
+
+    private void setupAvatarImage(){
         switch (userProfile.getRole()) {
             case ROLE_ADMIN:
                 userAvatar.setBackground(ContextCompat.getDrawable(this, R.drawable.admin_avatar));
@@ -91,7 +104,22 @@ public class UserProfileActivity extends AppCompatActivity {
                 userAvatar.setBackground(ContextCompat.getDrawable(this, R.drawable.user_avatar));
                 break;
         }
+    }
 
-        // TODO: show info for admin and creator
+    private void showRoleInfo() {
+        switch (userProfile.getRole()) {
+            case ROLE_ADMIN:
+                roleDescriptionLayout.setVisibility(View.VISIBLE);
+                roleDescriptionTv.setText(Constants.ADMIN_DESCRIPTION);
+                break;
+            case ROLE_CREATOR:
+                roleDescriptionLayout.setVisibility(View.VISIBLE);
+                roleDescriptionTv.setText(Constants.CREATOR_DESCRIPTION);
+                break;
+            case ROLE_USER:
+            default:
+                roleDescriptionLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 }
