@@ -36,6 +36,7 @@
     <string name="add_board">اضافه کردن برد</string>
     <string name="admin_control">تنظیمات ادمین</string>
     <string name="no_boards">بردی برای نمایش وجود ندارد</string>
+    <string name="no_members">در حال حاضر این برد کاربری ندارد!</string>
     <string name="type_announcement_hint">متن پیام</string>
 
     <string name="board_id">شناسه برد</string>
@@ -77,7 +78,7 @@
     <string name="search_board_hint">شناسه برد را وارد کنید</string>
     <string name="search_board">جست و جوی برد</string>
 
-    <string name="search_member_hint">نام کاربری را وارد کنید</string>
+    <string name="search_member_hint">جست و جوی کاربران برد</string>
     <string name="add_new_member">+ اضافه کردن کاربر جدید</string>
 
     <string-array name="navigation_drawer_items_array">

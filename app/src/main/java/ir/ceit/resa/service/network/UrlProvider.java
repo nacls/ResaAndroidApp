@@ -21,7 +21,7 @@ public class UrlProvider {
     public static final String EDIT_BOARD = "/api/board/edit/{boardId}";
     public static final String DELETE_BOARD = "/api/board/delete/{boardId}";
     public static final String BOARD_ACCESS_CONTROL = "/api/board/access-control";
-    public static final String GET_BOARD_WRITERS = "/api/board/writers/{boardId}";
+    public static final String GET_BOARD_MEMBERS = "/api/board/members/{boardId}";
 
     // Announcement endpoints
     public static final String GET_BOARD_ANNOUNCEMENTS = "/api/announcement/get/{boardId}";

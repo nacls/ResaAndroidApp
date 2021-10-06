@@ -9,6 +9,7 @@ import ir.ceit.resa.model.payload.request.EditBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
+import ir.ceit.resa.model.payload.response.BoardMemberResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import retrofit2.Call;
@@ -72,4 +73,9 @@ public interface ApiClient {
     @DELETE(UrlProvider.DELETE_BOARD)
     Call<MessageResponse> deleteBoard(@Path("boardId") String boardId,
                                       @Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
+    @GET(UrlProvider.GET_BOARD_MEMBERS)
+    Call<List<BoardMemberResponse>> getBoardMembers(@Path("boardId") String boardId,
+                                                    @Header("Authorization") String token);
 }

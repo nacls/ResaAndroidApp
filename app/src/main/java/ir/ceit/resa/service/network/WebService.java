@@ -9,6 +9,7 @@ import ir.ceit.resa.model.payload.request.EditBoardRequest;
 import ir.ceit.resa.model.payload.request.LoginRequest;
 import ir.ceit.resa.model.payload.request.SearchBoardRequest;
 import ir.ceit.resa.model.payload.response.BoardInfoResponse;
+import ir.ceit.resa.model.payload.response.BoardMemberResponse;
 import ir.ceit.resa.model.payload.response.JwtResponse;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import retrofit2.Call;
@@ -89,6 +90,14 @@ public class WebService {
                                   Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.deleteBoard(boardId, token);
+        call.enqueue(callback);
+    }
+
+    public static void getBoardMembers(String token,
+                                   String boardId,
+                                   Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<List<BoardMemberResponse>> call = service.getBoardMembers(boardId, token);
         call.enqueue(callback);
     }
 }

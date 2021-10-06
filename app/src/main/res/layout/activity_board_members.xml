@@ -23,17 +23,6 @@
                 layout="@layout/board_toolbar" />
         </LinearLayout>
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@color/white"
-            android:gravity="start"
-            android:iconifiedByDefault="false"
-            android:padding="5dp"
-            android:queryHint="@string/search_member_hint" />
-
         <FrameLayout
             android:id="@+id/member_content_frame"
             android:layout_width="match_parent"
@@ -41,15 +30,19 @@
             android:background="@color/white">
 
             <LinearLayout
+                android:id="@+id/members_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="visible">
 
                 <TextView
+                    android:id="@+id/add_member_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:textSize="16sp"
@@ -58,7 +51,7 @@
                     android:text="@string/add_new_member"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/memebrResultRv"
+                    android:id="@+id/member_result_rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="3dp" />
@@ -66,7 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/search_memeber_status_layout"
+                android:id="@+id/member_status_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -74,28 +67,28 @@
                 android:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/searchMemberStatusIv"
+                    android:id="@+id/member_status_iv"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
                     android:src="@drawable/boards_problem" />
 
                 <TextView
-                    android:id="@+id/searchMemberStatusTv"
+                    android:id="@+id/member_status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/iransans"
+                    android:fontFamily="@font/sahelfd"
                     android:gravity="center"
-                    android:text="@string/no_boards"
+                    android:text="@string/no_members"
                     android:textColor="@color/dark_shade3"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/searchProgressBar"
+                android:id="@+id/member_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

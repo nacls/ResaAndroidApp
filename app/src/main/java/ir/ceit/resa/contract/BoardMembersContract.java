@@ -13,6 +13,10 @@ public interface BoardMembersContract {
 
         void showBoardMembers(List<BoardMemberResponse> members);
 
+        void showProgressBar();
+
+        void showStatusLayout(String status, int i);
+
         void showToastStatus(String status, boolean isLong);
     }
 

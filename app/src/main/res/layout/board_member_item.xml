@@ -4,19 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="6dp"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="2dp"
     android:layout_marginRight="6dp"
-    android:layout_marginBottom="3dp"
+    android:layout_marginBottom="2dp"
     android:background="@drawable/member_border"
-    android:orientation="vertical"
-    android:padding="1dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/member_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="1dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,13 +37,13 @@
                 android:gravity="center|start"
                 android:text="@string/default_text"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/boardMembershipIv"
                 android:background="@drawable/creator_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_gravity="center" />
 
         </LinearLayout>
@@ -55,13 +53,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="37dp"
+            android:layout_marginRight="34dp"
             android:layout_marginBottom="5dp"
             android:gravity="right"
             android:fontFamily="@font/sahelfd"
             android:text="@string/board_id"
             android:textColor="@color/grey"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 </LinearLayout>

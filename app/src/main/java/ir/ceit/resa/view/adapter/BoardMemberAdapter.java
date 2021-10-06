@@ -50,10 +50,10 @@ public class BoardMemberAdapter extends
         Context context = status.getContext();
         switch (member.getMembership()) {
             case WRITER:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.pen));
+                status.setBackground(ContextCompat.getDrawable(context, R.drawable.pen));
                 break;
             case CREATOR:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.creator_avatar));
+                status.setBackground(ContextCompat.getDrawable(context, R.drawable.creator_icon));
                 break;
             case REGULAR_MEMBER:
                 status.setVisibility(View.INVISIBLE);
