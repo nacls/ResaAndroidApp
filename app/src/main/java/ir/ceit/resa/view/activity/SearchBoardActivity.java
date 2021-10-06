@@ -9,11 +9,13 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.contract.SearchContract;
@@ -26,6 +28,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
 
     private SearchBoardActivityPresenter searchPresenter;
     // Toolbar components
+    private Toolbar toolbar;
     private SearchView searchView;
     // status components
     private LinearLayout searchStatusLayout;
@@ -54,6 +57,7 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     @Override
     public void setupActivityView() {
         initializeViewComponents();
+        setupToolbar();
         setupSearchView();
         setupRecyclerView();
     }
@@ -92,12 +96,21 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
     }
 
     private void initializeViewComponents() {
+        toolbar = findViewById(R.id.search_toolbar);
         searchView = findViewById(R.id.searchView);
         searchStatusLayout = findViewById(R.id.search_status_layout);
         searchStatusIv = findViewById(R.id.searchStatusIv);
         searchStatusTv = findViewById(R.id.searchStatusTv);
         resultRv = findViewById(R.id.boardResultRv);
         searchProgressBar = findViewById(R.id.searchProgressBar);
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.search_board));
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupSearchView() {

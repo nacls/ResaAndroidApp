@@ -13,8 +13,6 @@ public interface BoardMembersContract {
 
         void showBoardMembers(List<BoardMemberResponse> members);
 
-        void showBoardCategoryError(String error);
-
         void showToastStatus(String status, boolean isLong);
     }
 
