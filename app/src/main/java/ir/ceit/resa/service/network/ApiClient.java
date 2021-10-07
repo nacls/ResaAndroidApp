@@ -3,6 +3,7 @@ package ir.ceit.resa.service.network;
 import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
+import ir.ceit.resa.model.payload.request.AddUserRequest;
 import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
 import ir.ceit.resa.model.payload.request.ChangePasswordRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
@@ -90,4 +91,9 @@ public interface ApiClient {
     @POST(UrlProvider.CHANGE_PASSWORD)
     Call<MessageResponse> changePassword(@Header("Authorization") String token,
                                       @Body ChangePasswordRequest changePasswordRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST(UrlProvider.ADD_USER)
+    Call<MessageResponse> addUser(@Header("Authorization") String token,
+                                         @Body AddUserRequest addUserRequest);
 }

@@ -3,6 +3,7 @@ package ir.ceit.resa.service.network;
 import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
+import ir.ceit.resa.model.payload.request.AddUserRequest;
 import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
 import ir.ceit.resa.model.payload.request.ChangePasswordRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
@@ -116,6 +117,14 @@ public class WebService {
                                              Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.changePassword(token, changePasswordRequest);
+        call.enqueue(callback);
+    }
+
+    public static void addUser(String token,
+                                      AddUserRequest addUserRequest,
+                                      Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.addUser(token, addUserRequest);
         call.enqueue(callback);
     }
 }

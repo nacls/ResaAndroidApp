@@ -63,4 +63,7 @@ public class Constants {
     public static final String MEMBERSHIP_CHANGED = "Membership changed";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong";
     public static final String PASSWORD_CHANGED = "Password changed successfully!";
+    public static final String USERNAME_IS_TAKEN = "Error: Username is already taken!";
+    public static final String EMAIL_IS_TAKEN = "Error: Email is already in use!";
+    public static final String USER_REGISTERED_SUCCESSFULLY = "User registered successfully!";
 }
