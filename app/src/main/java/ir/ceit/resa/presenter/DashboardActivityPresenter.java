@@ -22,6 +22,7 @@ import ir.ceit.resa.view.activity.CreateBoardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;
 import ir.ceit.resa.view.activity.SearchBoardActivity;
 import ir.ceit.resa.view.activity.UserProfileActivity;
+import ir.ceit.resa.view.activity.UserSettingActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,7 +59,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onSettingsCLicked() {
-        System.out.println("SETTINGS CLICKED");
+        openSettingActivity();
     }
 
     @Override
@@ -76,23 +77,28 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
         System.out.println("ADMIN SETTINGS CLICKED");
     }
 
-    public void openCreateBoardActivity() {
+    private void openCreateBoardActivity() {
         Intent intent = new Intent(context, CreateBoardActivity.class);
         context.startActivity(intent);
     }
 
-    public void openSearchBoardActivity() {
+    private void openSearchBoardActivity() {
         Intent intent = new Intent(context, SearchBoardActivity.class);
         context.startActivity(intent);
     }
 
-    public void openLoginActivity() {
+    private void openLoginActivity() {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
-    public void openProfileActivity() {
+    private void openProfileActivity() {
         Intent intent = new Intent(context, UserProfileActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void openSettingActivity(){
+        Intent intent = new Intent(context, UserSettingActivity.class);
         context.startActivity(intent);
     }
 

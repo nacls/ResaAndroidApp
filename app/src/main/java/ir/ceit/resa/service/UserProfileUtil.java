@@ -33,11 +33,12 @@ public class UserProfileUtil {
         String email = ResaSharedPreferences.getUserEmail(context);
         String firstname = ResaSharedPreferences.getUserFirstName(context);
         String lastname = ResaSharedPreferences.getUserLastName(context);
+        String faculty = ResaSharedPreferences.getUserFaculty(context);
         ERole role = ResaSharedPreferences.getRole(context);
 
         if (username == null || email == null || firstname == null || lastname == null || role == null)
             return null;
 
-        return new UserProfile(username, email, firstname, lastname, role);
+        return new UserProfile(username, email, firstname, lastname, faculty, role);
     }
 }

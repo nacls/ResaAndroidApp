@@ -26,6 +26,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView userFamilyName;
     private TextView username;
     private TextView email;
+    private TextView faculty;
     // Avatar
     private ImageView userAvatar;
     private LinearLayout roleDescriptionLayout;
@@ -58,6 +59,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userFamilyName = findViewById(R.id.user_family_name);
         username = findViewById(R.id.user_username);
         email = findViewById(R.id.user_email);
+        faculty = findViewById(R.id.user_faculty);
         // Avatar
         userAvatar = findViewById(R.id.avatar_iv);
         roleDescriptionLayout = findViewById(R.id.profile_description_layout);
@@ -78,6 +80,10 @@ public class UserProfileActivity extends AppCompatActivity {
         userFamilyName.setText(userProfile.getLastName());
         username.setText(userProfile.getUsername());
         email.setText(userProfile.getEmail());
+        if (userProfile.getFaculty() == null)
+            faculty.setText(Constants.NOT_DEFINED);
+        else
+            faculty.setText(userProfile.getFaculty());
     }
 
     private void validateUserProfile() {
@@ -91,7 +97,7 @@ public class UserProfileActivity extends AppCompatActivity {
         showRoleInfo();
     }
 
-    private void setupAvatarImage(){
+    private void setupAvatarImage() {
         switch (userProfile.getRole()) {
             case ROLE_ADMIN:
                 userAvatar.setBackground(ContextCompat.getDrawable(this, R.drawable.admin_avatar));

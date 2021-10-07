@@ -10,6 +10,7 @@ public class Constants {
     public static final String CHECK_CONNECTION_TRY_AGAIN = "اتصال اینترنت خود را بررسی کنید و مجدداً تلاش کنید.";
     public static final String UNKNOWN_ERROR_TRY_AGAIN = "خطای نامشخص، مجدداً تلاش کنید.";
     public static final String UNEXPECTED_PROBLEM_NOTIFY_ADMIN = "مشکل غیر منتظره ای رخ داده است. " + "\n" + "به پشتیبانی سیستم اطلاع دهید.";
+    public static final String NOT_DEFINED = "تعریف نشده";
 
     // Login
     public static final String PROBLEM_OCCURRED_DURING_LOGIN = "مشکلی در ورود پیش آمده است.";

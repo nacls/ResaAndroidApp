@@ -100,6 +100,7 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
         ResaSharedPreferences.setFirstName(context, jwtResponse.getFirstName());
         ResaSharedPreferences.setLastName(context, jwtResponse.getLastName());
         ResaSharedPreferences.setEmail(context, jwtResponse.getEmail());
+        ResaSharedPreferences.setFaculty(context, jwtResponse.getFaculty());
         ResaSharedPreferences.setRole(context, UserProfileUtil.getHighLevelRole(jwtResponse.getRoles()));
     }
 

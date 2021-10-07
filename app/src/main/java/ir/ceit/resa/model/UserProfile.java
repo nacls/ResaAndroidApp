@@ -18,24 +18,31 @@ public class UserProfile implements Parcelable {
     private String email;
     private String firstName;
     private String lastName;
+    private String faculty;
     private ERole role;
 
-    public UserProfile(String username, String email, String firstName, String lastName, ERole role) {
+    public UserProfile(String username,
+                       String email,
+                       String firstName, String lastName,
+                       String faculty,
+                       ERole role) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.faculty = faculty;
         this.role = role;
     }
 
     public UserProfile(Parcel in) {
-        String[] data = new String[5];
+        String[] data = new String[6];
         in.readStringArray(data);
         this.username = data[0];
         this.email = data[1];
         this.firstName = data[2];
         this.lastName = data[3];
-        this.role = ERole.valueOf(data[4]);
+        this.faculty = data[4];
+        this.role = ERole.valueOf(data[5]);
     }
 
     public String getUsername() {
@@ -70,6 +77,14 @@ public class UserProfile implements Parcelable {
         this.lastName = lastName;
     }
 
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
     public ERole getRole() {
         return role;
     }
@@ -91,6 +106,7 @@ public class UserProfile implements Parcelable {
                         this.email,
                         this.firstName,
                         this.lastName,
+                        this.faculty,
                         String.valueOf(this.role)});
     }
 }

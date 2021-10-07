@@ -14,6 +14,7 @@ public class ResaSharedPreferences {
     private static final String PREF_USER_FIRST_NAME = "user-first-name";
     private static final String PREF_USER_LAST_NAME = "user-last-name";
     private static final String PREF_USER_EMAIL = "user-email";
+    private static final String PREF_USER_FACULTY = "user-faculty";
 
 
     static SharedPreferences getSharedPreferences(Context context) {
@@ -50,6 +51,10 @@ public class ResaSharedPreferences {
         setValueToKey(context, email, PREF_USER_EMAIL);
     }
 
+    public static void setFaculty(Context context, String faculty) {
+        setValueToKey(context, faculty, PREF_USER_FACULTY);
+    }
+
     public static String getUserName(Context context) {
         return getSharedPreferences(context).getString(PREF_USERNAME, null);
     }
@@ -72,6 +77,10 @@ public class ResaSharedPreferences {
 
     public static String getUserEmail(Context context) {
         return getSharedPreferences(context).getString(PREF_USER_EMAIL, null);
+    }
+
+    public static String getUserFaculty(Context context) {
+        return getSharedPreferences(context).getString(PREF_USER_FACULTY, null);
     }
 
     public static void clearPreferences(Context context) {

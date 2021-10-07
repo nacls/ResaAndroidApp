@@ -248,7 +248,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         if (isItemSelectedValid) {
             drawerList.setItemChecked(position, true);
             drawerList.setSelection(position);
-            drawerLayout.closeDrawers();
         }
     }
 
