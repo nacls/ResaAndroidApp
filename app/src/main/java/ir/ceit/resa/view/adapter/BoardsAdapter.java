@@ -48,20 +48,6 @@ public class BoardsAdapter extends
     public void onBindViewHolder(@NonNull @NotNull ViewHolder viewHolder, int i) {
         Board board = boards.get(i);
 
-        ImageView status = viewHolder.membershipStatus;
-        Context context = status.getContext();
-        switch (board.getUserMembership()) {
-            case WRITER:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.pen));
-                break;
-            case CREATOR:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.key));
-                break;
-            case REGULAR_MEMBER:
-                status.setVisibility(View.GONE);
-            default:
-                break;
-        }
 
         TextView description = viewHolder.boardDescription;
         description.setText(board.getDescription());
@@ -86,6 +72,8 @@ public class BoardsAdapter extends
         } else {
             announcementLayout.setVisibility(View.GONE);
         }
+
+        Context context = announcementLayout.getContext();
 
         viewHolder.parentLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, BoardActivity.class);
@@ -113,7 +101,6 @@ public class BoardsAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout parentLayout;
         public LinearLayout announcementLayout;
-        public ImageView membershipStatus;
         public TextView boardDescription;
         public TextView boardCreator;
         public TextView latestAnnouncement;
@@ -122,7 +109,6 @@ public class BoardsAdapter extends
         public ViewHolder(View itemView) {
             super(itemView);
 
-            membershipStatus = itemView.findViewById(R.id.membershipIv);
             boardDescription = itemView.findViewById(R.id.boardDescription);
             boardCreator = itemView.findViewById(R.id.boardCreator);
             latestAnnouncement = itemView.findViewById(R.id.announcementTv);

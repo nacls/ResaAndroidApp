@@ -54,11 +54,7 @@ public class SearchResultAdapter extends
         Context context = status.getContext();
         switch (board.getUserMembership()) {
             case WRITER:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.pen));
-                break;
             case CREATOR:
-                status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.key));
-                break;
             case REGULAR_MEMBER:
                 status.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.joined_tick));
                 break;
