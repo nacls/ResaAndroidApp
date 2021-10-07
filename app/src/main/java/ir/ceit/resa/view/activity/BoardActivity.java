@@ -105,7 +105,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
     @Override
     public void setupActivityView() {
         initializeViewComponents();
-        setUpToolbar();
+        setupToolbar();
         setOnSwipe();
         setupRecyclerView();
     }
@@ -348,7 +348,7 @@ public class BoardActivity extends AppCompatActivity implements BoardContract.Vi
         swipeContainer.setOnRefreshListener(direction -> boardPresenter.getBoardAnnouncementsFromServer());
     }
 
-    private void setUpToolbar() {
+    private void setupToolbar() {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

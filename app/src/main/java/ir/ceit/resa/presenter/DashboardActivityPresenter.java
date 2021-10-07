@@ -18,6 +18,7 @@ import ir.ceit.resa.service.UserProfileUtil;
 import ir.ceit.resa.service.network.ErrorUtils;
 import ir.ceit.resa.service.network.WebService;
 import ir.ceit.resa.service.storage.ResaSharedPreferences;
+import ir.ceit.resa.view.activity.AdminSettingActivity;
 import ir.ceit.resa.view.activity.CreateBoardActivity;
 import ir.ceit.resa.view.activity.LoginActivity;
 import ir.ceit.resa.view.activity.SearchBoardActivity;
@@ -74,7 +75,7 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     @Override
     public void onAdminSettingsClicked() {
-        System.out.println("ADMIN SETTINGS CLICKED");
+        openAdminSettingActivity();
     }
 
     private void openCreateBoardActivity() {
@@ -99,6 +100,11 @@ public class DashboardActivityPresenter implements DashboardContract.Presenter {
 
     private void openSettingActivity(){
         Intent intent = new Intent(context, UserSettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void openAdminSettingActivity(){
+        Intent intent = new Intent(context, AdminSettingActivity.class);
         context.startActivity(intent);
     }
 

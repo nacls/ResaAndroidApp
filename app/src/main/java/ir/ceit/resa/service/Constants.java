@@ -2,6 +2,11 @@ package ir.ceit.resa.service;
 
 public class Constants {
 
+    // Roles
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
+    public static final String CREATOR = "creator";
+
     // General
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
     public static final String CONNECTION_PROBLEM = "مشکلی در برقراری ارتباط با سرور پیش آمده است.";
@@ -44,8 +49,14 @@ public class Constants {
     // User setting
     public static final String REPEATED_PASSWORD_IS_WRONG = "کلمات عبور وارد شده یکسان نیستند.";
     public static final String OLD_PASSWORD_IS_WRONG = "رمز عبور وارد شده اشتباه است.";
-    public static final String NEW_PASS_IS_TOO_SHORT = "رمز عبور نمی تواند کمتر از 5 حرف باشد.";
+    public static final String NEW_PASS_IS_TOO_SHORT = "رمز عبور نمی تواند کمتر از 6 حرف باشد.";
     public static final String YOUR_PASS_WAS_CHANGED = "رمز عبور شما با موفقیت تغییر کرد.";
+
+    // Admin setting
+    public static final String USER_WAS_ADDED = "کاربر با موفقیت ساخته شد.";
+    public static final String ENTERED_USERNAME_IS_TAKEN = "این نام کاربری قبلاً استفاده شده است.";
+    public static final String ENTERED_EMAIL_IS_TAKEN = "این ایمیل قبلاً استفاده شده است.";
+
 
     // Submission Errors
     public static final String CANT_BE_EMPTY = "نمی تواند خالی باشد.";

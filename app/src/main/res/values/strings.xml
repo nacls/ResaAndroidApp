@@ -24,9 +24,9 @@
     <string name="resaName">سامانه رسا</string>
     <string name="loginToResa">ورود به سامانه رسا</string>
     <string name="login">ورود</string>
-    <string name="username">نام کاربری:</string>
+    <string name="username">نام کاربری</string>
     <string name="username_hint">برای مثال شماره دانشجویی</string>
-    <string name="password">رمز عبور:</string>
+    <string name="password">رمز عبور</string>
     <string name="password_hint">رمز عبور پورتال آموزشی</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="default_text">مقدار پیش فرض</string>
@@ -67,8 +67,8 @@
     <string name="name">نام</string>
     <string name="family_name">نام خانوادگی</string>
     <string name="email">ایمیل</string>
-    <string name="user_name">نام کاربری</string>
     <string name="user_info">اطلاعات کاربری</string>
+    <string name="user_role">نقش کاربر</string>
 
 
     <string name="yes">بله</string>
@@ -94,6 +94,11 @@
     <string name="old_password_hint">رمز عبور فعلی خود را وارد کنید</string>
     <string name="new_password_hint">رمز عبور جدید را وارد کنید</string>
     <string name="new_password_repeat_hint">رمز عبور جدید را تکرار کنید</string>
+
+    <string name="add_new_user">اضافه کردن کاربر جدید</string>
+    <string name="admin">ادمین</string>
+    <string name="creator">بانی برد</string>
+    <string name="regular_member">کاربر عادی</string>
 
 
     <string-array name="navigation_drawer_items_array">

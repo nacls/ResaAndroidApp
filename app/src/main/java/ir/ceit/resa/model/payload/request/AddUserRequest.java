@@ -16,6 +16,15 @@ public class AddUserRequest {
 
     private String lastName;
 
+    public AddUserRequest(String username, String email, Set<String> role, String password, String firstName, String lastName) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getUsername() {
         return username;
     }

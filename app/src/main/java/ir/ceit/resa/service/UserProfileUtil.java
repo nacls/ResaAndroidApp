@@ -2,7 +2,9 @@ package ir.ceit.resa.service;
 
 import android.content.Context;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ir.ceit.resa.service.storage.ResaSharedPreferences;
 import ir.ceit.resa.model.ERole;
@@ -23,6 +25,27 @@ public class UserProfileUtil {
             return ERole.ROLE_CREATOR;
         }
         return ERole.ROLE_USER;
+    }
+
+    public static Set<String> getRoleSet(ERole highestLevelRole){
+        Set<String> roles = new HashSet<>();
+        switch (highestLevelRole){
+            case ROLE_USER:
+                roles.add(Constants.USER);
+                break;
+            case ROLE_CREATOR:
+                roles.add(Constants.USER);
+                roles.add(Constants.CREATOR);
+                break;
+            case ROLE_ADMIN:
+                roles.add(Constants.USER);
+                roles.add(Constants.CREATOR);
+                roles.add(Constants.ADMIN);
+                break;
+            default:
+                break;
+        }
+        return roles;
     }
 
     public static UserProfile createUserProfile(Context context) {

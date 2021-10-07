@@ -64,7 +64,7 @@ public class UserSettingActivityPresenter implements UserSettingContract.Present
     private boolean validatePasswordsEntered(String newPass, String newPassRepeated) {
         // validate old pass
         if (newPass.equals(newPassRepeated)) {
-            if (newPass.length() < 5){
+            if (newPass.length() < 6){
                 view.showNewPassError(Constants.NEW_PASS_IS_TOO_SHORT);
                 return false;
             }
