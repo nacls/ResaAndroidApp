@@ -117,19 +117,25 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
 
     private void initializeViewComponents() {
         toolbar = findViewById(R.id.create_board_toolbar);
+        // Board Id
         boardIdEt = findViewById(R.id.board_id_create);
         boardIdProblemLayout = findViewById(R.id.board_id_problem_layout);
         boardIdProblemTv = findViewById(R.id.board_id_problem_description);
+        // Board Title
         boardTitleEt = findViewById(R.id.board_title_create);
         boardTitleProblemLayout = findViewById(R.id.board_title_problem_layout);
         boardTitleProblemTv = findViewById(R.id.board_title_problem_description);
+        // Board Category
         boardCategoryEt = findViewById(R.id.board_category_create);
         boardCategoryProblemLayout = findViewById(R.id.board_category_problem_layout);
         boardCategoryProblemTv = findViewById(R.id.board_category_problem_description);
+        // Board Faculty
         boardFacultyEt = findViewById(R.id.board_faculty_create);
+        // Status
         boardStatusLayout = findViewById(R.id.create_board_status_layout);
         statusDescriptionTv = findViewById(R.id.create_board_status_description);
         statusIv = findViewById(R.id.create_board_status_image);
+        // Submit Button
         submit = findViewById(R.id.submit_board);
     }
 

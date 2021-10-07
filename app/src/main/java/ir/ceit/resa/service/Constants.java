@@ -41,13 +41,18 @@ public class Constants {
     public static final String ADMIN_DESCRIPTION = "شما می توانید کاربران جدید به سیستم اضافه کنید و مشکلات سیستم را پیگیری کنید.";
     public static final String CREATOR_DESCRIPTION = "شما می توانید بردهای جدید ایجاد کنید، در آن ها اطلاعیه قرار دهید و آن ها را مدیریت کنید.";
 
+    // User setting
+    public static final String REPEATED_PASSWORD_IS_WRONG = "کلمات عبور وارد شده یکسان نیستند.";
+    public static final String OLD_PASSWORD_IS_WRONG = "رمز عبور وارد شده اشتباه است.";
+    public static final String NEW_PASS_IS_TOO_SHORT = "رمز عبور نمی تواند کمتر از 5 حرف باشد.";
+    public static final String YOUR_PASS_WAS_CHANGED = "رمز عبور شما با موفقیت تغییر کرد.";
 
     // Submission Errors
     public static final String CANT_BE_EMPTY = "نمی تواند خالی باشد.";
     public static final String NOTICE_ERRORS_RETRY = "خطاهای گفته شده را حل کنید و مجدداً تلاش کنید.";
     public static final String LAST_REQUEST_STILL_IN_PROGRESS = "درخواست قبلی هنوز در حال پردازش است، لطفاً منتظر بمانید.";
     public static final String REQUEST_SENT_SUCCESSFULLY = "درخواست شما با موفقیت ارسال شد، لطفاً منتظر بمانید.";
-    public static final String BOARD_ID_TAKEN_CHOOSE_ANOTHER = "این شناسه قبلاً استفاده شده است،"+"\n"+"شناسه دیگری انتخاب کنید.";
+    public static final String BOARD_ID_TAKEN_CHOOSE_ANOTHER = "این شناسه قبلاً استفاده شده است،" + "\n" + "شناسه دیگری انتخاب کنید.";
 
     // Server Messages
     public static final String SERVER_RESPONSE_ADD_ANNOUNCEMENT_OK = "Announcement added successfully!";
@@ -57,4 +62,5 @@ public class Constants {
     public static final String BOARD_WAS_DELETED = "Board deleted successfully!";
     public static final String MEMBERSHIP_CHANGED = "Membership changed";
     public static final String SOMETHING_WENT_WRONG = "Something went wrong";
+    public static final String PASSWORD_CHANGED = "Password changed successfully!";
 }

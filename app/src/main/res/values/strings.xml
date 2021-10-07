@@ -86,6 +86,15 @@
     <string name="take_writer_access">گرفتن دسترسی نویسنده برد</string>
     <string name="add_as_writer">نویسنده برد</string>
     <string name="submit">ثبت</string>
+    <string name="change_password">تغییر رمز عبور</string>
+    <string name="old_password">رمز عبور فعلی</string>
+    <string name="new_password">رمز عبور جدید</string>
+    <string name="new_password_repeat">تکرار رمز عبور جدید</string>
+
+    <string name="old_password_hint">رمز عبور فعلی خود را وارد کنید</string>
+    <string name="new_password_hint">رمز عبور جدید را وارد کنید</string>
+    <string name="new_password_repeat_hint">رمز عبور جدید را تکرار کنید</string>
+
 
     <string-array name="navigation_drawer_items_array">
         <item>پروفایل</item>

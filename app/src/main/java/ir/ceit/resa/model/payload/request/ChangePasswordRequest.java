@@ -7,6 +7,10 @@ public class ChangePasswordRequest {
     @SerializedName("new-password")
     private String newPassword;
 
+    public ChangePasswordRequest(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
     public String getNewPassword() {
         return newPassword;
     }

@@ -6,6 +6,18 @@ public interface UserSettingContract {
 
         void setupActivityView();
 
+        void showOldPassError(String error);
+
+        void showNewPassError(String error);
+
+        void showChangePassStatus(String status, boolean isError);
+
+        void disableSubmitPassButton();
+
+        void enableSubmitPassButton();
+
+        void clearProblemLayouts();
+
         void showToastStatus(String status, boolean isLong);
     }
 
@@ -13,6 +25,6 @@ public interface UserSettingContract {
 
         void onCreated();
 
-        void changePasswordClicked(String password);
+        void changePasswordClicked(String oldPassword, String newPass, String newPassRepeat);
     }
 }

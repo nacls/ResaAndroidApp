@@ -6,9 +6,9 @@ public class UrlProvider {
 
     // Authentication endpoints
     public static final String LOGIN_URL = "api/auth/signin";
-    public static final String CHANGE_PASSWORD = "";
+    public static final String CHANGE_PASSWORD = "api/auth/change-pass";
     // Admin
-    public static final String ADD_USER = "";
+    public static final String ADD_USER = "api/auth/adduser";
 
     // Board endpoints
     public static final String JOINED_BOARDS = "/api/board/joined/{username}";

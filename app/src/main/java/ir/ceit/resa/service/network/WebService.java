@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
+import ir.ceit.resa.model.payload.request.ChangePasswordRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.EditBoardRequest;
@@ -107,6 +108,14 @@ public class WebService {
                                              Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<MessageResponse> call = service.changeUserMembership(token, changeMembershipRequest);
+        call.enqueue(callback);
+    }
+
+    public static void changePassword(String token,
+                                             ChangePasswordRequest changePasswordRequest,
+                                             Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<MessageResponse> call = service.changePassword(token, changePasswordRequest);
         call.enqueue(callback);
     }
 }

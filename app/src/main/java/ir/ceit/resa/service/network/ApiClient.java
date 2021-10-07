@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.ceit.resa.model.Announcement;
 import ir.ceit.resa.model.payload.request.ChangeMembershipRequest;
+import ir.ceit.resa.model.payload.request.ChangePasswordRequest;
 import ir.ceit.resa.model.payload.request.CreateAnnouncementRequest;
 import ir.ceit.resa.model.payload.request.CreateBoardRequest;
 import ir.ceit.resa.model.payload.request.EditBoardRequest;
@@ -84,4 +85,9 @@ public interface ApiClient {
     @PUT(UrlProvider.BOARD_ACCESS_CONTROL)
     Call<MessageResponse> changeUserMembership(@Header("Authorization") String token,
                                                @Body ChangeMembershipRequest changeMembershipRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST(UrlProvider.CHANGE_PASSWORD)
+    Call<MessageResponse> changePassword(@Header("Authorization") String token,
+                                      @Body ChangePasswordRequest changePasswordRequest);
 }
