@@ -47,7 +47,7 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
             view.disableEditBoardButton();
             submitInProgress = true;
             view.clearProblemLayouts();
-            sendEditBoardRequestToServer(makeEditBoardRequest(title, category, faculty));
+            sendEditBoardRequestToServer(makeEditBoardRequest(title.trim(), category.trim(), faculty.trim()));
             view.showBoardStatus(Constants.REQUEST_SENT_SUCCESSFULLY, false);
         }
     }
@@ -164,7 +164,7 @@ public class ConfigureBoardActivityPresenter implements ConfigureBoardContract.P
     }
 
     public boolean isValid(String value) {
-        return !value.isEmpty();
+        return !value.trim().isEmpty();
     }
 
     public Board getBoard() {
