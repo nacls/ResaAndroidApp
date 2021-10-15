@@ -3,6 +3,9 @@ package ir.ceit.resa.presenter;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import ir.ceit.resa.contract.LoginContract;
 import ir.ceit.resa.model.UserProfile;
 import ir.ceit.resa.model.payload.request.LoginRequest;
@@ -47,11 +50,11 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
             return;
         }
 
-        if (isStringValid(username) && isStringValid(password)) {
+        if (isUsernameValid(username) && isPasswordValid(password)) {
             setLoginInProgress(true);
             requestLoginAndHandleErrors(new LoginRequest(username, password));
         } else {
-            showUserPassLengthError(username, password);
+            showUserPassError(username, password);
         }
     }
 
@@ -109,19 +112,51 @@ public class LoginActivityPresenter implements LoginContract.Presenter {
         context.startActivity(intent);
     }
 
-    private boolean isStringValid(String string) {
-        return string.length() > 2;
+    private boolean isUsernameValid(String username) {
+        return username.length() > 2 && !containsWhiteSpace(username);
     }
 
-    private void showUserPassLengthError(String username, String password) {
-        if (!isStringValid(username) && !isStringValid(password)) {
-            view.setStatusText(Constants.USERNAME_AND_PASSWORD_ERROR, true);
-        } else if (!isStringValid(username)) {
-            view.setStatusText(Constants.USERNAME_ERROR, true);
-        } else {
-            view.setStatusText(Constants.PASSWORD_ERROR, true);
-        }
+    private boolean isPasswordValid(String password) {
+        return password.length() >= 6 && !containsWhiteSpace(password);
     }
+
+    private void showUserPassError(String username, String password) {
+        String passwordError = getPasswordError(password);
+        String usernameError = getUsernameError(username);
+        String error;
+        if (usernameError != null && passwordError != null)
+            error = passwordError + " و " + usernameError + ".";
+        else if (usernameError != null)
+            error = usernameError + ".";
+        else if (passwordError != null)
+            error = passwordError + ".";
+        else
+            error = Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN;
+        view.setStatusText(error, true);
+    }
+
+    private String getPasswordError(String password) {
+        if (containsWhiteSpace(password))
+            return Constants.PASSWORD_SPACE_ERROR;
+        if (password.length() < 6)
+            return Constants.PASSWORD_LENGTH_ERROR;
+        return null;
+    }
+
+    private String getUsernameError(String username) {
+        if (containsWhiteSpace(username))
+            return Constants.USERNAME_SPACE_ERROR;
+        if (username.length() < 2)
+            return Constants.USERNAME_LENGTH_ERROR;
+        return null;
+    }
+
+    private boolean containsWhiteSpace(String string) {
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.find();
+    }
+
 
     public boolean isLoginInProgress() {
         return loginInProgress;

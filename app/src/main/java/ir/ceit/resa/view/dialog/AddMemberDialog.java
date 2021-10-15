@@ -65,8 +65,8 @@ public class AddMemberDialog extends Dialog implements
 
     private void addUserButtonClicked() {
         String username = String.valueOf(usernameEt.getText());
-        if (username.isEmpty()) {
-            showToast(Constants.USERNAME_ERROR, true);
+        if (username.trim().isEmpty()) {
+            showToast(Constants.USERNAME_LENGTH_ERROR, true);
         } else {
             listener.addUserClicked(username, isWriterCb.isChecked());
             dismiss();

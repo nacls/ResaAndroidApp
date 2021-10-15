@@ -20,9 +20,10 @@ public class Constants {
     // Login
     public static final String PROBLEM_OCCURRED_DURING_LOGIN = "مشکلی در ورود پیش آمده است.";
     public static final String LOGIN_SUCCESSFUL_WAIT = "ورود مووفقیت آمیز بود، اندکی صبر کنید.";
-    public static final String USERNAME_ERROR = "نام کاربری نمی تواند کمتر از 2 حرف باشد.";
-    public static final String PASSWORD_ERROR = "رمز عبور نمی تواند کمتر از 2 حرف باشد.";
-    public static final String USERNAME_AND_PASSWORD_ERROR = "نام کاربری و رمز عبور نمی توانند کمتر از 2 حرف باشند.";
+    public static final String USERNAME_LENGTH_ERROR = "نام کاربری نمی تواند کمتر از 2 حرف باشد";
+    public static final String USERNAME_SPACE_ERROR = "نام کاربری نمی تواند شامل فاصله باشد";
+    public static final String PASSWORD_LENGTH_ERROR = "رمز عبور نمی تواند کمتر از 6 حرف باشد";
+    public static final String PASSWORD_SPACE_ERROR = "رمز عبور نمی تواند شامل فاصله باشد";
     public static final String USERNAME_OR_PASSWORD_WRONG = "نام کاربری و یا رمز عبور اشتباه است.";
 
     // Board
