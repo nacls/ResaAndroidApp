@@ -15,6 +15,7 @@ public class UrlProvider {
     public static final String SEARCH_BOARDS = "/api/board/search";
     public static final String JOIN_BOARD = "/api/board/join/{boardId}";
     public static final String LEAVE_BOARD = "/api/board/leave/{boardId}";
+    public static final String ALL_ACCESSIBLE_BOARDS = "/api/board/get-all";
     // Create board
     public static final String CREATE_BOARD = "/api/board/create";
     // Edit board

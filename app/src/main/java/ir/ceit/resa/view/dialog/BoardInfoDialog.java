@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import ir.ceit.resa.R;
 import ir.ceit.resa.model.Board;
+import ir.ceit.resa.service.Constants;
 
 public class BoardInfoDialog extends Dialog implements
         android.view.View.OnClickListener {
@@ -53,7 +54,13 @@ public class BoardInfoDialog extends Dialog implements
         String boardTitleValue = board.getDescription();
         String boardCreatorValue = board.getCreatorUsername();
         String boardCategoryValue = board.getCategory();
-        String boardFacultyValue = board.getFaculty();
+
+        String boardFacultyValue;
+        if (board.getFaculty() == null || board.getFaculty().isEmpty()) {
+            boardFacultyValue = Constants.NOT_DEFINED;
+        } else {
+            boardFacultyValue = board.getFaculty();
+        }
 
         boardId.setText(boardIdValue);
         boardTitle.setText(boardTitleValue);

@@ -22,5 +22,7 @@ public interface SearchContract {
         void onCreated();
 
         void searchButtonClicked(String boardQuery);
+
+        void searchCleared();
     }
 }

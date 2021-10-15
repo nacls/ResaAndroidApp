@@ -36,6 +36,10 @@ public interface ApiClient {
                                                 @Header("Authorization") String token);
 
     @Headers("Content-Type: application/json")
+    @GET(UrlProvider.ALL_ACCESSIBLE_BOARDS)
+    Call<List<BoardInfoResponse>> getAllAccessibleBoards(@Header("Authorization") String token);
+
+    @Headers("Content-Type: application/json")
     @GET(UrlProvider.GET_BOARD_ANNOUNCEMENTS)
     Call<List<Announcement>> getBoardAnnouncements(@Path("boardId") String boardId,
                                                    @Header("Authorization") String token);

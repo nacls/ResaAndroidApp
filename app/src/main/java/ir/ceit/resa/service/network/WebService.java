@@ -32,6 +32,12 @@ public class WebService {
         call.enqueue(callback);
     }
 
+    public static void getAllAccessibleBoards(String token, Callback callback) {
+        ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
+        Call<List<BoardInfoResponse>> call = service.getAllAccessibleBoards(token);
+        call.enqueue(callback);
+    }
+
     public static void getBoardAnnouncements(String token, String boardId, Callback callback) {
         ApiClient service = RetrofitClient.getRetrofitInstance().create(ApiClient.class);
         Call<List<Announcement>> call = service.getBoardAnnouncements(boardId, token);

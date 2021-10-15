@@ -124,6 +124,10 @@ public class SearchBoardActivity extends AppCompatActivity implements SearchCont
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (newText.equals("")) {
+                    latestQuery = "";
+                    searchPresenter.searchCleared();
+                }
                 return false;
             }
         });
