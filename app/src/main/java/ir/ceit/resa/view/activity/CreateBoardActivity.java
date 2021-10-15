@@ -161,6 +161,7 @@ public class CreateBoardActivity extends AppCompatActivity implements CreateBoar
         createBoardPresenter.submitBoardClicked(boardId, boardTitle, boardCategory, boardFaculty);
     }
 
+
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

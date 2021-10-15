@@ -44,10 +44,14 @@ public class CreateBoardActivityPresenter implements CreateBoardContract.Present
         if (validateOrShowError(boardId, boardTitle, boardCategory)) {
             view.disableSubmitButton();
             submitInProgress = true;
-            sendCreateBoardRequestToServer(makeCreateBoardRequest(boardId, boardTitle, boardCategory, boardFaculty));
+            sendCreateBoardRequestToServer(makeCreateBoardRequest(boardId.trim(),
+                    boardTitle.trim(),
+                    boardCategory.trim(),
+                    boardFaculty.trim()));
             view.showBoardStatus(Constants.REQUEST_SENT_SUCCESSFULLY, false);
         }
     }
+
 
     private CreateBoardRequest makeCreateBoardRequest(String boardId, String boardTitle, String boardCategory, String boardFaculty) {
         return new CreateBoardRequest(boardId,
@@ -118,7 +122,7 @@ public class CreateBoardActivityPresenter implements CreateBoardContract.Present
     }
 
     public boolean isValid(String value) {
-        return !value.isEmpty();
+        return !value.trim().isEmpty();
     }
 
     public void showErrorBasedOnField(EFields field) {

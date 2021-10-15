@@ -28,3 +28,4 @@ public interface CreateBoardContract {
         void submitBoardClicked(String boardId, String boardTitle, String boardCategory, String boardFaculty);
     }
 }
+

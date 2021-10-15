@@ -196,6 +196,14 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
         submitChangesButton.setOnClickListener(v -> notifyPresenterOfSubmitChanges());
     }
 
+    private void notifyPresenterOfSubmitChanges() {
+        String title = String.valueOf(boardTitleEt.getText());
+        String category = String.valueOf(boardCategoryEt.getText());
+        String faculty = String.valueOf(boardFacultyEt.getText());
+        configurePresenter.onChangeBoardClicked(title, category, faculty);
+    }
+
+
     private void registerDeleteButton() {
         deleteBoardButton.setOnClickListener(v -> openAssuranceDialog());
     }
@@ -221,12 +229,7 @@ public class ConfigureBoardActivity extends AppCompatActivity implements Configu
         exitDialog.show();
     }
 
-    private void notifyPresenterOfSubmitChanges() {
-        String title = String.valueOf(boardTitleEt.getText());
-        String category = String.valueOf(boardCategoryEt.getText());
-        String faculty = String.valueOf(boardFacultyEt.getText());
-        configurePresenter.onChangeBoardClicked(title, category, faculty);
-    }
+
 
     @Override
     public void onBackPressed() {

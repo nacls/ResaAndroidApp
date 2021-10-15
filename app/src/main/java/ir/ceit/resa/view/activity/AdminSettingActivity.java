@@ -204,7 +204,7 @@ public class AdminSettingActivity extends AppCompatActivity implements AdminSett
         String faculty = String.valueOf(facultyEt.getText());
         ERole highestLevelRole = getSelectedRole();
 
-        adminSettingPresenter.onSubmitUserClicked(username,name,familyName,password,email,highestLevelRole, faculty);
+        adminSettingPresenter.onSubmitUserClicked(username, name, familyName, password, email, highestLevelRole, faculty);
     }
 
     private ERole getSelectedRole() {

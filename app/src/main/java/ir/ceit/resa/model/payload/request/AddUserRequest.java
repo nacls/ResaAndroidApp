@@ -16,13 +16,21 @@ public class AddUserRequest {
 
     private String lastName;
 
-    public AddUserRequest(String username, String email, Set<String> role, String password, String firstName, String lastName) {
+    private String faculty;
+
+    public AddUserRequest(String username,
+                          String email,
+                          Set<String> role,
+                          String password,
+                          String firstName, String lastName,
+                          String faculty) {
         this.username = username;
         this.email = email;
         this.role = role;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.faculty = faculty;
     }
 
     public String getUsername() {
@@ -71,5 +79,13 @@ public class AddUserRequest {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 }

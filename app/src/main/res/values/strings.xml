@@ -62,7 +62,7 @@
     <string name="edit_board_info">ویرایش اطلاعات برد</string>
     <string name="edit_board">ویرایش برد</string>
     <string name="submit_changes">ثبت تغییرات</string>
-    <string name="exit_board_question">ااگر خارج شوید، برد ایجاد نخواهد شد.</string>
+    <string name="exit_board_question">اگر خارج شوید، برد ایجاد نخواهد شد.</string>
 
     <string name="name">نام</string>
     <string name="family_name">نام خانوادگی</string>

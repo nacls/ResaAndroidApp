@@ -46,7 +46,8 @@ public class AdminSettingActivityPresenter implements AdminSettingContract.Prese
                     UserProfileUtil.getRoleSet(role),
                     password,
                     name,
-                    familyName));
+                    familyName,
+                    faculty));
         }
     }
 
