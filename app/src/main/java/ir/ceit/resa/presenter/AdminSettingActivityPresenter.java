@@ -2,10 +2,12 @@ package ir.ceit.resa.presenter;
 
 import android.content.Context;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import ir.ceit.resa.contract.AdminSettingContract;
 import ir.ceit.resa.model.ERole;
 import ir.ceit.resa.model.payload.request.AddUserRequest;
-import ir.ceit.resa.model.payload.response.LoginError;
 import ir.ceit.resa.model.payload.response.MessageResponse;
 import ir.ceit.resa.service.Constants;
 import ir.ceit.resa.service.UserProfileUtil;
@@ -42,12 +44,12 @@ public class AdminSettingActivityPresenter implements AdminSettingContract.Prese
         if (validateAddUserInput(username, name, familyName, password, email)) {
             view.disableSubmitPassButton();
             sendAddUserRequestToServer(new AddUserRequest(username,
-                    email,
+                    email.trim(),
                     UserProfileUtil.getRoleSet(role),
                     password,
-                    name,
-                    familyName,
-                    faculty));
+                    name.trim(),
+                    familyName.trim(),
+                    faculty.trim()));
         }
     }
 
@@ -63,7 +65,7 @@ public class AdminSettingActivityPresenter implements AdminSettingContract.Prese
                     if (serverMessage.getMessage().equals(Constants.USER_REGISTERED_SUCCESSFULLY)) {
                         view.showStatus(Constants.USER_WAS_ADDED, false);
                     } else {
-                        view.showStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN+"HEREE", true);
+                        view.showStatus(Constants.UNEXPECTED_PROBLEM_NOTIFY_ADMIN, true);
                     }
                 } else {
                     MessageResponse error = ErrorUtils.parseMessageResponse(response);
@@ -94,11 +96,11 @@ public class AdminSettingActivityPresenter implements AdminSettingContract.Prese
             view.showUsernameError("نام کاربری " + Constants.CANT_BE_EMPTY);
             isOk = false;
         }
-        if (name.isEmpty()) {
+        if (name.trim().isEmpty()) {
             view.showNameError("نام " + Constants.CANT_BE_EMPTY);
             isOk = false;
         }
-        if (familyName.isEmpty()) {
+        if (familyName.trim().isEmpty()) {
             view.showFamilyNameError("نام خانوادگی " + Constants.CANT_BE_EMPTY);
             isOk = false;
         }
@@ -106,10 +108,21 @@ public class AdminSettingActivityPresenter implements AdminSettingContract.Prese
             view.showPasswordError(Constants.NEW_PASS_IS_TOO_SHORT);
             isOk = false;
         }
-        if (email.isEmpty()) {
+        if (email.trim().isEmpty()) {
             view.showEmailError("ایمیل " + Constants.CANT_BE_EMPTY);
+            isOk = false;
+        } else if (!isInEmailFormat(email)) {
+            view.showEmailError("ایمیل " + Constants.WRONG_EMAIL_FORMAT);
             isOk = false;
         }
         return isOk;
     }
+
+    private boolean isInEmailFormat(String email) {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
 }

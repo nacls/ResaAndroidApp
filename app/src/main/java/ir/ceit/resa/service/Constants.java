@@ -61,6 +61,7 @@ public class Constants {
 
     // Submission Errors
     public static final String CANT_BE_EMPTY = "نمی تواند خالی باشد.";
+    public static final String WRONG_EMAIL_FORMAT = "فرمت ایمیل وارد شده اشتباه است.";
     public static final String NOTICE_ERRORS_RETRY = "خطاهای گفته شده را حل کنید و مجدداً تلاش کنید.";
     public static final String LAST_REQUEST_STILL_IN_PROGRESS = "درخواست قبلی هنوز در حال پردازش است، لطفاً منتظر بمانید.";
     public static final String REQUEST_SENT_SUCCESSFULLY = "درخواست شما با موفقیت ارسال شد، لطفاً منتظر بمانید.";
